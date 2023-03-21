@@ -27,4 +27,12 @@ describe('posts api routes', () => {
         await doAfterAll()
         await server.close()
     })
+    describe('GET', () => {
+    })
+    describe('POST', () => {
+    })
+    describe('PUT', () => {
+    })
+    describe('DELETE', () => {
+    })
 })
