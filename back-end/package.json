@@ -5,6 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node app.js",
+    "test": "export NODE_ENV='test';mocha  --recursive   ./test/tests/"
   },
   "keywords": [],
   "author": "",
