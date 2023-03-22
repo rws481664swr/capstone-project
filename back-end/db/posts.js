@@ -1,60 +1,54 @@
-import {Posts as posts} from './schemas/models.js'
+import {Posts} from './schemas/models.js'
+
 export const createPost = async (post) => {
-    return posts.create(post)
+    return Posts.create(post)
 }
 
 
-export const getPosts = async (sort={}) => {
- return await posts.find({}).sort(sort).exec()
+const postDate = -1
+
+export const getPosts = async (sort = {postDate}) => {
+    const posts = await Posts.find({}).sort(sort).exec()
+    return posts
 }
-export const getPostsFromCourse = async (course, sort={}) => {
- return await posts.find({course}).sort(sort).exec()
+export const getPostsFromCourse = async (course, sort = {postDate}) => {
+    return await Posts.find({course}).sort(sort).exec()
 }
-export const getPostsFromUser = async (user, sort={}) => {
- return await posts.find({user}).sort(sort).exec()
+export const getPostsFromUser = async (username, sort = {postDate}) => {
+    return await Posts.find({username}).sort(sort).exec()
 }
-export const getPinned = async ( sort={}) => {
- return await posts.find({pinned:true}).sort(sort).exec()
+export const getPinned = async (sort = {postDate}) => {
+    return await Posts.find({pinned: true}).sort(sort).exec()
 }
-export const getPost =  async(_id,{user,course}={user:false,course:false}) => {
-    if(!user && !course) return await posts.findOne({_id}).exec()
+export const getPost = async (_id, {user, course} = {user: false, course: false}) => {
 
-
- let populate=''
-    if (user){
-        populate='user'
-    }
-    if(course){
-        if(populate){
-            populate+=' course'
-        }else{
-            populate='course'
-        }
-    }
-
-    return await    posts.findOne({_id}).populate(populate).exec()
-}
-
-
-export const updatePost =  async(_id, update) => {
-    return await posts.findOneAndUpdate({_id},update).exec()
-}
-
-
-export const deletePost =  async(_id) => {
-    return await posts.findOneAndDelete({_id}).exec()
+    let query = Posts.findById(_id)
+    if (user) query = query.populate('user')
+    if (course) query = query.populate('course')
+    return await query.exec()
 
 }
 
 
-export const pinPost =async  (_id) => {
-    return await posts.findOneAndUpdate({_id},{pinned:true}).exec()
+export const updatePost = async (_id, update) => {
+    return await Posts.findOneAndUpdate({_id}, update).exec()
+}
+
+
+export const deletePost = async (_id) => {
+    return await Posts.findOneAndDelete({_id}).exec()
 
 }
 
 
-export const unpinPost =  (_id) => {
-    return posts.findOneAndUpdate({_id},{pinned:false})
+export const pinPost = async (_id) => {
+    return await Posts.findOneAndUpdate({_id}, {pinned: true}).exec()
+
+}
+
+
+export const unpinPost = (_id) => {
+    return Posts.findOneAndUpdate({_id}, {pinned: false})
 
 }
 
