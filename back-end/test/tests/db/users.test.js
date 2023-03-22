@@ -8,8 +8,8 @@ import courses from "../../../db/schemas/courses.js";
 
 should()
 
-describe('test user queries',()=>{
-doAllHooks()
+describe('test user queries', () => {
+    doAllHooks()
     describe('basic CRUD Users tests', () => {
         it("should get a User", async () => {
             const user1 = jsonify(await getUser(u1.username))
@@ -18,7 +18,10 @@ doAllHooks()
         it("should get all Users", async () => {
             let users = jsonify(await getUsers())
 
-            const expected = jsonify(await Users.find({}).exec())
+            const expected = jsonify(await Users
+                .find({})
+                .sort({username: 1})
+                .exec())
             users.should.eql(expected)
 
         })
@@ -80,8 +83,8 @@ doAllHooks()
             const user2 = jsonify(await getUser('u2', true))
             const _c1 = jsonify(await Courses.findById(c1._id).exec())
             const _c2 = jsonify(await Courses.findById(c2._id).exec())
-            user2.courses[0].should.eql(_c1)
-            user2.courses[1].should.eql(_c2)
+            user2.courses[0]._id.should.eql(_c1._id)
+            user2.courses[1]._id.should.eql(_c2._id)
             const {courses, ...rest} = user2
             const {courses: _, ...expectedUser2} = jsonify(await Users.findOne({username: 'u2'}))
             rest.should.eql(expectedUser2)

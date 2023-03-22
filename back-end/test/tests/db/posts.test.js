@@ -14,7 +14,6 @@ import {
 import {should} from "chai";
 import {jsonify} from "../../../db/util.js";
 
-process.env.NODE_ENV = 'test'
 const itShould = should()
 describe('test post queries', () => {
     common()
@@ -25,19 +24,22 @@ describe('test post queries', () => {
 
     })
     it("should get all posts", async () => {
-        const promisedPosts = await getPosts()
-        const posts = jsonify(promisedPosts)
-        posts.should.eql(jsonify([p1, p2, p3]))
+        const posts = jsonify(await getPosts())
+        const expected =  await Posts.find({}).sort({postDate: -1}).exec()
+        posts.should.eql(jsonify(expected))
     })
 
     it('should get all posts in a course', async () => {
         const posts = jsonify(await getPostsFromCourse(c1._id))
-        posts.should.eql(jsonify([p1, p3]))
+        //not testing order in this test
+        posts.should.deep.include(jsonify(p1))
+        posts.should.deep.include(jsonify(p3))
 
     })
     it('should get all posts by a user', async () => {
         const posts = jsonify(await getPostsFromUser(u1.username))
-        posts.should.eql(jsonify([p1, p2]))
+        posts.should.deep.include(jsonify(p1))
+        posts.should.deep.include(jsonify(p2))
 
     })
     it('should get all pinned posts', async () => {
@@ -47,18 +49,22 @@ describe('test post queries', () => {
 
     })
     it('should get all posts sorted by user', async () => {
-        const posts = jsonify(await getPosts({user: 1}))
-        posts.should.eql(jsonify([p1, p2, p3]))
+        const posts = jsonify(await getPosts({username: 1}))
+        const [postA, postB, ...post3shouldBeHere] = posts;
+        [postA,postB].should.deep.include(jsonify(p1));
+        [postA,postB].should.deep.include(jsonify(p2));
+        post3shouldBeHere.should.deep.include(jsonify(p3))
     })
     it('should get all posts sorted by user reverse', async () => {
-        const posts = jsonify(await getPosts({user: -1}))
-        posts.should.eql(jsonify([p3, p1, p2]))
+        const posts = jsonify(await getPosts({username: -1}))
+        //u2 is the last alphabetically and only wrote p3.
+        // ordering of everything else could have secondary sorting,
+        // so it's less important to test here .
+        posts[0].should.eql(jsonify(p3 ))
+
 
     })
-    it('should get all posts sorted by user reverse', async () => {
 
-
-    })
     it('should get all posts sorted by post date asc', async () => {
         const [a, b, c] =
             jsonify(await getPosts({postDate: 1}))

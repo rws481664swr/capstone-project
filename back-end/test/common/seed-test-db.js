@@ -8,7 +8,7 @@ import {initTestDB} from "./test-data.js";
 import {connect} from "../../db/db.js";
 
 export let u1, u2, c1, c2, p1, p2, p3
-let conn
+let connection, server
 export const doBeforeAll = async () => {
     conn = await connect()
 
