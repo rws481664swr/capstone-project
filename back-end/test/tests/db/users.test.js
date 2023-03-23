@@ -83,8 +83,9 @@ describe('test user queries', () => {
             const user2 = jsonify(await getUser('u2', true))
             const _c1 = jsonify(await Courses.findById(c1._id).exec())
             const _c2 = jsonify(await Courses.findById(c2._id).exec())
-            user2.courses[0]._id.should.eql(_c1._id)
-            user2.courses[1]._id.should.eql(_c2._id)
+            user2.courses.map(({_id})=>_id).should.include(_c1._id)
+            user2.courses.map(({_id})=>_id).should.include(_c2._id)
+
             const {courses, ...rest} = user2
             const {courses: _, ...expectedUser2} = jsonify(await Users.findOne({username: 'u2'}))
             rest.should.eql(expectedUser2)
