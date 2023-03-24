@@ -3,20 +3,22 @@ import {newCourse} from "../../db/schemas/courses.js";
 import {newUser} from "../../db/schemas/users.js";
 import {newPost} from "../../db/schemas/posts.js";
 import {conn, startServer} from "../../app.js";
-import {jsonify} from "../../db/util.js";
-import {initTestDB} from "./test-data.js";
-import {connect} from "../../db/db.js";
 
 export let u1, u2, c1, c2, p1, p2, p3
 let connection, server
-export const doBeforeAll = async () => {
-
-    server = await startServer()
+export const doBeforeAll = async function (){
+    this.timeout(10000)
+    // server = await startServer()
+    this.server= await startServer()
+    this.conn= conn
     await Posts.deleteMany({}).exec()
     await Courses.deleteMany({}).exec()
     await Users.deleteMany({}).exec();
+
 }
 export const doBeforeEach = async () => {
+
+
     ;[u1, u2, c1, c2] = await Promise.all([
         Users.create(newUser('u1', "STUDENT")),
         Users.create(newUser('u2', "TEACHER")),
@@ -49,15 +51,15 @@ export const doBeforeEach = async () => {
     ]);
 
 }
-export const doAfterEach = async () => {
+export const doAfterEach = async function ()  {
     await Promise.all([Users, Courses, Posts]
         .map(model => model.deleteMany({}))
         .map(query => query.exec()))
 }
-export const doAfterAll = async () => {
+export const doAfterAll = async function ()  {
 
-    await conn.disconnect()
-    await server.close()
+    await this.conn.disconnect()
+    await this.server.close()
 }
 const doAllHooks = () => {
     before(doBeforeAll)
