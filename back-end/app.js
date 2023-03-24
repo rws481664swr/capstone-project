@@ -11,7 +11,7 @@ import {ServerError} from "./util/Errors.js";
 
 const [, mainModule] = process.argv
 const isMainModule = mainModule === fileURLToPath(import.meta.url)
-export const conn = await connect(true)
+export let conn
 
 const app = express()
 
@@ -57,9 +57,10 @@ app.use((err, req, res, next)=>{
  * @param PORT_NUM the port to start the express server on.
  * @returns the server started by express.
  */
-export function startServer(PORT_NUM = PORT) {
+export async function startServer(PORT_NUM = PORT) {
+    conn = await connect(true)
     return app.listen(PORT_NUM,
-        () => console.log(`Listening on Port ${PORT_NUM}`))
+        () => console.log(`Listening on Port ${PORT_NUM}`));
 }
 
 
