@@ -7,14 +7,12 @@ export default router
 
 router.get('/', async ({query: {username}}, res, next) => {
     try {
-        console.log(res.locals)
-        res.json(await getUsers({
-            username: username === 'asc'
-                ? 1 : (username === 'desc' ? -1 : 1)
-        }))
+        const sort=  username === 'asc'
+            ? 1 : (username === 'desc' ? -1 : 1)
+        const response = await getUsers({ username:sort ||1 })
+        res.json(response)
     } catch (e) {
-
-        return next()
+        return next(e)
     }
 
 })

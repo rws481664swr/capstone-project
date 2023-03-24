@@ -15,7 +15,7 @@ const courseSchema = new Schema({
     subject: {type: String},
     startDate: {type: Date},
     endDate: {type: Date},
-    students: [{type: String, ref: "User"}],
-    teachers: [{type: String, ref: "User"}]
+    students: [{type: Schema.Types.ObjectId, ref: "User"}],
+    teachers: [{type: Schema.Types.ObjectId, ref: "User"}]
 }, {collection: 'courses'})
 export default courseSchema

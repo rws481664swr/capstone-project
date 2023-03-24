@@ -1,5 +1,4 @@
-import {startServer} from '../../../app.js'
-import {doAfterAll, doAfterEach, doBeforeAll, doBeforeEach, u1, u2} from '../../common/seed-test-db.js'
+import doAllHooks, {u1, u2} from '../../common/seed-test-db.js'
 import axios from 'axios'
 import {token} from "../../common/tokens.js";
 import {should} from "chai";
@@ -10,8 +9,6 @@ should()
 let server
 
 
-
-
 const config = {
     headers: {authorization: `Bearer ${token}`}
 }
@@ -20,17 +17,7 @@ const prefix = `http://localhost:3001`
 
 describe('user api routes tests', () => {
 
-    before(async () => {
-        server = await  startServer(3001)
-        await doBeforeAll()
-    })
-
-    beforeEach(doBeforeEach)
-    afterEach(doAfterEach)
-    after(async () => {
-        await doAfterAll()
-        await server.close()
-    })
+    doAllHooks()
     it(`should get all users`, async () => {
         const {data} = await axios.get('http://localhost:3001/users', {...config})
         let y = jsonify(await Promise.all(
@@ -50,7 +37,7 @@ describe('user api routes tests', () => {
     })
     it(`should get user with username u1`, async () => {
         const {data} = await axios.get(`${prefix}/users/u1`, {...config})
-        const expected=await Users.findOne({username: 'u1'}).exec()
+        const expected = await Users.findOne({username: 'u1'}).exec()
         data.should.eql(JSON.parse(JSON.stringify(expected.toJSON())))
     })
     it(`should get user with courses`, async () => {
