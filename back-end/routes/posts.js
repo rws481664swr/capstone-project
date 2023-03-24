@@ -1,5 +1,5 @@
 import express from "express";
-import {getPost, getPostsFromCourse, getPostsFromUser} from "../db/posts.js";
+import {getPost, getPostsFromCourse, getPostsFromUser, pinPost, unpinPost, updatePost} from "../db/posts.js";
 import {BadRequestError} from "../util/Errors.js";
 import {Posts} from "../db/schemas/models.js";
 // import ensureEnrolledOrProf from '../authorization/ensureEnrolledOrProf.js'
@@ -28,16 +28,25 @@ function getSort(sort) {
     return sort
 }
 
-router.get('/users/:user', async ({params: {user}, query: {sort}}, res, next) => {
-    sort = getSort(sort)
-    return res.json(await getPostsFromUser(user, sort))
+router.get(  '/users/:user',async ({params: {user}, query: {sort}}, res, next) => {
+    try{
+        sort = getSort(sort)
+        const results = await getPostsFromUser(user, sort)
+        return res.json(results)
+    }catch (e) {
+        next(e)
+    }
 })
 
-router.get('/courses/:course' /*ensureEnrolledOrProf*/, async ({params: {course}, query: {sort}}, res, next) => {
-    sort = getSort(sort)
-    const results = await getPostsFromCourse(course, sort)
-    return res.json(results)
-})
+router.get('/users/:course',async ({params: {course}, query: {sort}}, res, next) => {
+    try{
+        sort = getSort(sort)
+        const results = await getPostsFromCourse(course, sort)
+        return res.json(results)
+    }catch (e) {
+        next(e)
+    }
+} /*ensureEnrolledOrProf*/)
 
 router.post('/', async ({body: {course, username, user, content, pinned = false, ...rest}}, res, next) => {
     try {
@@ -52,14 +61,40 @@ router.post('/', async ({body: {course, username, user, content, pinned = false,
 })
 
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:_id', async ({body:{content},params:{_id}}, res, next) => {
+    try{
+        if (!content) throw new BadRequestError('Body has no content')
+            await updatePost(_id, {content})
+        res.json({message:"Updated!"})
+    }catch (e){
+        return next(e)
+    }
 })
 
 
-router.put('/:id/pin', async (req, res, next) => {
+router.put('/:_id/pin', async ({params: {_id}}, res, next) => {
+try {
+    await pinPost(_id)
+    res.json({message:"pinned!"})
+}catch (e) {
+    next(e)
+}
+
 })
-router.put('/:id/unpin', async (req, res, next) => {
+router.put('/:_id/unpin', async ({params: {_id}}, res, next) => {
+
+try {
+    await unpinPost(_id)
+    res.json({message:"unpinned!"})
+}catch (e) {
+    next(e)
+}
+
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:_id', async ({params: {_id}}, res, next) => {
+
+    const {...rest} = await Posts.findOneAndDelete({_id}).exec()
+    res.json({deleted: 'true'})
+
 })
