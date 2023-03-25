@@ -1,12 +1,8 @@
-// import {createCourse, getCourse, getCourses, updateCourse} from "../courses.js";
-import * as data from '../../common/seed-test-db.js'
-import {Courses, Posts, Users} from "../../../db/schemas/models.js";
-import {newUser} from "../../../db/schemas/users.js";
-import {newCourse} from "../../../db/schemas/courses.js";
-import {newPost} from "../../../db/schemas/posts.js";
+import common from '../../common/seed-test-db.js'
 import {should} from "chai";
-import common,{doAfterEach, doAfterAll, doBeforeAll, doBeforeEach, c1} from "../../common/seed-test-db.js";
-import {getCourse} from "../../../db/courses.js";
+import {createCourse} from "../../../db/courses.js";
+import {Courses} from "../../../db/schemas/models.js";
+import {jsonify} from "../../../db/util.js";
 
 should()
 // before(doBeforeAll)
@@ -17,11 +13,21 @@ should()
 describe('test courses queries', () => {
     common()
 
-    it('should create a Course', () => {
-        console.log()
-        // // createCourse()
+    it('should create a Course', async () => {
+        let d1 = new Date()
+        const c3 = await createCourse(
+            {
+                subject: 'english',
+                endDate: new Date(),
+                startDate: d1,
+                courseName: 'course 3',
+                courseNumber: 11031,
+            })
+        const course = await Courses.findById(c3._id).exec()
+        jsonify(c3).should.eql(jsonify(course))
     })
-    it('should update a Course', () => {
+
+    it('should update a Course', async () => {
         // updateCourse()
     })
     it('should get Course', async () => {
@@ -30,13 +36,17 @@ describe('test courses queries', () => {
         // console.log(c1)
         // expect(course).toEqual(c1)
     })
-    it('should get all Courses', () => {
-        // getCourses()
+    it('should get all Courses', async () => {
+        // getCourses() TODO ADD VARIANTS
+
     })
-    it('should delete a Course', () => {
+    it('should delete a Course', async () => {
+
     })
-    it('should add a teacher to Course', () => {
+    it('should add a teacher to Course', async () => {
+
     })
-    it('should enroll a student in a Course', () => {
+    it('should enroll a student in a Course', async () => {
+        ;
     })
 })

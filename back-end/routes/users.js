@@ -1,5 +1,7 @@
 import express from "express";
 import {deleteUser, getUser, getUsers, updateUser} from "../db/users.js";
+import {createPost} from "../db/posts.js";
+import {BadRequestError, ExpressError} from "../util/Errors.js";
 
 const router = express.Router()
 export default router
@@ -7,9 +9,9 @@ export default router
 
 router.get('/', async ({query: {username}}, res, next) => {
     try {
-        const sort=  username === 'asc'
+        const sort = username === 'asc'
             ? 1 : (username === 'desc' ? -1 : 1)
-        const response = await getUsers({ username:sort ||1 })
+        const response = await getUsers({username: sort || 1})
         res.json(response)
     } catch (e) {
         return next(e)
@@ -49,14 +51,15 @@ router.put('/:username', async ({params: {username}, body}, res, next) => {
         res.json(await updateUser(username, body))
     } catch (e) {
 
-        return next(new ExpressError(e.message))
+        return next(e)
     }
 
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', async ({body}, res, next) => {
     try {
-
+        const post = await createPost(body)
+        res.json(post)
     } catch (e) {
 
         return next(new ExpressError(e.message))
