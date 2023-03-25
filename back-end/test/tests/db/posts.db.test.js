@@ -122,10 +122,5 @@ describe('test post queries', () => {
         const post = (await Posts.findById(p1._id).exec())
         itShould.not.exist(post)
     })
-    it('should fail to delete a post due to permissions', async () => {
-    })
-    '/posts/'//todo find out who posted whatit("
-    it('', async () => {
-        '/posts/'
-    })
+
 })

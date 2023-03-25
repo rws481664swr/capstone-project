@@ -58,7 +58,7 @@ describe('posts api routes', () => {
         })
     })
     describe('POST', () => {
-        it('should create a user', async () => {
+        it('should create a post', async () => {
             const {_id: course} = c1
             const {_id: user, username} = u1
             const content = 'CONTENT'
