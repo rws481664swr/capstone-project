@@ -4,7 +4,7 @@ import  {Schema} from "mongoose";
 export const newUser = (username, role = "STUDENT") =>
     ({
         username,
-        password: faker.internet.password(),
+        password: 'password',
         first_name: faker.name.firstName(),
         last_name: faker.name.lastName(),
         email: faker.internet.email(),

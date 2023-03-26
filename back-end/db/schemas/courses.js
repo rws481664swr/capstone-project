@@ -1,12 +1,12 @@
 import {faker} from "@faker-js/faker";
 import {Schema} from "mongoose";
 
-export const newCourse = () =>
+export const newCourse = (courseName,subject,date,date2) =>
     ({
-        subject: faker.lorem.word(),
-        endDate: faker.date.recent(1),
-        startDate: faker.date.recent(7),
-        courseName: faker.name.middleName(),
+        subject,
+        endDate:date2 || faker.date.recent(1),
+        startDate: date ||faker.date.recent(7),
+        courseName,
         courseNumber: faker.datatype.number()
     })
 const courseSchema = new Schema({
