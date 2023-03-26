@@ -11,8 +11,10 @@ import express from "express";
 
 
 export function jsonify(json){
+    if (!json)return json
     const jstringify=j=>
     {
+        if (!j)return j
         return JSON.parse(
             JSON.stringify(
                 'toJSON' in j

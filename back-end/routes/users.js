@@ -1,5 +1,5 @@
 import express from "express";
-import {deleteUser, getUser, getUsers, updateUser} from "../db/users.js";
+import {createUser, deleteUser, getUser, getUsers, updateUser} from "../db/users.js";
 import {createPost} from "../db/posts.js";
 import {BadRequestError, ExpressError} from "../util/Errors.js";
 
@@ -58,7 +58,7 @@ router.put('/:username', async ({params: {username}, body}, res, next) => {
 
 router.post('/', async ({body}, res, next) => {
     try {
-        const post = await createPost(body)
+        const post = await createUser(body)
         res.json(post)
     } catch (e) {
 

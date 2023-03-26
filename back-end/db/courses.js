@@ -1,46 +1,62 @@
-import {Courses as courses} from './schemas/models.js'
-import Users from "../routes/users.js";
+import {Courses, Users} from './schemas/models.js'
 
 export const createCourse = async (course) => {
-    return courses.create(course)
+    return await Courses.create(course)
 }
 
 
 export const updateCourse = async (_id, update) => {
-    return courses.findOneAndUpdate({_id}, update)
+    return await Courses.findOneAndUpdate({_id}, update).exec()
 }
 
 
-export const getCourse = async (_id,{teachers,students}) => {
-    let query= courses.findOne({_id})
+export const getCourse = async (_id, {teachers, students} = {teachers: undefined, students: undefined}) => {
+    let query = Courses.findOne({_id})
     if (teachers) query = query.populate('teachers')
-     if (students) query = query.populate('students')
+    if (students) query = query.populate('students')
     return await query.exec()
 
 }
 
-export const getCourses =async  (sort) => {
+export const getCourses = async (sort) => {
 
-    let courses_= courses.findOne({})
+    let courses_ = Courses.find({})
     if (sort) courses_ = courses_.sort(sort)
-    return courses_
+    return await courses_.exec()
 
 }
 
 
 export const deleteCourse = async (_id) => {
-return courses.findOneAndDelete({_id})
+    return await Courses.findOneAndDelete({_id})
 }
 
 
-export const teachCourse = async (username, _id) => {
-    await courses.update({_id},{$push:{teachers:_id}})
-    await Users.update({username}, {$push:{courses:_id}})
+export const teachCourse = async (username, course_id) => {
+    await addToCourseList(username, course_id, 'teachers')
 }
 
 
-export const enrollCourse = async ()=>{
-    await Users.update({username}, {$push:{courses:_id}})
-     await courses.update({_id},{$push:{students:_id}})
+export const enrollCourse = async (username, course_id) => {
+    await addToCourseList(username, course_id, 'students')
+}
+
+async function addToCourseList(username, course_id, type) {
+
+    const {_id: user_id} = await Users.findOneAndUpdate({username}, {$push: {courses: course_id}})
+    await Courses.findOneAndUpdate({_id: course_id}, {$push: {[type]: user_id}})
+
+}
+
+export const unEnrollCourse= async (username, course_id)=>{
+    await removeUserFromCourse(username, course_id,'students')
+}
+export const unTeachCourse= async (username, course_id)=>{
+   await removeUserFromCourse(username, course_id,'teachers')
+}
+async function removeUserFromCourse(username, course_id, type){
+    const {_id: user_id} = await Users.findOneAndUpdate({username}, {$pull: {courses: course_id}})
+    await Courses.findOneAndUpdate({_id: course_id}, {$pull: {[type]: user_id}})
+
 
 }
