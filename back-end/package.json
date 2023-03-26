@@ -22,7 +22,9 @@
     "mocha": "^10.2.0"
   },
   "scripts": {
-    "test": "mocha"
+    "start": "node app.js",
+    "test": "export NODE_ENV='test';mocha  --recursive   ./test/tests/",
+    "coverage": " export NODE_ENV='test' ;c8 mocha ./test/tests/ --recursive  "
   },
   "keywords": [],
   "author": "",
