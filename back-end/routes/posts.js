@@ -2,7 +2,6 @@ import express from "express";
 import {getPost, getPostsFromCourse, getPostsFromUser, pinPost, unpinPost, updatePost} from "../db/posts.js";
 import {BadRequestError} from "../util/Errors.js";
 import {Posts} from "../db/schemas/models.js";
-// import ensureEnrolledOrProf from '../authorization/ensureEnrolledOrProf.js'
 const router = express.Router()
 export default router
 router.get('/', async (req, res) => {

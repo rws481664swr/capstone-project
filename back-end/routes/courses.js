@@ -1,12 +1,9 @@
 import express from "express";
-
+import {createCourse, deleteCourse, enrollCourse, getCourses, unEnrollCourse} from '../db/courses.js'
+import {getUser} from "../db/users.js";
+import getSortObj from './util/getSortObj'
 const router = express.Router()
 export default router
-router.get('/',async (req,res)=>{})
-router.get('/:id',async (req,res)=>{})
-router.put('/:id',async (req,res)=>{})
-router.post('/',async (req,res)=>{})
-router.delete('/:id',async (req,res)=>{})
 
 //enroll in course
 router.post('/:id/users/:username',async (req,res)=>{})
