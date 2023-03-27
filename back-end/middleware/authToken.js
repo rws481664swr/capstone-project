@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import {SECRET_KEY} from '../config.js'
+import {ForbiddenError, UnauthorizedError} from "../util/Errors.js";
 /** Middleware: Authenticate user.
  *
  * If a token was provided, verify it, and, if valid, store the token payload
@@ -21,11 +22,12 @@ export default function authenticateJWT(req, res, next) {
     }
 }
 
+export const isLoggedIn = ({locals: {user}}) => user && true
 
-const loggedIn = ({locals: {user}}) => user && true
 
-
-const isAdmin = ({locals: {user}}) => (user.isAdmin) && true
+export const isAdmin = ({locals: {user}}) => (user.role==="ADMIN") && true
+export const isTeacher = ({locals: {user}}) => (user.role==="TEACHER") && true
+export const isStudent = ({locals: {user}}) => (user.role==="STUDENT") && true
 
 
 /** Middleware to use when they must be logged in.
@@ -35,7 +37,7 @@ const isAdmin = ({locals: {user}}) => (user.isAdmin) && true
 
 export function ensureLoggedIn(req, res, next) {
     try {
-        if (!loggedIn(res)) throw new UnauthorizedError();
+        if (!isLoggedIn(res)) throw new UnauthorizedError("Must be logged in");
         return next();
     } catch (err) {
         return next(err);
@@ -43,9 +45,28 @@ export function ensureLoggedIn(req, res, next) {
 }
 
 
+/**
+ * middleware to determine if user is admin.
+ * Redirects to proper location upon determining role.
+ */
 export function ensureAdmin(req, res, next) {
     try {
-        if (!loggedIn(res) || !isAdmin(res)) throw new UnauthorizedError();
+        if (!isLoggedIn(res) || !isAdmin(res)) throw new UnauthorizedError('Must be an administrator');
+        return next();
+    } catch (err) {
+        return next(err);
+    }
+}
+
+
+/**
+ * middleware to determine if user has teacher privileges (or admin).
+ * Redirects to proper location upon determining role.
+ */
+export function ensureTeacher(req, res, next) {
+    try {
+        const validUser=isTeacher(res)||isAdmin(res)
+        if (!isLoggedIn(res) || !validUser) throw new UnauthorizedError('Must be a teacher');
         return next();
     } catch (err) {
         return next(err);
@@ -57,7 +78,7 @@ const isUser = (u, {locals: {user}}) => u === user.username
 
 export function ensureAdminOrLoggedInUser({params: {username}}, res, next) {
     try {
-        if (!loggedIn(res)) throw new UnauthorizedError();
+        if (!isLoggedIn(res)) throw new UnauthorizedError();
         if (!isAdmin(res) && !isUser(username, res)) throw new UnauthorizedError()
         return next();
     } catch (err) {
