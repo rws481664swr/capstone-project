@@ -118,43 +118,43 @@ describe('posts api routes', () => {
     })
     describe('PUT', () => {
         it('should pin a post', async () => {
-            const {_id}=p1
-            await axios.put(`${prefix}/${_id}/pin`,{pinned:true})
-         ;(await getPost(_id)).pinned.should.be.true
+            const {_id} = p1
+            await axios.put(`${prefix}/${_id}/pin`, {pinned: true})
+            ;(await getPost(_id)).pinned.should.be.true
         })
         it('should unpin a post', async () => {
-            const {_id}=p1
+            const {_id} = p1
             await pinPost(_id);
             ;(await getPost(_id)).pinned.should.be.true
-            await axios.put(`${prefix}/${_id}/unpin`,{pinned:false})
+            await axios.put(`${prefix}/${_id}/unpin`, {pinned: false})
             ;(await getPost(_id)).pinned.should.be.false
 
 
         })
         it('should update the content of a post', async () => {
-            const {_id}=p1
-            const body = {content:'hello world'}
-            await axios.put(`${prefix}/${_id}`,body)
+            const {_id} = p1
+            const body = {content: 'hello world'}
+            await axios.put(`${prefix}/${_id}`, body)
             ;(await getPost(_id)).content.should.equal('hello world')
         })
 
     })
     describe('DELETE', () => {
-        it('should delete a post as a student', async function()  {
+        it('should delete a post as a student', async function () {
             await axios.delete(`${prefix}/${p1._id}`, {headers: {Authorization: `Bearer ${token}`}})
-            const posts = await Posts.find({_id:p1._id}).exec()
+            const posts = await Posts.find({_id: p1._id}).exec()
             posts.should.have.length(0)
             posts.should.not.deep.include(p1)
         })
-        it('should delete a post as a teacher', async function()  {
+        it('should delete a post as a teacher', async function () {
             await axios.delete(`${prefix}/${p1._id}`, {headers: {Authorization: `Bearer ${teacherToken}`}})
-            const posts = await Posts.find({_id:p1._id}).exec()
+            const posts = await Posts.find({_id: p1._id}).exec()
             posts.should.have.length(0)
             posts.should.not.deep.include(p1)
         })
-        it('should delete a post as an admin', async function()  {
+        it('should delete a post as an admin', async function () {
             await axios.delete(`${prefix}/${p1._id}`, {headers: {Authorization: `Bearer ${adminToken}`}})
-            const posts = await Posts.find({_id:p1._id}).exec()
+            const posts = await Posts.find({_id: p1._id}).exec()
             posts.should.have.length(0)
             posts.should.not.deep.include(p1)
         })

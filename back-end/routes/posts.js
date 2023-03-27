@@ -37,7 +37,7 @@ router.get(  '/users/:user',async ({params: {user}, query: {sort}}, res, next) =
     }
 })
 
-router.get('/users/:course',async ({params: {course}, query: {sort}}, res, next) => {
+router.get('/courses/:course',async ({params: {course}, query: {sort}}, res, next) => {
     try{
         sort = getSort(sort)
         const results = await getPostsFromCourse(course, sort)
