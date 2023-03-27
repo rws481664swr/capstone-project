@@ -1,10 +1,11 @@
 import doAllHooks, {c1, c2, u1, u2} from '../../common/seed-test-db.js'
 import {createUser, deleteUser, getUser, getUsers, updateUser} from "../../../db/users.js";
 import {should} from 'chai'
-import {Courses, Users} from "../../../db/schemas/models.js";
+import {Courses, Credentials, Users} from "../../../db/schemas/models.js";
 import {jsonify} from "../../../db/util.js";
 import {newUser} from "../../../db/schemas/users.js";
 import courses from "../../../db/schemas/courses.js";
+import {compare} from "bcrypt";
 
 should()
 
@@ -26,21 +27,26 @@ describe('test user queries', () => {
 
         })
         it("should update a User", async () => {
-            const {username} = u1, password = 'password'
+            const {username} = u1, first_name = 'password'
 
-            await updateUser(username, {password})
+            await updateUser(username, {first_name})
 
             const user1 = await Users.findOne({username})
-            user1.password.should.equal(password)
+            user1.first_name.should.equal(first_name)
         })
         it("should delete a User", async () => {
             const {acknowledged} = await deleteUser(u1.username)
             acknowledged.should.be.true
         })
-        it("should create a User", async () => {
-            const user3 = jsonify(await createUser(newUser('newUser')))
+        it("should create a User", async function() {
+            this.timeout(15000)
+            const {username,...new_user}=newUser('newUser')
+            const user3 = jsonify(await createUser({username,...new_user}))
             const all = jsonify(await Users.find({}).exec())
+            const auth =jsonify(await Credentials.findOne({username}).exec())
+           ;( await compare(new_user.password,auth.password)).should.be.true
             all.length.should.eql(3)
+            auth.username.should.equal(username)
             user3.should.eql(all[all.length - 1])
         })
     })

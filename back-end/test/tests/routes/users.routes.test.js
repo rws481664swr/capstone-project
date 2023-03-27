@@ -45,11 +45,7 @@ describe('user api routes tests', () => {
         const _u1 = await Users.findOne({username: 'u1'}).populate('courses').exec()
         data.should.eql(jsonify(_u1))
     })
-    it(`should update user's password`, async () => {
-        await axios.put(`${prefix}/users/u1`, {password: 'password'}, {...config})
-        const _u1 = await Users.findOne({username: 'u1'}).exec()
-        _u1.password.should.equal('password')
-    })
+
     it(`should delete u1`, async () => {
         const {data: {message}} = await axios.delete(`${prefix}/users/u1`)
         console.log(message)

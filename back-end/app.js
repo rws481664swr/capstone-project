@@ -3,7 +3,7 @@ import users from './routes/users.js'
 import courses from './routes/courses.js'
 import posts from './routes/posts.js'
 import {connect} from "./db/db.js";
-import {PORT} from './config.js'
+import {PORT, printReport} from './config.js'
 import {fileURLToPath} from 'url'
 import cors from "cors";
 import morgan from "morgan";
@@ -13,7 +13,7 @@ import authenticateJWT from "./middleware/authToken.js";
 const [, mainModule] = process.argv
 const isMainModule = mainModule === fileURLToPath(import.meta.url)
 export let conn
-
+printReport()
 const app = express()
 
 // middleware

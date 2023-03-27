@@ -1,8 +1,12 @@
-import {Courses, Posts, Users} from "../../db/schemas/models.js";
+import {Courses, Credentials, Posts, Users} from "../../db/schemas/models.js";
 import {conn, startServer} from "../../app.js";
 import {$c1, $c2, $p1, $p2, $p3, $u1, $u2} from "./mock-data.js";
+import {BCRYPT_WORK_FACTOR} from "../../config.js";
+import {hash} from "bcrypt";
 
 export let u1, u2, c1, c2, p1, p2, p3, c1c2, c2c1
+export let cred1,cred2
+const password = await hash('password',BCRYPT_WORK_FACTOR)
 let connection, server
 export const doBeforeAll = async function () {
     this.timeout(10000)
@@ -12,13 +16,16 @@ export const doBeforeAll = async function () {
     await Posts.deleteMany({}).exec()
     await Courses.deleteMany({}).exec()
     await Users.deleteMany({}).exec();
-
+    await Credentials.deleteMany({}).exec();
 }
 export const doBeforeEach = async () => {
 
 
     u1 = await Users.create($u1())
     u2 = await Users.create($u2())
+    // cred1 = await Credentials.create({username:'u1',password})
+    // cred2 = await Credentials.create({username:'u2',password})
+
     c1 = await Courses.create($c1())
     c2 = await Courses.create($c2())
     p1 = await Posts.create($p1(c1._id, u1._id, u1.username))

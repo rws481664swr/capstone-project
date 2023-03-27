@@ -49,7 +49,6 @@ export const $p3 = (course, user, username) =>
 export const $u1 = () =>
     ({
         username: 'u1',
-        password: 'password',
         first_name: faker.name.firstName(),
         last_name: faker.name.lastName(),
         email: faker.internet.email(),
@@ -58,7 +57,6 @@ export const $u1 = () =>
 export const $u2 = () =>
     ({
         username: 'u2',
-        password: 'password',
         first_name: faker.name.firstName(),
         last_name: faker.name.lastName(),
         email: faker.internet.email(),
