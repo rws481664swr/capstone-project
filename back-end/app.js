@@ -8,6 +8,7 @@ import {fileURLToPath} from 'url'
 import cors from "cors";
 import morgan from "morgan";
 import {ServerError} from "./util/Errors.js";
+import authenticateJWT from "./middleware/authToken.js";
 
 const [, mainModule] = process.argv
 const isMainModule = mainModule === fileURLToPath(import.meta.url)
@@ -18,6 +19,7 @@ const app = express()
 // middleware
 app.use(cors());
 app.use(express.json())
+app.use(authenticateJWT)
 
 //only use if not in test environment
 if (process.env.NODE_ENV !== 'test') {

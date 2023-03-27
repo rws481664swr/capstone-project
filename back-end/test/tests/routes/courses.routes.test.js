@@ -5,6 +5,7 @@ import {should} from "chai";
 import {getUser} from '../../../db/users.js'
 import {c1, c2 , default as common} from "../../common/seed-test-db.js";
 import {getCourses} from "../../../db/courses.js";
+import {token} from "../../common/tokens.js";
 should()
 const prefix = `http://localhost:${PORT}`
 
@@ -18,7 +19,7 @@ describe('Courses routes', () => {
 
 
         it('should GET /courses', async () => {
-            const courses = jsonify((await axios.get(`${prefix}/courses?sort=date&direction=desc`)).data)
+            const courses = jsonify((await axios.get(`${prefix}/courses?sort=date&direction=desc`, {headers: {authorization:token}})).data)
         courses.should.eql(jsonify([c1]))
         })
 
