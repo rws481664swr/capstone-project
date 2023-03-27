@@ -1,6 +1,5 @@
 import express from "express";
 import {createUser, deleteUser, getUser, getUsers, updateUser} from "../db/users.js";
-import {createPost} from "../db/posts.js";
 import {BadRequestError, ExpressError} from "../util/Errors.js";
 
 const router = express.Router()

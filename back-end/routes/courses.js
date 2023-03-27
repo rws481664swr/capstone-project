@@ -5,6 +5,21 @@ import getSortObj from './util/getSortObj.js'
 const router = express.Router()
 export default router
 
+
+router.get('/', async ({query: {sort, direction}}, res, next) => {
+    try {
+        const user = await getUser(res.locals.user.username, true)
+        return res.json(user.courses)
+
+        if (!sort) return res.json(await getCourses())
+        const sortObj = getSortObj(sort, direction)
+        return res.json(await getCourses(sortObj))
+    } catch (e) {
+        next(e)
+    }
+
+})
+
 router.post('/', async ({body}, res, next) => {
     res.send(await createCourse(body))
 })
