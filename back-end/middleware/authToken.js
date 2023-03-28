@@ -18,13 +18,12 @@ export default function authenticateJWT(req, res, next) {
         }
         return next();
     } catch (err) {
+        /* c8 ignore next */
         return next();
     }
 }
 
 export const isLoggedIn = ({locals: {user}}) => user && true
-
-
 export const isAdmin = ({locals: {user}}) => (user.role==="ADMIN") && true
 export const isTeacher = ({locals: {user}}) => (user.role==="TEACHER") && true
 export const isStudent = ({locals: {user}}) => (user.role==="STUDENT") && true
@@ -75,13 +74,3 @@ export function ensureTeacher(req, res, next) {
 
 
 const isUser = (u, {locals: {user}}) => u === user.username
-
-export function ensureAdminOrLoggedInUser({params: {username}}, res, next) {
-    try {
-        if (!isLoggedIn(res)) throw new UnauthorizedError();
-        if (!isAdmin(res) && !isUser(username, res)) throw new UnauthorizedError()
-        return next();
-    } catch (err) {
-        return next(err);
-    }
-}
