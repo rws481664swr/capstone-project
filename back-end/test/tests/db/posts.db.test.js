@@ -1,6 +1,7 @@
 import {c1, default as common, p1, p2, p3, u1} from "../../common/seed-test-db.js";
 import {Posts} from '../../../db/db.js'
 import {
+    createPost,
     deletePost,
     getPinned,
     getPost,
@@ -13,11 +14,28 @@ import {
 } from '../../../db/posts.js'
 import {should} from "chai";
 import {jsonify} from "../../../db/util.js";
+import {Schema} from "mongoose";
 
 const itShould = should()
 describe('test post queries', () => {
-    common()
+    common() /* c8 ignore next */
 
+    it('should create a post',async()=>{
+        let _post ={
+            course: c1._id,
+            title:'t',
+            username:u1.username,
+            user: u1._id,
+            content: "content!",
+            pinned: false,
+            postDate: new Date()
+        }
+       _post= await createPost(_post)
+      const post =  jsonify(_post )
+
+        const post2=jsonify(await Posts.findById(post._id).exec())
+        post2.should.eql(jsonify(post))
+    } )
     it("should get a post by id", async () => {
         const post = await getPost(p1._id)
         post.should.eql(p1)
@@ -109,6 +127,7 @@ describe('test post queries', () => {
     it('should create a post', async () => {
         const newPost = jsonify(await Posts.create({
             course: c1._id,
+            title:'t',
             username: u1.username,
             content: 'hello world',
             pinned: true,
