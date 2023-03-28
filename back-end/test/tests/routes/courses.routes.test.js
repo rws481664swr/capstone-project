@@ -1,12 +1,12 @@
 import {PORT} from "../../../config.js";
 import axios from "axios";
 import {jsonify} from "../../../db/util.js";
-import {should} from "chai";
+import {should as chaiShould} from "chai";
 import {getUser} from '../../../db/users.js'
-import {c1, c2 , default as common} from "../../common/seed-test-db.js";
-import {getCourses} from "../../../db/courses.js";
-import {token} from "../../common/tokens.js";
-should()
+import {c1, c2, default as common, u1} from "../../common/seed-test-db.js";
+import {getCourse, getCourses} from "../../../db/courses.js";
+import {teacherTokenConfig, token, tokenConfig} from "../../common/tokens.js";
+const should = chaiShould()
 const prefix = `http://localhost:${PORT}`
 
 describe('Courses routes', () => {
@@ -19,14 +19,14 @@ describe('Courses routes', () => {
 
 
         it('should GET /courses', async () => {
-            const courses = jsonify((await axios.get(`${prefix}/courses?sort=date&direction=desc`, {headers: {authorization:token}})).data)
+            const courses = jsonify((await axios.get(`${prefix}/courses?sort=date&direction=desc`, tokenConfig)).data)
         courses.should.eql(jsonify([c1]))
         })
 
     })
     describe('POST /courses', () => {
 
-        it('should ', async () => {
+        it('should create a new course', async () => {
             const body = {
                 subject: 'english',
                 endDate: new Date(),
@@ -34,27 +34,75 @@ describe('Courses routes', () => {
                 courseName: 'course 3',
                 courseNumber: 11031,
             }
-            let {data}= await axios.post(`${prefix}/courses`,body)
+            let {data}= await axios.post(`${prefix}/courses`,body, teacherTokenConfig)
             let {_id,__v,students,teachers,...rest} =jsonify(data);
             _id.should.not.be.null
             students.should.eql([])
             teachers.should.eql([])
-            console.log( rest)
+        })
+        it('should fail if student tries to create course', async () => {
+            const body = {
+                subject: 'english',
+                endDate: new Date(),
+                startDate: new Date(2020),
+                courseName: 'course 3',
+                courseNumber: 11031,
+            }
+            try{
+                await axios.post(`${prefix}/courses`, body, tokenConfig)
+                should.fail('fail')
+            }catch (e) {
+                e.message.should.not.equal('fail')
+            }
         })
 
     })
 
     describe('DELETE /courses', () => {
 
-        it('should ', async () => {
-            await axios.delete(`${prefix}/courses/${c1._id}`)
+        it('should delete a course', async () => {
+            await axios.delete(`${prefix}/courses/${c1._id}`, teacherTokenConfig)
             const courses = await getCourses()
             courses.map(({_id})=>_id).should.not.include(jsonify(c1)._id)
         })
+        it('should fail to delete a course', async () => {
+            try {
+                await axios.delete(`${prefix}/courses/${c1._id}`, tokenConfig)
+                should.fail('fail')
+            }catch ({message}) {
+                message.should.not.equal('fail')
+            }
+        })
+        it('should fail if student tries to delete course', async () => {
+            try{
+                await axios.delete(`${prefix}/courses/${c1._id}`, tokenConfig)
+                should.fail('fail')
+            }catch (e) {
+                e.message.should.not.equal('fail')
+            }
+        })
+
+
 
     })
     describe('enroll/unenroll',()=>{
-        it('POST /:id/users/:username',async ()=>{})
-        it('DELETE /:id/users/:username',async ()=>{})
+        it('POST /:id/users/:username',async ()=>{
+            const {username}=u1
+            await axios.post(`${prefix}/courses/${c2._id}/users/${username}`,{}, tokenConfig)
+            const user =await  getUser(username)
+            const course=await  getCourse(c2._id)
+            jsonify(course.students).should.include(jsonify(u1)._id)
+            jsonify(user.courses).should.include(jsonify(c2)._id)
+        })
+        it('DELETE /:id/users/:username',async ()=>{
+            const {username}=u1
+
+            const {data}= await axios.delete(`${prefix}/courses/${c1._id}/users/${username}`,tokenConfig)
+            data.message.should.eql('unenrolled')
+            const user =await  getUser(username)
+            const course=await  getCourse(c1._id)
+            jsonify(course.students).should.not.include(jsonify(u1)._id)
+            jsonify(user.courses).should.not.include(jsonify(c1)._id)
+        })
     })
 })
