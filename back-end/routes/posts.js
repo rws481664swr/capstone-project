@@ -2,11 +2,14 @@ import express from "express";
 import {getPost, getPostsFromCourse, getPostsFromUser, pinPost, unpinPost, updatePost} from "../db/posts.js";
 import {BadRequestError} from "../util/Errors.js";
 import {Posts} from "../db/schemas/models.js";
+import {ensureLoggedIn} from "../middleware/authToken.js";
+
 const router = express.Router()
 export default router
-router.get('/', async (req, res) => {
+
+router.get('/', ensureLoggedIn, async (req, res) => {
 })
-router.get('/:id', async ({params: {id}, query: {course, user}}, res, next) => {
+router.get('/:id', ensureLoggedIn, async ({params: {id}, query: {course, user}}, res, next) => {
     try {
         let opts = {course, user}
         const post = await getPost(id, opts)
@@ -27,32 +30,29 @@ function getSort(sort) {
     return sort
 }
 
-router.get(  '/users/:user',async ({params: {user}, query: {sort}}, res, next) => {
-    try{
+router.get('/users/:user', ensureLoggedIn, async ({params: {user}, query: {sort}}, res, next) => {
+    try {
         sort = getSort(sort)
         const results = await getPostsFromUser(user, sort)
         return res.json(results)
-    }catch (e) {
+    } catch (e) {
         next(e)
     }
 })
 
-router.get('/courses/:course',async ({params: {course}, query: {sort}}, res, next) => {
-    try{
+router.get('/courses/:course', ensureLoggedIn, async ({params: {course}, query: {sort}}, res, next) => {
+    try {
         sort = getSort(sort)
         const results = await getPostsFromCourse(course, sort)
         return res.json(results)
-    }catch (e) {
+    } catch (e) {
         next(e)
     }
 } /*ensureEnrolledOrProf*/)
 
-router.post('/', async ({body: {course, username, user, content, pinned = false, ...rest}}, res, next) => {
+router.post('/', ensureLoggedIn, async ({   body }, res, next) => {
     try {
-        if (!content) throw new BadRequestError('Content was empty')
-        if (Object.keys(rest).length) throw new BadRequestError("Invalid extra data was sent")
-        if (!(course && username && user && content && pinned !== undefined)) throw new BadRequestError("Invalid Data")
-        const post = await Posts.create({course, username, user, content, pinned, postDate: new Date()})
+        const post = await Posts.create({...body,pinned:false, postDate: new Date()})
         res.status(201).json(post)
     } catch (err) {
         return next(err)
@@ -60,38 +60,38 @@ router.post('/', async ({body: {course, username, user, content, pinned = false,
 })
 
 
-router.put('/:_id', async ({body:{content},params:{_id}}, res, next) => {
-    try{
+router.put('/:_id', ensureLoggedIn, async ({body: {content}, params: {_id}}, res, next) => {
+    try {
         if (!content) throw new BadRequestError('Body has no content')
-            await updatePost(_id, {content})
-        res.json({message:"Updated!"})
-    }catch (e){
+        await updatePost(_id, {content})
+        res.json({message: "Updated!"})
+    } catch (e) {
         return next(e)
     }
 })
 
 
-router.put('/:_id/pin', async ({params: {_id}}, res, next) => {
-try {
-    await pinPost(_id)
-    res.json({message:"pinned!"})
-}catch (e) {
-    next(e)
-}
+router.put('/:_id/pin', ensureLoggedIn, async ({params: {_id}}, res, next) => {
+    try {
+        await pinPost(_id)
+        res.json({message: "pinned!"})
+    } catch (e) {
+        next(e)
+    }
 
 })
-router.put('/:_id/unpin', async ({params: {_id}}, res, next) => {
+router.put('/:_id/unpin', ensureLoggedIn, async ({params: {_id}}, res, next) => {
 
-try {
-    await unpinPost(_id)
-    res.json({message:"unpinned!"})
-}catch (e) {
-    next(e)
-}
+    try {
+        await unpinPost(_id)
+        res.json({message: "unpinned!"})
+    } catch (e) {
+        next(e)
+    }
 
 })
 
-router.delete('/:_id', async ({params: {_id}}, res, next) => {
+router.delete('/:_id', ensureLoggedIn, async ({params: {_id}}, res, next) => {
 
     const {...rest} = await Posts.findOneAndDelete({_id}).exec()
     res.json({deleted: 'true'})
