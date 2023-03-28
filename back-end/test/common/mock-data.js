@@ -20,6 +20,7 @@ export const $c2 = () =>
     })
 export const $p1 = (course, user, username) =>
     ({
+        title: faker.lorem.sentence(5),
         course,
         user,
         username,
@@ -29,6 +30,7 @@ export const $p1 = (course, user, username) =>
     })
 export const $p2 = (course, user, username) =>
     ({
+        title: faker.lorem.sentence(5),
         course,
         user,
         username,
@@ -38,6 +40,7 @@ export const $p2 = (course, user, username) =>
     })
 export const $p3 = (course, user, username) =>
     ({
+        title: faker.lorem.sentence(5),
         course,
         user,
         username,
