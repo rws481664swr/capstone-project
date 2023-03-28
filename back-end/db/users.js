@@ -1,10 +1,18 @@
 import {Users, Users as users} from "./schemas/models.js";
 import {removeCredentials, signUp} from "./creds.js";
+import {BadRequestError} from "../util/Errors.js";
 
 export const createUser = async (_user) => {
     const {password,username,...user}=_user
-    await signUp(username,password)
-    return await users.create({username,...user})
+    try{
+        await signUp(username, password)
+        return await users.create({username,...user})
+    }catch (e) {
+        if(e.message.includes('duplicate key error')){
+            throw new BadRequestError(`username ${username} is taken`)
+        }
+        throw e
+    }
 }
 
 export const getUsers = async ({username}={username:1},showCourses=false) => {
