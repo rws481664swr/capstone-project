@@ -7,7 +7,8 @@ const postSchema = new Schema( {
         title: {type: String, required: true},
         content: {type: String, required: true},
         pinned: {type: Boolean, required: true},
-        postDate: {type: Schema.Types.Date, required: true}
+        postDate: {type: Schema.Types.Date, required: true},
+        comments:[{type: Schema.Types.ObjectId, ref: "Comments"}]
     },{collection: 'posts'})
 ;
 

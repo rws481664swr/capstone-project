@@ -3,8 +3,8 @@ import {createUser, deleteUser, getUser, getUsers, updateUser} from "../../../db
 import {should} from 'chai'
 import {Courses, Credentials, Users} from "../../../db/schemas/models.js";
 import {jsonify} from "../../../db/util.js";
-import {newUser} from "../../../db/schemas/users.js";
-import courses from "../../../db/schemas/courses.js";
+import {newUser} from "../../../db/schemas/userSchema.js";
+import courses from "../../../db/schemas/coursesSchema.js";
 import {compare} from "bcrypt";
 
 should()
