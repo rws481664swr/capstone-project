@@ -31,7 +31,7 @@ router.post('/', ensureLoggedIn, ensureTeacher, async ({body = {}}, res, next) =
 router.delete('/:id', ensureLoggedIn, ensureTeacher, async ({params: {_id}}, res, next) => {
     try {
         await deleteCourse(_id)
-        res.json({mesesage: 'deleted'})
+        res.json({message: 'deleted'})
     } catch (e) {
         next(e)
     }

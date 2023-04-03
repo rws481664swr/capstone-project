@@ -45,7 +45,7 @@ describe('/auth', () => {
                password:'password'
            }
             const {data} = await axios.post(`${prefix}/register`,body)
-            console.log(data)
+
 
         })
 

@@ -47,7 +47,7 @@ app.use(errorHandler)
 export async function startServer(PORT_NUM = PORT) {
     conn = await connect(true)
     return app.listen(PORT_NUM,
-        () => console.log(`Listening on Port ${PORT_NUM}`));
+        () => !isTest &&console.log(`Listening on Port ${PORT_NUM}`));
 }
 
 /* c8 ignore next 2*/
