@@ -1,8 +1,12 @@
 import express from "express";
 import {createUser, deleteUser, getUser, getUsers, updateUser} from "../db/users.js";
 import {BadRequestError, ExpressError} from "../util/Errors.js";
+import {changePassword} from "../db/creds.js";
+import {ensureLoggedIn} from "../middleware/authToken.js";
 
 const router = express.Router()
+router.use(ensureLoggedIn)
+
 export default router
 
 
@@ -10,7 +14,7 @@ router.get('/', async ({query: {username}}, res, next) => {
     try {
         const sort = username === 'asc'
             ? 1 : (username === 'desc' ? -1 : 1)
-        const response = await getUsers({username: sort || 1})
+        const response = await getUsers({username: sort })
         res.json(response)
     } catch (e) {
         return next(e)
@@ -49,7 +53,15 @@ router.put('/:username', async ({params: {username}, body}, res, next) => {
         }
         res.json(await updateUser(username, body))
     } catch (e) {
+        return next(e)
+    }
+})
 
+router.put('/:username/password', async ({params: {username}, body: {password, old}}, res, next) => {
+    try {
+        await changePassword(username, old, password)
+        res.json({message: "updated"})
+    } catch (e) {
         return next(e)
     }
 

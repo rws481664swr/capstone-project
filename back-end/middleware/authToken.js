@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import {SECRET_KEY} from '../config.js'
 import {ForbiddenError, UnauthorizedError} from "../util/Errors.js";
+import {isAdmin,isTeacher, isLoggedIn, isStudent} from './predicates.js'
 /** Middleware: Authenticate user.
  *
  * If a token was provided, verify it, and, if valid, store the token payload
@@ -18,16 +19,11 @@ export default function authenticateJWT(req, res, next) {
         }
         return next();
     } catch (err) {
+        /* c8 ignore next */
         return next();
     }
 }
 
-export const isLoggedIn = ({locals: {user}}) => user && true
-
-
-export const isAdmin = ({locals: {user}}) => (user.role==="ADMIN") && true
-export const isTeacher = ({locals: {user}}) => (user.role==="TEACHER") && true
-export const isStudent = ({locals: {user}}) => (user.role==="STUDENT") && true
 
 
 /** Middleware to use when they must be logged in.
@@ -74,14 +70,3 @@ export function ensureTeacher(req, res, next) {
 }
 
 
-const isUser = (u, {locals: {user}}) => u === user.username
-
-export function ensureAdminOrLoggedInUser({params: {username}}, res, next) {
-    try {
-        if (!isLoggedIn(res)) throw new UnauthorizedError();
-        if (!isAdmin(res) && !isUser(username, res)) throw new UnauthorizedError()
-        return next();
-    } catch (err) {
-        return next(err);
-    }
-}

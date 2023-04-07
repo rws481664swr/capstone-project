@@ -3,17 +3,19 @@ import users from './routes/users.js'
 import courses from './routes/courses.js'
 import posts from './routes/posts.js'
 import {connect} from "./db/db.js";
-import {PORT} from './config.js'
+import {PORT, printReport} from './config.js'
 import {fileURLToPath} from 'url'
 import cors from "cors";
 import morgan from "morgan";
-import {ServerError} from "./util/Errors.js";
-import authenticateJWT from "./middleware/authToken.js";
-
+import authenticateJWT, {ensureLoggedIn} from "./middleware/authToken.js";
+import auth from './routes/auth.js'
+import notFound from './middleware/404.js'
+import errorHandler from './middleware/error.js'
 const [, mainModule] = process.argv
 const isMainModule = mainModule === fileURLToPath(import.meta.url)
+const isTest= process.env.NODE_ENV === 'test'
 export let conn
-
+isMainModule && printReport()
 const app = express()
 
 // middleware
@@ -22,34 +24,17 @@ app.use(express.json())
 app.use(authenticateJWT)
 
 //only use if not in test environment
-if (process.env.NODE_ENV !== 'test') {
-    app.use(morgan("tiny"));
-}
+!isTest && app.use(morgan("tiny"));
 
 //Routers
+app.use('/auth', auth)
 app.use("/courses", courses)
 app.use("/users", users)
 app.use("/posts", posts)
 
-
-/**
- * 404 catch-all
- */
-app.use(( req, res, next)=>{
-    res.status(404).json({status:404,message:"Not Found"})
-})
-app.use((err, req, res, next)=>{
-    try{
-        const {status,message}= err
-        if(!status) return res.json(new ServerError(message))
-        else return res.status(status).json({status,message})
-
-    }catch (e) {
-        return res.status(500).json(new ServerError("Server Error"))
-
-    }
-})
-
+//error handling
+app.use(notFound)
+app.use(errorHandler)
 
 
 
@@ -62,10 +47,10 @@ app.use((err, req, res, next)=>{
 export async function startServer(PORT_NUM = PORT) {
     conn = await connect(true)
     return app.listen(PORT_NUM,
-        () => console.log(`Listening on Port ${PORT_NUM}`));
+        () => !isTest &&console.log(`Listening on Port ${PORT_NUM}`));
 }
 
-
+/* c8 ignore next 2*/
 if (isMainModule) {
     await startServer()
     // can't programatically stop server so no reason to save return value

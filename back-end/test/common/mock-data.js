@@ -20,6 +20,7 @@ export const $c2 = () =>
     })
 export const $p1 = (course, user, username) =>
     ({
+        title: faker.lorem.sentence(5),
         course,
         user,
         username,
@@ -29,6 +30,7 @@ export const $p1 = (course, user, username) =>
     })
 export const $p2 = (course, user, username) =>
     ({
+        title: faker.lorem.sentence(5),
         course,
         user,
         username,
@@ -38,6 +40,7 @@ export const $p2 = (course, user, username) =>
     })
 export const $p3 = (course, user, username) =>
     ({
+        title: faker.lorem.sentence(5),
         course,
         user,
         username,
@@ -49,7 +52,6 @@ export const $p3 = (course, user, username) =>
 export const $u1 = () =>
     ({
         username: 'u1',
-        password: 'password',
         first_name: faker.name.firstName(),
         last_name: faker.name.lastName(),
         email: faker.internet.email(),
@@ -58,7 +60,6 @@ export const $u1 = () =>
 export const $u2 = () =>
     ({
         username: 'u2',
-        password: 'password',
         first_name: faker.name.firstName(),
         last_name: faker.name.lastName(),
         email: faker.internet.email(),

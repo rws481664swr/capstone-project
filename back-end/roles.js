@@ -1,0 +1,3 @@
+export const ADMIN="ADMIN",TEACHER="TEACHER",STUDENT="STUDENT"
+const all = {ADMIN,TEACHER,STUDENT}
+export default Object.freeze({ADMIN,TEACHER,STUDENT})
