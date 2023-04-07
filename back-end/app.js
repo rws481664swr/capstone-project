@@ -7,7 +7,7 @@ import {PORT, printReport} from './config.js'
 import {fileURLToPath} from 'url'
 import cors from "cors";
 import morgan from "morgan";
-import authenticateJWT from "./middleware/authToken.js";
+import authenticateJWT, {ensureLoggedIn} from "./middleware/authToken.js";
 import auth from './routes/auth.js'
 import notFound from './middleware/404.js'
 import errorHandler from './middleware/error.js'

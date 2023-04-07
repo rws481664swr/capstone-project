@@ -11,7 +11,6 @@ export const createComment = async (post, comment) => {
 }
 export const removeComment = async (cid) => {
     const comment = await Comments.findById(cid).exec();
-    console.log()
     await Promise.all([
         Comments.deleteOne({_id: cid}).exec(),
         Posts.updateOne({_id: comment.post}, {$pull: {comments: cid}})]);

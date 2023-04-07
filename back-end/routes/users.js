@@ -2,8 +2,11 @@ import express from "express";
 import {createUser, deleteUser, getUser, getUsers, updateUser} from "../db/users.js";
 import {BadRequestError, ExpressError} from "../util/Errors.js";
 import {changePassword} from "../db/creds.js";
+import {ensureLoggedIn} from "../middleware/authToken.js";
 
 const router = express.Router()
+router.use(ensureLoggedIn)
+
 export default router
 
 

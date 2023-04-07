@@ -22,6 +22,16 @@ describe('Courses routes', () => {
             const courses = jsonify((await axios.get(`${prefix}/courses?sort=date&direction=desc`, tokenConfig)).data)
         courses.should.eql(jsonify([c1]))
         })
+        it('should fail GET /courses no token', async () => {
+          try  {
+                const courses = jsonify((await axios.get(`${prefix}/courses?sort=date&direction=desc`)).data)
+                should.fail('fail')
+            }catch (e) {
+              e.message.should.not.eql('fail')
+
+              e.response.status.should.eql(401)
+          }
+        })
 
     })
     describe('POST /courses', () => {

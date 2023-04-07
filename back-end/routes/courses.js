@@ -6,13 +6,16 @@ import {ADMIN, STUDENT, TEACHER} from "../roles.js";
 import {BadRequestError} from "../util/Errors.js";
 
 const router = express.Router()
+router.use(ensureLoggedIn)
+
 export default router
 
 
-router.get('/', ensureLoggedIn, async ({query: {sort, direction}}, res, next) => {
+router.get('/', async ({query: {sort, direction}}, res, next) => {
     try {
-        const user = await getUser(res.locals.user.username, true)
-        return res.json(user.courses)
+
+        const {courses} = await getUser(res.locals.user.username, true)
+        return res.json(courses)
 
     } catch (e) {
         next(e)
@@ -28,7 +31,7 @@ router.post('/', ensureLoggedIn, ensureTeacher, async ({body = {}}, res, next) =
         next(e)
     }
 })
-router.delete('/:id', ensureLoggedIn, ensureTeacher, async ({params: {_id}}, res, next) => {
+router.delete('/:id' ,ensureLoggedIn,ensureTeacher, async ({params: {_id}}, res, next) => {
     try {
         await deleteCourse(_id)
         res.json({message: 'deleted'})

@@ -3,6 +3,7 @@ import {login} from "../db/creds.js";
 import {BadRequestError, UnauthorizedError} from "../util/Errors.js";
 import {createUser, getUser} from "../db/users.js";
 import createToken from '../createToken.js'
+import {ensureLoggedIn} from "../middleware/authToken.js";
 
 const router = express.Router()
 export default router
