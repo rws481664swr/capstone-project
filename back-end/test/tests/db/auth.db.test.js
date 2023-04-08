@@ -13,7 +13,7 @@ let conn=await connect()
 process.env.NODE_ENV='test'
 describe('signUp', () => {
     afterEach(async () => {
-        await Credentials.deleteMany();
+        await Credentials.deleteMany({});
     });
 
     it('should create a new user with hashed password', async () => {

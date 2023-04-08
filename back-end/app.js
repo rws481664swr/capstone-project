@@ -2,6 +2,7 @@ import express from 'express'
 import users from './routes/users.js'
 import courses from './routes/courses.js'
 import posts from './routes/posts.js'
+import comments from './routes/comments.js'
 import {connect} from "./db/db.js";
 import {PORT, printReport} from './config.js'
 import {fileURLToPath} from 'url'
@@ -29,6 +30,7 @@ app.use(authenticateJWT)
 //Routers
 app.use('/auth', auth)
 app.use("/courses", courses)
+app.use("/comments", comments)
 app.use("/users", users)
 app.use("/posts", posts)
 
