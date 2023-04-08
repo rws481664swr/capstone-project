@@ -1,4 +1,5 @@
 import {Posts} from './schemas/models.js'
+import comments from "../routes/comments.js";
 
 export const createPost = async (post) => {
     return Posts.create(post)
@@ -20,11 +21,12 @@ export const getPostsFromUser = async (username, sort = {postDate}) => {
 export const getPinned = async (sort = {postDate}) => {
     return await Posts.find({pinned: true}).sort(sort).exec()
 }
-export const getPost = async (_id, {user, course} = {user: false, course: false}) => {
+export const getPost = async (_id, {user, course,comments}={}) => {
 
     let query = Posts.findById(_id)
     if (user) query = query.populate('user')
     if (course) query = query.populate('course')
+    if (comments) query = query.populate('comments')
     return await query.exec()
 
 }

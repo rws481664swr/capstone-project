@@ -19,7 +19,6 @@ export const signUp = async (username, rawPassword) => {
         await Credentials.create({username, password})
     }catch (e) {
         if(e.message){
-            console.log(e.message)
             throw e
         }
     }
