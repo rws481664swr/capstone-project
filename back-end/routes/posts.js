@@ -10,10 +10,10 @@ router.use(ensureLoggedIn)
 export default router
 router.get('/', async (req, res) => {
 })
-router.get('/:id', async ({params: {id}, query: {course, user}}, res, next) => {
+router.get('/:_id', async ({params: {_id}, query: {course, user}}, res, next) => {
     try {
         let opts = {course, user}
-        const post = await getPost(id, opts)
+        const post = await getPost(_id, opts)
         res.json(post)
     } catch (e) {
         next(e)
@@ -31,10 +31,10 @@ function getSort(sort) {
     return sort
 }
 
-router.get('/users/:user', async ({params: {user}, query: {sort}}, res, next) => {
+router.get('/users/:username', async ({params: {user: username}, query: {sort}}, res, next) => {
     try {
         sort = getSort(sort)
-        const results = await getPostsFromUser(user, sort)
+        const results = await getPostsFromUser(username, sort)
         return res.json(results)
     } catch (e) {
         next(e)

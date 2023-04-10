@@ -31,7 +31,7 @@ router.post('/', ensureLoggedIn, ensureTeacher, async ({body = {}}, res, next) =
         next(e)
     }
 })
-router.delete('/:id' ,ensureLoggedIn,ensureTeacher, async ({params: {_id}}, res, next) => {
+router.delete('/:_id' ,ensureLoggedIn,ensureTeacher, async ({params: {_id}}, res, next) => {
     try {
         await deleteCourse(_id)
         res.json({message: 'deleted'})
@@ -41,10 +41,10 @@ router.delete('/:id' ,ensureLoggedIn,ensureTeacher, async ({params: {_id}}, res,
 })
 
 //enroll in course
-router.post('/:id/users/:username', ensureLoggedIn, async ({params: {id, username}}, res, next) => {
+router.post('/:_id/users/:username', ensureLoggedIn, async ({params: {_id, username}}, res, next) => {
     //TODO add conditional to see if student or if teacher. for now, default to teacher
     try {
-        await enrollCourse(username, id)
+        await enrollCourse(username, _id)
         res.json({message: 'enrolled'})
 
     } catch (e) {
@@ -53,7 +53,7 @@ router.post('/:id/users/:username', ensureLoggedIn, async ({params: {id, usernam
 })
 
 //unenroll
-router.delete('/:id/users/:username', ensureLoggedIn, async ({params: {id, username},...req}, res, next) => {
+router.delete('/:_id/users/:username', ensureLoggedIn, async ({params: {_id, username},...req}, res, next) => {
     //TODO add conditional to see if student or if teacher. for now, default to teacher
     const {
         user
@@ -69,10 +69,10 @@ router.delete('/:id/users/:username', ensureLoggedIn, async ({params: {id, usern
         switch (role) {
 
             case STUDENT:
-                await unEnrollCourse(username, id)
+                await unEnrollCourse(username, _id)
                 break;
             case TEACHER:
-                await unTeachCourse(username, id)
+                await unTeachCourse(username, _id)
                 break;
             default:throw new BadRequestError('User role unspecified')
         }

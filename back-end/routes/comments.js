@@ -8,9 +8,9 @@ router.use(ensureLoggedIn)
 
 export default router
 
-router.get('/:post_id', async ({params: {post_id}}, res, next) => {
+router.get('/:_id', async ({params: {_id}}, res, next) => {
     try {
-        const comments = await getComments(post_id)
+        const comments = await getComments(_id)
         res.json(comments)
     } catch (e) {
         return next(e)
@@ -24,19 +24,19 @@ router.post('/', async ({body: {post,... comment}}, res, next) => {
         return next(e)
     }
 })
-router.put('/:id', async ({params:{id},body: { comment:c}}, res, next) => {
+router.put('/:_id', async ({params:{_id},body: { comment:c}}, res, next) => {
     try {
-        if (!id) throw new BadRequestError('no comment id provided')
+        if (!_id) throw new BadRequestError('no comment id provided')
         if (!c) throw new BadRequestError('no data provided')
-        const comment = await editComment(id, c)
+        const comment = await editComment(_id, c)
         return res.json(comment)
     } catch (e) {
         return next(e)
     }
 })
-router.delete('/:cid', async ({params: {cid}}, res, next) => {
+router.delete('/:_id', async ({params: {_id}}, res, next) => {
     try {
-        await removeComment(cid)
+        await removeComment(_id)
          res.json({message:'deleted'})
 
     } catch (e) {

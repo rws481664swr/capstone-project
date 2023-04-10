@@ -29,8 +29,8 @@ app.use(authenticateJWT)
 
 //Routers
 app.use('/auth', auth)
-app.use("/courses", courses)
 app.use("/comments", comments)
+app.use("/courses", courses)
 app.use("/users", users)
 app.use("/posts", posts)
 
