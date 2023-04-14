@@ -1,5 +1,5 @@
 import {should} from "chai";
-import common, {c1, c2, cm1, cm3, p1, u1, u2} from "../common/seed-test-db.js";
+import common, {c1, c2, cm1, cm3, p1, p2, p3, u1, u2} from "../common/seed-test-db.js";
 import {
     postBelongsToCourse,
     postBelongsToUser,
@@ -12,7 +12,7 @@ import {faker} from "@faker-js/faker";
 import {createPost} from "../../db/posts.js";
 
 should()
-describe('sandbox', () => {
+describe('predicates', () => {
     common()
     it('teacherOwns true', async () => {
         const teacher = u2.username
@@ -76,15 +76,15 @@ describe('sandbox', () => {
         result.should.be.false
     })
     it('user can comment on post',async()=>{
-        (await userCanComment(u1.username,cm1._id)).should.be.true
+        (await userCanComment(u1.username,p1._id)).should.be.true
     })
     it('user cannot comment on post',async()=>{
-        (await userCanComment(u1.username,cm3._id)).should.be.false
+        (await userCanComment(u1.username,p2._id)).should.be.false
 
     })
     it('user cam comment on multiple posts',async()=>{
-        (await userCanComment(u2.username,cm3._id)).should.be.true;
-        (await userCanComment(u2.username,cm3._id)).should.be.true;
+        (await userCanComment(u2.username,p1._id)).should.be.true;
+        (await userCanComment(u2.username,p3._id)).should.be.true;
 
     })
 })

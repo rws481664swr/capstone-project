@@ -1,13 +1,15 @@
 import {should} from "chai";
-import {c1, doAfterAll, doAfterEach, doBeforeAll, doBeforeEach, p1, u1} from "../../common/seed-test-db.js";
 import {
-    adminToken,
-    adminTokenConfig,
-    teacherToken,
-    teacherTokenConfig,
-    token,
-    tokenConfig
-} from "../../common/tokens.js";
+    adminToken, adminTokenConfig,
+    c1,
+    doAfterAll,
+    doAfterEach,
+    doBeforeAll,
+    doBeforeEach,
+    p1,
+    teacherToken, teacherTokenConfig, token, tokenConfig,
+    u1
+} from "../../common/seed-test-db.js";
 import axios from 'axios'
 import {jsonify} from "../../../db/util.js";
 import {Posts} from "../../../db/schemas/models.js";
@@ -60,7 +62,11 @@ describe('posts api routes', () => {
         })
         it('/users/:username', async () => {
             const {data} = await axios.get(`${prefix}/users/${u1.username}`,tokenConfig)
-            const expected = jsonify(await Posts.find({user: u1._id}).sort({postDate: -1}).exec())
+            const expected = jsonify(
+                await Posts
+                    .find({user: u1._id})
+                    .sort({postDate: -1})
+                    .exec())
             data.should.eql(expected)
         })
     })

@@ -1,6 +1,5 @@
-import doAllHooks, {u1, u2} from '../../common/seed-test-db.js'
+import doAllHooks, {admin, adminTokenConfig, tokenConfig, u1, u2} from '../../common/seed-test-db.js'
 import axios from 'axios'
-import {token, createConfigToken, tokenConfig} from "../../common/tokens.js";
 import {should} from "chai";
 import {jsonify} from "../../../db/util.js";
 import {Users} from "../../../db/schemas/models.js";
@@ -20,17 +19,17 @@ this.timeout(20000)
         doAllHooks()
 
         it(`should get all users`, async () => {
-            const {data} = await axios.get(prefix, tokenConfig)
+            const {data} = await axios.get(prefix, adminTokenConfig)
             let y = jsonify(await Promise.all(
-                jsonify([u1, u2])
+                jsonify([admin,u1, u2])
                     .map(({username}) =>
                         Users.findOne({username}).exec())))
             data.should.eql(y)
         })
         it(`should get all users in reverse order`, async () => {
-            const {data} = await axios.get(prefix, {...tokenConfig, params: {username: -1}})
+            const {data} = await axios.get(prefix, {...adminTokenConfig, params: {username: -1}})
             let y = jsonify(await Promise.all(
-                [u1, u2]
+                [admin,u1, u2]
                     .map(({username}) =>
                         Users.findOne({username})
                             .sort({username: -1}).exec())))

@@ -5,13 +5,12 @@ import {ensureLoggedIn, ensureTeacher} from "../middleware/authToken.js";
 import {ADMIN, STUDENT, TEACHER} from "../roles.js";
 import {BadRequestError} from "../util/Errors.js";
 
-const router = express.Router()
-router.use(ensureLoggedIn)
-
-export default router
+export const coursesRouter = express.Router()
+coursesRouter.use(ensureLoggedIn)
 
 
-router.get('/', async ({query: {sort, direction}}, res, next) => {
+
+coursesRouter.get('/', async ({query: {sort, direction}}, res, next) => {
     try {
 
         const {courses} = await getUser(res.locals.user.username, true)
@@ -23,7 +22,7 @@ router.get('/', async ({query: {sort, direction}}, res, next) => {
 
 })
 
-router.post('/', ensureLoggedIn, ensureTeacher, async ({body = {}}, res, next) => {
+coursesRouter.post('/', ensureLoggedIn, ensureTeacher, async ({body = {}}, res, next) => {
     try {
         const data = await createCourse(body)
         res.json(data)
@@ -31,7 +30,7 @@ router.post('/', ensureLoggedIn, ensureTeacher, async ({body = {}}, res, next) =
         next(e)
     }
 })
-router.delete('/:_id' ,ensureLoggedIn,ensureTeacher, async ({params: {_id}}, res, next) => {
+coursesRouter.delete('/:_id' ,ensureLoggedIn,ensureTeacher, async ({params: {_id}}, res, next) => {
     try {
         await deleteCourse(_id)
         res.json({message: 'deleted'})
@@ -41,7 +40,7 @@ router.delete('/:_id' ,ensureLoggedIn,ensureTeacher, async ({params: {_id}}, res
 })
 
 //enroll in course
-router.post('/:_id/users/:username', ensureLoggedIn, async ({params: {_id, username}}, res, next) => {
+coursesRouter.post('/:_id/users/:username', ensureLoggedIn, async ({params: {_id, username}}, res, next) => {
     //TODO add conditional to see if student or if teacher. for now, default to teacher
     try {
         await enrollCourse(username, _id)
@@ -53,7 +52,7 @@ router.post('/:_id/users/:username', ensureLoggedIn, async ({params: {_id, usern
 })
 
 //unenroll
-router.delete('/:_id/users/:username', ensureLoggedIn, async ({params: {_id, username},...req}, res, next) => {
+coursesRouter.delete('/:_id/users/:username', ensureLoggedIn, async ({params: {_id, username},...req}, res, next) => {
     //TODO add conditional to see if student or if teacher. for now, default to teacher
     const {
         user

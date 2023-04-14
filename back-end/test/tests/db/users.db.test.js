@@ -1,4 +1,4 @@
-import doAllHooks, {c1, c2, u1, u2} from '../../common/seed-test-db.js'
+import doAllHooks, {c1, c2, u1, u2,admin} from '../../common/seed-test-db.js'
 import {createUser, deleteUser, getUser, getUsers, updateUser} from "../../../db/users.js";
 import {should} from 'chai'
 import {Courses, Credentials, Users} from "../../../db/schemas/models.js";
@@ -45,7 +45,7 @@ describe('test user queries', () => {
             const all = jsonify(await Users.find({}).exec())
             const auth =jsonify(await Credentials.findOne({username}).exec())
            ;( await compare(new_user.password,auth.password)).should.be.true
-            all.length.should.eql(3)
+            all.length.should.eql(4)
             auth.username.should.equal(username)
             user3.should.eql(all[all.length - 1])
         })
@@ -57,6 +57,7 @@ describe('test user queries', () => {
             const z = jsonify(await Users.create(newUser('z')))
             await Users.deleteOne({username: 'u1'})
             await Users.deleteOne({username: 'u2'})
+            await Users.deleteOne({username: 'admin'})
             const ls = jsonify(await getUsers({username: -1}))
             ls.should.eql([z, f, a])
         })
@@ -66,6 +67,7 @@ describe('test user queries', () => {
             const z = jsonify(await Users.create(newUser('z')))
             await Users.deleteOne({username: 'u1'})
             await Users.deleteOne({username: 'u2'})
+            await Users.deleteOne({username: 'admin'})
             const ls = jsonify(await getUsers({username: 1}))
             ls.should.eql([a, f, z])
         })
@@ -73,16 +75,18 @@ describe('test user queries', () => {
             const ls = jsonify(await getUsers({username: 1}, true))
             const _u2 = await Users.findOne({username: 'u2'}).populate('courses').exec()
             const _u1 = await Users.findOne({username: 'u1'}).populate('courses').exec()
+            const admin = await Users.findOne({username: 'admin'}).populate('courses').exec()
 
-            ls.should.eql(jsonify([_u1, _u2]))
+            ls.should.eql(jsonify([admin,_u1, _u2]))
 
         })
         it('should have getUsers returns list in reverse with courses', async () => {
             const ls = jsonify(await getUsers({username: -1}, true))
             const _u2 = await Users.findOne({username: 'u2'}).populate('courses').exec()
             const _u1 = await Users.findOne({username: 'u1'}).populate('courses').exec()
+            const admin = await Users.findOne({username: 'admin'}).populate('courses').exec()
 
-            ls.should.eql(jsonify([_u2, _u1]))
+            ls.should.eql(jsonify([_u2, _u1,admin]))
         })
 
         it('should have getUser returns with courses', async () => {

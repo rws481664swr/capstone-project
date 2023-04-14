@@ -10,4 +10,19 @@ const courseSchema = new Schema({
     students: [{type: Schema.Types.ObjectId, ref: "User"}],
     teachers: [{type: Schema.Types.ObjectId, ref: "User"}]
 }, {collection: 'courses'})
+
+courseSchema.methods.hasMember = function (test) {
+    let toString=o=>o.toString()
+    test=test.toString()
+    try {
+        if ([
+            ...this.students.map(toString),
+            ...this.teachers.map(toString),
+        ].includes(test))
+            return true
+    } catch (e) {
+    console.error('error in hasMember()' , e.message)
+    }
+return false
+}
 export default courseSchema

@@ -2,8 +2,7 @@ import {PORT} from "../../../config.js";
 import _axios from "axios";
 import {jsonify} from "../../../db/util.js";
 import {should as chaiShould} from "chai";
-import {c1, cm1, cm2, default as common, p1} from "../../common/seed-test-db.js";
-import {tokenConfig} from "../../common/tokens.js";
+import {c1, cm1, cm2, default as common, p1, tokenConfig} from "../../common/seed-test-db.js";
 
 const should = chaiShould()
 const prefix = `http://localhost:${PORT}/comments`
@@ -33,7 +32,7 @@ describe('/comments', () => {
     })
     it('should when failing to find from a post', async () => {
         try {
-            await axios.get(c1._id)
+            await axios.get(cm1._id)
             should.fail('fail')
         } catch ({message = 'error', response: {status}}) {
             message.should.not.equal('fail')
@@ -68,13 +67,13 @@ describe('/comments', () => {
 
     })
     it('should edit a comment', async () => {
-        const {data, status} = await axios.put(cm1._id, {comment: 'new content'})
+        const {data, status} = await axios.put(cm1._id, {content: 'new content'})
         status.should.equal(200)
         data.should.have.property('content').equal('new content')
     })
     it('should fail to edit comment due to bad id', async () => {
         try{
-            await axios.put(p1._id, {comment: 'new content'})
+            await axios.put(p1._id, {content: 'new content'})
             should.fail('fail')
         }catch (e){
             e.message.should.not.equal('fail')

@@ -2,19 +2,19 @@ import express from "express";
 import {createUser, deleteUser, getUser, getUsers, updateUser} from "../db/users.js";
 import {BadRequestError, ExpressError} from "../util/Errors.js";
 import {changePassword} from "../db/creds.js";
-import {ensureLoggedIn} from "../middleware/authToken.js";
+import {ensureAdmin, ensureLoggedIn} from "../middleware/authToken.js";
+import {mustBeUsernameOrAdmin} from '../middleware/predicates.js'
 
-const router = express.Router()
-router.use(ensureLoggedIn)
-
-export default router
+export const usersRouter = express.Router()
+usersRouter.use(ensureLoggedIn)
 
 
-router.get('/', async ({query: {username}}, res, next) => {
+
+usersRouter.get('/', ensureAdmin, async ({query: {username}}, res, next) => {
     try {
         const sort = username === 'asc'
             ? 1 : (username === 'desc' ? -1 : 1)
-        const response = await getUsers({username: sort })
+        const response = await getUsers({username: sort})
         res.json(response)
     } catch (e) {
         return next(e)
@@ -22,7 +22,7 @@ router.get('/', async ({query: {username}}, res, next) => {
 
 })
 
-router.get('/:username', async ({params: {username}}, res, next) => {
+usersRouter.get('/:username', mustBeUsernameOrAdmin, async ({params: {username}}, res, next) => {
     try {
         res.json(await getUser(username, false))
 
@@ -33,7 +33,7 @@ router.get('/:username', async ({params: {username}}, res, next) => {
 
 })
 
-router.get('/:username/courses', async ({params: {username}}, res, next) => {
+usersRouter.get('/:username/courses', mustBeUsernameOrAdmin, async ({params: {username}}, res, next) => {
 
     try {
 
@@ -46,7 +46,7 @@ router.get('/:username/courses', async ({params: {username}}, res, next) => {
 
 })
 
-router.put('/:username', async ({params: {username}, body}, res, next) => {
+usersRouter.put('/:username', mustBeUsernameOrAdmin, async ({params: {username}, body}, res, next) => {
     try {
         if ("username" in body) {
             throw new BadRequestError('cannot change username')
@@ -57,7 +57,10 @@ router.put('/:username', async ({params: {username}, body}, res, next) => {
     }
 })
 
-router.put('/:username/password', async ({params: {username}, body: {password, old}}, res, next) => {
+usersRouter.put('/:username/password', mustBeUsernameOrAdmin, async ({
+                                                                    params: {username},
+                                                                    body: {password, old}
+                                                                }, res, next) => {
     try {
         await changePassword(username, old, password)
         res.json({message: "updated"})
@@ -67,7 +70,7 @@ router.put('/:username/password', async ({params: {username}, body: {password, o
 
 })
 
-router.post('/', async ({body}, res, next) => {
+usersRouter.post('/', async ({body}, res, next) => {
     try {
         const post = await createUser(body)
         res.json(post)
@@ -77,7 +80,7 @@ router.post('/', async ({body}, res, next) => {
     }
 })
 
-router.delete('/:username', async ({params: {username}}, res, next) => {
+usersRouter.delete('/:username', mustBeUsernameOrAdmin, async ({params: {username}}, res, next) => {
     try {
         const {acknowledged} = await deleteUser(username)
         if (acknowledged)

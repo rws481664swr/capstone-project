@@ -1,0 +1,5 @@
+export {authRouter} from './auth.js'
+export {commentsRouter} from './comments.js'
+export {postsRouter} from './postsRouter.js'
+export {coursesRouter} from './coursesRouter.js'
+export {usersRouter} from './usersRouter.js'

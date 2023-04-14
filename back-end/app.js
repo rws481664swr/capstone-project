@@ -1,20 +1,16 @@
 import express from 'express'
-import users from './routes/users.js'
-import courses from './routes/courses.js'
-import posts from './routes/posts.js'
-import comments from './routes/comments.js'
+import {authRouter, commentsRouter, coursesRouter, postsRouter, usersRouter} from './routes/routers.js'
+// import {} from './routes/usersRouter.js'
+// import {} from './routes/coursesRouter.js'
+// import {} from './routes/postsRouter.js'
+// import {} from './routes/commentsRouter.js'
+// import {} from './routes/auth.js'
+import {authenticateJWT, errorHandler, notFound} from './middleware/middleware.js'
 import {connect} from "./db/db.js";
-import {PORT, printReport} from './config.js'
-import {fileURLToPath} from 'url'
+import {isMainModule, isTest, PORT, printReport} from './config.js'
 import cors from "cors";
 import morgan from "morgan";
-import authenticateJWT, {ensureLoggedIn} from "./middleware/authToken.js";
-import auth from './routes/auth.js'
-import notFound from './middleware/404.js'
-import errorHandler from './middleware/error.js'
-const [, mainModule] = process.argv
-const isMainModule = mainModule === fileURLToPath(import.meta.url)
-const isTest= process.env.NODE_ENV === 'test'
+
 export let conn
 isMainModule && printReport()
 const app = express()
@@ -28,11 +24,11 @@ app.use(authenticateJWT)
 !isTest && app.use(morgan("tiny"));
 
 //Routers
-app.use('/auth', auth)
-app.use("/comments", comments)
-app.use("/courses", courses)
-app.use("/users", users)
-app.use("/posts", posts)
+app.use('/auth', authRouter)
+app.use("/comments", commentsRouter)
+app.use("/courses", coursesRouter)
+app.use("/users", usersRouter)
+app.use("/posts", postsRouter)
 
 //error handling
 app.use(notFound)

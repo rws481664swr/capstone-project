@@ -1,6 +1,8 @@
 import {getUser} from "../db/users.js";
 import {Comments, Posts} from "../db/schemas/models.js";
 import {getPost} from "../db/posts.js";
+import {ADMIN} from "../roles.js";
+import {ForbiddenError} from "../util/Errors.js";
 
 export const isLoggedIn = ({locals: {user}}) => user && true
 export const isAdmin = ({locals: {user: {role}}}) => role === "ADMIN" && true
@@ -30,14 +32,23 @@ export const teacherCanPin = async (teacher, post_id) => {
     return courses.map(e => e.toString()).includes(course.toString())
 }
 
-export const userCanComment = async (username, cid) => {
+export const userCanComment = async (username, post) => {
 
-    const [user, {post:post_id}] = await Promise.all([
-        getUser(username),
-        Comments.findById(cid)])
     const {course:course_id} = await getPost(post_id)
     const course = course_id.toString()
     const courses=user.courses.map(course => course.toString())
     const includesCourse= courses.includes(course)
     return (includesCourse && true) || false
+}
+
+export const mustBeUsernameOrAdmin=({params:{username}}, {locals},next)=>{
+    try{
+        const{user: {username:uname,role}}=locals
+        if( username===uname || role ===ADMIN ) return next()
+        throw new ForbiddenError("Must be user to perform action")
+
+    }catch (e) {
+        return next(e)
+    }
+
 }

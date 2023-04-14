@@ -1,5 +1,14 @@
 import {faker} from "@faker-js/faker";
 
+export const $u3=() =>
+    ({
+            username: 'admin',
+            first_name: faker.name.firstName(),
+            last_name: faker.name.lastName(),
+            email: faker.internet.email(),
+            role: "ADMIN"
+    })
+
 export const $c1 = () =>
     ({
         subject: 'subject1',

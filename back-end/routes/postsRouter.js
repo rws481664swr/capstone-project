@@ -4,13 +4,12 @@ import {BadRequestError} from "../util/Errors.js";
 import {Posts} from "../db/schemas/models.js";
 import {ensureLoggedIn} from "../middleware/authToken.js";
 
-const router = express.Router()
-router.use(ensureLoggedIn)
+export const postsRouter = express.Router()
+postsRouter.use(ensureLoggedIn)
 
-export default router
-router.get('/', async (req, res) => {
+postsRouter.get('/', async (req, res) => {
 })
-router.get('/:_id', async ({params: {_id}, query: {course, user}}, res, next) => {
+postsRouter.get('/:_id', async ({params: {_id}, query: {course, user}}, res, next) => {
     try {
         let opts = {course, user}
         const post = await getPost(_id, opts)
@@ -31,7 +30,7 @@ function getSort(sort) {
     return sort
 }
 
-router.get('/users/:username', async ({params: {user: username}, query: {sort}}, res, next) => {
+postsRouter.get('/users/:username', async ({params: { username}, query: {sort}}, res, next) => {
     try {
         sort = getSort(sort)
         const results = await getPostsFromUser(username, sort)
@@ -41,7 +40,7 @@ router.get('/users/:username', async ({params: {user: username}, query: {sort}},
     }
 })
 
-router.get('/courses/:course', async ({params: {course}, query: {sort}}, res, next) => {
+postsRouter.get('/courses/:course', async ({params: {course}, query: {sort}}, res, next) => {
     try {
         sort = getSort(sort)
         const results = await getPostsFromCourse(course, sort)
@@ -51,7 +50,7 @@ router.get('/courses/:course', async ({params: {course}, query: {sort}}, res, ne
     }
 } /*ensureEnrolledOrProf*/)
 
-router.post('/', async ({   body }, res, next) => {
+postsRouter.post('/', async ({   body }, res, next) => {
     try {
         const post = await Posts.create({...body,pinned:false, postDate: new Date()})
         res.status(201).json(post)
@@ -61,7 +60,7 @@ router.post('/', async ({   body }, res, next) => {
 })
 
 
-router.put('/:_id', async ({body: {content}, params: {_id}}, res, next) => {
+postsRouter.put('/:_id', async ({body: {content}, params: {_id}}, res, next) => {
     try {
         if (!content) throw new BadRequestError('Body has no content')
         await updatePost(_id, {content})
@@ -72,7 +71,7 @@ router.put('/:_id', async ({body: {content}, params: {_id}}, res, next) => {
 })
 
 
-router.put('/:_id/pin', async ({params: {_id}}, res, next) => {
+postsRouter.put('/:_id/pin', async ({params: {_id}}, res, next) => {
     try {
         await pinPost(_id)
         res.json({message: "pinned!"})
@@ -81,7 +80,7 @@ router.put('/:_id/pin', async ({params: {_id}}, res, next) => {
     }
 
 })
-router.put('/:_id/unpin', async ({params: {_id}}, res, next) => {
+postsRouter.put('/:_id/unpin', async ({params: {_id}}, res, next) => {
 
     try {
         await unpinPost(_id)
@@ -92,7 +91,7 @@ router.put('/:_id/unpin', async ({params: {_id}}, res, next) => {
 
 })
 
-router.delete('/:_id', async ({params: {_id}}, res, next) => {
+postsRouter.delete('/:_id', async ({params: {_id}}, res, next) => {
 
     const {...rest} = await Posts.findOneAndDelete({_id}).exec()
     res.json({deleted: 'true'})

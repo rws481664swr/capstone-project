@@ -5,8 +5,7 @@ import {createUser, getUser} from "../db/users.js";
 import createToken from '../createToken.js'
 import {isLoggedIn} from "../middleware/predicates.js";
 
-const router = express.Router()
-export default router
+export const authRouter = express.Router()
 
 const notLoggedIn = (req, res, next) => {
 
@@ -25,23 +24,23 @@ function ensureLoggedOut(type='log in') {
     }
 }
 
-router.post('/login', ensureLoggedOut(), async ({body: {username, password}}, res, next) => {
+authRouter.post('/login', ensureLoggedOut(), async ({body: {username, password}}, res, next) => {
     try {
         const isLoggedIn = await login(username, password)
         if (!isLoggedIn) throw new UnauthorizedError("Invalid username/password")
-        const {role} = await getUser(username)
-        const token = createToken(username, role)
+        const {role,_id} = await getUser(username)
+        const token = createToken(username, role,_id.toString())
         return res.json({token})
     } catch (e) {
         next(e)
     }
 })
 
-router.post('/register', ensureLoggedOut('register'), async ({body}, res, next) => {
+authRouter.post('/register', ensureLoggedOut('register'), async ({body}, res, next) => {
     try {
         if (!body.password) throw new BadRequestError('Must provide a password')
         const user = await createUser(body)
-        const token = createToken(user.username, user.role)
+        const token = createToken(user.username, user.role,user._id.toString())
         res.json({token})
     } catch (e) {
         next(e)
