@@ -1,13 +1,14 @@
 import _axios from 'axios'
-import {adminTokenConfig, teacherTokenConfig, tokenConfig} from "../../common/tokens.js";
 
-const _as = (axios, config)=>({
+import {adminTokenConfig, teacherTokenConfig, tokenConfig} from "../../common/seed-test-db.js";
+
+const as = (axios, config)=>({
     get:async(url)=> await axios.get (url,config),
     post:async(url,body)=> await axios.post (url,body,config),
     put:async(url,body)=> await axios.put (url,body,config),
     delete:async(url)=> await axios.delete (url,config)
 })
-export default (axios=_axios,as=_as)=> {
+export const createRequests= (axios=_axios)=> {
 
 
     const asTeacher=(axios)=>

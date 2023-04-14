@@ -1,11 +1,12 @@
-import common from "../../common/seed-test-db.js";
+import common,{requests} from "../../common/seed-test-db.js";
 import {should as chaiShould} from "chai";
 import {PORT} from "../../../config.js";
+
 
 const should = chaiShould()
 
 const prefix = `http://localhost:${PORT}`
-export default ()=>{common();
+describe('courses middleware security',()=>{common();
     it('should be able to create as teacher',async()=>{should.fail('todo')})
     it('should be able to create as admin',async()=>{should.fail('todo')})
     it('should be NOT be able to create as student',async()=>{should.fail('todo')})
@@ -14,3 +15,4 @@ export default ()=>{common();
     it('teacher cannot delete a course if not a teacher of the course',async()=>{should.fail('todo')})
     it('',async()=>{should.fail('todo')})
 }
+)

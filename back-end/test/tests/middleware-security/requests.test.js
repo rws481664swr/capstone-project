@@ -1,82 +1,123 @@
-import requests from "./requests.js";
+import {createRequests as requests} from "./requests.js";
 import {should as chaiShould} from 'chai'
-const should= chaiShould()
+import {PORT} from "../../../config.js";
+import {
+    adminTokenConfig as admin,
+    default as common,
+    teacherTokenConfig as teacher,
+    tokenConfig as student
+} from "../../common/seed-test-db.js";
 
-import {tokenConfig as student, teacherTokenConfig as teacher, adminTokenConfig as admin} from "../../common/tokens.js";
+const should = chaiShould()
 
-const mockAxios ={
+const prefix = `http://localhost:${PORT}/users`
+const mockAxios = {
     get: async (url, config) => {
 
-        return {url,config}
+        return {url, config}
     },
     post: async (url, body, config) => {
-        return {url,body,config}
+        return {url, body, config}
     },
     put: async (url, body, config) => {
-        return {url,body,config}
+        return {url, body, config}
     },
     delete: async (url, config) => {
-        return {url,config}
+        return {url, config}
     }
 }
 
 
-  const req=  requests(mockAxios)
+let req
 describe('requests test', () => {
-    it('should GET',async ()=>{
-        let response
-         response= await req.get.student('/')
-        response.should.have.property('url').eql('/')
-        response.should.have.property('config').eql(student)
-         response= await req.get.teacher('/')
-        response.should.have.property('url').eql('/')
-        response.should.have.property('config').eql(teacher)
-         response= await req.get.admin('/')
-        response.should.have.property('url').eql('/')
-        response.should.have.property('config').eql(admin)
+    let response
+    describe('should GET', async () => {
+        common()
+        beforeEach(() => req = requests(mockAxios))
+
+        it('student', async () => {
+            response = await req.get.student('/')
+            response.should.have.property('url').eql('/')
+            response.should.have.property('config').eql(student)
+        })
+        it('teacher', async () => {
+            response = await req.get.teacher('/')
+            response.should.have.property('url').eql('/')
+            response.should.have.property('config').eql(teacher)
+        })
+        it('admin', async () => {
+            response = await req.get.admin('/')
+            response.should.have.property('url').eql('/')
+            response.should.have.property('config').eql(admin)
+        })
     })
-    it('should PUT',async ()=>{
-        let response
-        response= await req.put.student('/',{})
-        response.should.have.property('url').eql('/')
-        response.should.have.property('body').eql({})
-        response.should.have.property('config').eql(student)
-        response= await req.put.teacher('/',{})
-        response.should.have.property('url').eql('/')
-        response.should.have.property('body').eql({})
-        response.should.have.property('config').eql(teacher)
-        response= await req.put.admin('/',{})
-        response.should.have.property('url').eql('/')
-        response.should.have.property('body').eql({})
-        response.should.have.property('config').eql(admin)
+    describe('should PUT', async () => {
+        common()
+        beforeEach(() => req = requests(mockAxios))
+
+        it('student', async () => {
+            response = await req.put.student('/', {})
+            response.should.have.property('url').eql('/')
+            response.should.have.property('body').eql({})
+            response.should.have.property('config').eql(student)
+        })
+
+        it('teacher', async () => {
+            response = await req.put.teacher('/', {})
+            response.should.have.property('url').eql('/')
+            response.should.have.property('body').eql({})
+            response.should.have.property('config').eql(teacher)
+        })
+        it('admin', async () => {
+            response = await req.put.admin('/', {})
+            response.should.have.property('url').eql('/')
+            response.should.have.property('body').eql({})
+            response.should.have.property('config').eql(admin)
+        })
 
     })
-    it('should POST',async ()=>{
-        let response
-        response= await req.post.student('/',{})
-        response.should.have.property('url').eql('/')
-        response.should.have.property('body').eql({})
-        response.should.have.property('config').eql(student)
-        response= await req.post.teacher('/',{})
-        response.should.have.property('url').eql('/')
-        response.should.have.property('body').eql({})
-        response.should.have.property('config').eql(teacher)
-        response= await req.post.admin('/',{})
-        response.should.have.property('url').eql('/')
-        response.should.have.property('body').eql({})
-        response.should.have.property('config').eql(admin)
+    describe('should POST', async () => {
+        common()
+        beforeEach(() => req = requests(mockAxios))
+
+        it('student', async () => {
+            response = await req.post.student('/', {})
+            response.should.have.property('url').eql('/')
+            response.should.have.property('body').eql({})
+            response.should.have.property('config').eql(student)
+        })
+        it('teacher', async () => {
+            response = await req.post.teacher('/', {})
+            response.should.have.property('url').eql('/')
+            response.should.have.property('body').eql({})
+            response.should.have.property('config').eql(teacher)
+        })
+        it('admin', async () => {
+            response = await req.post.admin('/', {})
+            response.should.have.property('url').eql('/')
+            response.should.have.property('body').eql({})
+            response.should.have.property('config').eql(admin)
+        })
     })
-    it('should DELETE',async ()=>{
-        let response
-        response= await req.delete.student('/',{})
-        response.should.have.property('url').eql('/')
-        response.should.have.property('config').eql(student)
-        response= await req.delete.teacher('/',{})
-        response.should.have.property('url').eql('/')
-        response.should.have.property('config').eql(teacher)
-        response= await req.delete.admin('/',{})
-        response.should.have.property('url').eql('/')
-        response.should.have.property('config').eql(admin)
+    describe('should DELETE', async () => {
+        common()
+        beforeEach(() => req = requests(mockAxios))
+
+        it('student', async () => {
+            response = await req.delete.student('/', {})
+            response.should.have.property('url').eql('/')
+            response.should.have.property('config').eql(student)
+        })
+        it('teacher', async () => {
+            response = await req.delete.teacher('/', {})
+            response.should.have.property('url').eql('/')
+            response.should.have.property('config').eql(teacher)
+        })
+        it('admin', async () => {
+            response = await req.delete.admin('/', {})
+            response.should.have.property('url').eql('/')
+            response.should.have.property('config').eql(admin)
+        })
     })
 
 })

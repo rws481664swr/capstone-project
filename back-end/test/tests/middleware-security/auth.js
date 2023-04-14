@@ -1,17 +1,14 @@
-import common from "../../common/seed-test-db.js";
+import common,{requests} from "../../common/seed-test-db.js";
 import {should as chaiShould} from 'chai'
 import {PORT} from "../../../config.js";
 
-import _axios from './requests.js'
-import axios from "axios";
 
-const requests = _axios(axios)
 
 const should = chaiShould()
 
 const prefix = (rest) => `http://localhost:${PORT}/auth${rest}`
 
-export default () => {
+describe('auth middleware security',() => {
     common();
     it('should not log in due to token', async () => {
         try {
@@ -31,4 +28,4 @@ export default () => {
             e.response.data.message. should.equal('Cannot register twice' )
         }
     })
-}
+})

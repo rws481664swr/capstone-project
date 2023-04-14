@@ -1,11 +1,12 @@
-import common from "../../common/seed-test-db.js";
+import common,{requests} from "../../common/seed-test-db.js";
 import {should as chaiShould} from "chai";
 import {PORT} from "../../../config.js";
 
 const should = chaiShould()
 
 const prefix = `http://localhost:${PORT}`
-export default ()=>{common();
+describe('users middleware security',()=>{
+    common();
     it('only admin can get all users',async()=>{should.fail('todo')})
     it('admin can get user',async()=>{should.fail('todo')})
     it('teacher of student can get user',async()=>{should.fail('todo')})
@@ -25,4 +26,4 @@ export default ()=>{common();
     it('others cannot delete user',async()=>{should.fail('todo')})
     it('',async()=>{should.fail('todo')})
 
-}
+})
