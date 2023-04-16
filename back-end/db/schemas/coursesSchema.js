@@ -1,5 +1,5 @@
 import {Schema} from "mongoose";
-
+import {toString} from "../util.js";
 
 const courseSchema = new Schema({
     courseNumber: {type: Number, required: true},
@@ -12,8 +12,7 @@ const courseSchema = new Schema({
 }, {collection: 'courses'})
 
 courseSchema.methods.hasMember = function (test) {
-    let toString=o=>o.toString()
-    test=test.toString()
+    test = test.toString()
     try {
         if ([
             ...this.students.map(toString),
@@ -21,8 +20,14 @@ courseSchema.methods.hasMember = function (test) {
         ].includes(test))
             return true
     } catch (e) {
-    console.error('error in hasMember()' , e.message)
+        console.error('error in hasMember()', e.message)
     }
-return false
+    return false
+}
+courseSchema.methods.getTeachers = function () {
+    return this.teachers.map(toString)
+}
+courseSchema.methods.getStudents = function () {
+    return this.students.map(toString)
 }
 export default courseSchema
