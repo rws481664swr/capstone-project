@@ -1,14 +1,13 @@
 import express from "express";
-import {createCourse, deleteCourse, enrollCourse, unEnrollCourse, unTeachCourse} from '../db/courses.js'
+import {createCourse, deleteCourse, enrollCourse, getCourse, unEnrollCourse, unTeachCourse} from '../db/courses.js'
 import {getUser} from "../db/users.js";
 import {ensureLoggedIn, ensureTeacher} from "../middleware/authToken.js";
 import {ADMIN, STUDENT, TEACHER} from "../roles.js";
-import {BadRequestError} from "../util/Errors.js";
+import {BadRequestError, ForbiddenError} from "../util/Errors.js";
+
 
 export const coursesRouter = express.Router()
 coursesRouter.use(ensureLoggedIn)
-
-
 
 coursesRouter.get('/', async ({query: {sort, direction}}, res, next) => {
     try {
@@ -25,12 +24,12 @@ coursesRouter.get('/', async ({query: {sort, direction}}, res, next) => {
 coursesRouter.post('/', ensureLoggedIn, ensureTeacher, async ({body = {}}, res, next) => {
     try {
         const data = await createCourse(body)
-        res.json(data)
+        res.status(201).json(data)
     } catch (e) {
         next(e)
     }
 })
-coursesRouter.delete('/:_id' ,ensureLoggedIn,ensureTeacher, async ({params: {_id}}, res, next) => {
+coursesRouter.delete('/:_id', ensureLoggedIn, ensureTeacher, async ({params: {_id}}, res, next) => {
     try {
         await deleteCourse(_id)
         res.json({message: 'deleted'})
@@ -52,11 +51,11 @@ coursesRouter.post('/:_id/users/:username', ensureLoggedIn, async ({params: {_id
 })
 
 //unenroll
-coursesRouter.delete('/:_id/users/:username', ensureLoggedIn, async ({params: {_id, username},...req}, res, next) => {
-    //TODO add conditional to see if student or if teacher. for now, default to teacher
+coursesRouter.delete('/:_id/users/:username', ensureLoggedIn, async ({params: {_id, username}, ...req}, res, next) => {
+
     const {
         user
-    }=res.locals
+    } = res.locals
 
     try {
         let {role} = user
@@ -73,7 +72,8 @@ coursesRouter.delete('/:_id/users/:username', ensureLoggedIn, async ({params: {_
             case TEACHER:
                 await unTeachCourse(username, _id)
                 break;
-            default:throw new BadRequestError('User role unspecified')
+            default:
+                throw new BadRequestError('User role unspecified')
         }
 
         res.json({message: 'unenrolled'})
