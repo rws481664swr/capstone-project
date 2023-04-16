@@ -11,6 +11,9 @@ const postSchema = new Schema( {
         comments:[{type: Schema.Types.ObjectId, ref: "Comments"}]
     },{collection: 'posts'})
 ;
+postSchema.methods.getID = function () {
+        return this._id.toString()
+}
 
 
 export default postSchema

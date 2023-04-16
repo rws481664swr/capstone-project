@@ -1,3 +1,4 @@
+process.env.NODE_ENV='test'
 import {Comments, Courses, Credentials, Posts, Users} from "../../db/schemas/models.js";
 import {conn, startServer} from "../../app.js";
 import {$c1, $c2, $p1, $p2, $p3, $u1, $u2, $u3} from "./mock-data.js";

@@ -30,4 +30,11 @@ courseSchema.methods.getTeachers = function () {
 courseSchema.methods.getStudents = function () {
     return this.students.map(toString)
 }
+courseSchema.methods.hasOneTeacher = function () {
+    return this.teachers.length===1
+}
+
+courseSchema.methods.getID = function(){
+    return this._id.toString()
+}
 export default courseSchema

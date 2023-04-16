@@ -6,4 +6,7 @@ const commentsSchema = new Schema({
     content:{type:String, required:true},
     timestamp:{type: Schema.Types.Date, required: true}
 }, {collection: 'comments'})
+commentsSchema.methods.getID = function () {
+    return this._id.toString()
+}
 export default commentsSchema
