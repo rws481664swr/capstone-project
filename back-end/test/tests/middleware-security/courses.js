@@ -55,7 +55,7 @@ describe('courses middleware security', () => {
 
         })
         it('should be NOT be able to create as student', async () => {
-            try {
+            try{
                 await requests.post.student(prefix(), newCourse())
                 should.fail('fail')
             } catch (e) {

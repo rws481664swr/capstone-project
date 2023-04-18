@@ -1,6 +1,7 @@
 import {faker} from "@faker-js/faker";
 import {Schema} from "mongoose";
 import {ADMIN, STUDENT, TEACHER} from "../../roles.js";
+import {Posts} from "./models.js";
 
 export const newUser = (username, role = "STUDENT") =>
     ({
@@ -33,6 +34,11 @@ userSchema.methods.getID = function () {
 userSchema.methods.studentCanEnroll = function (course) {
         return this.role===STUDENT &&
             course.getStudents().includes(this.id())
+
+}
+userSchema.methods.ownsPost = async function (post_id) {
+     const post = await Posts.findById(post_id).exec()
+    return post.username===this.username
 
 }
 

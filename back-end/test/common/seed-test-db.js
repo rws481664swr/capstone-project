@@ -80,7 +80,7 @@ export const doBeforeEach = async function () {
         c2 = await Courses.create($c2())
 
         p1 = await Posts.create($p1(c1._id, u1._id, u1.username))
-        p2 = await Posts.create($p2(c2._id, u1._id, u1.username))
+        p2 = await Posts.create($p2(c2._id, u2._id, u1.username))
         p3 = await Posts.create($p3(c1._id, u2._id, u2.username))
 
         ;[cm1, cm2, cm3] = await Promise.all([

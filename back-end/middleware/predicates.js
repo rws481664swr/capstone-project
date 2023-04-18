@@ -34,7 +34,8 @@ export const teacherCanPin = async (teacher, post_id) => {
 
 export const userCanComment = async (username, post) => {
 
-    const {course:course_id} = await getPost(post_id)
+    const {course:course_id} = await getPost(post)
+    const user= await getUser(username)
     const course = course_id.toString()
     const courses=user.courses.map(course => course.toString())
     const includesCourse= courses.includes(course)
