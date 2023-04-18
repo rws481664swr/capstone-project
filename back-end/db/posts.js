@@ -1,5 +1,4 @@
 import {Posts} from './schemas/models.js'
-import comments from "../routes/comments.js";
 
 export const createPost = async (post) => {
     return Posts.create(post)

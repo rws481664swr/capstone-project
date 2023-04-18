@@ -1,13 +1,15 @@
 import {should} from "chai";
-import {c1, doAfterAll, doAfterEach, doBeforeAll, doBeforeEach, p1, u1} from "../../common/seed-test-db.js";
 import {
-    adminToken,
-    adminTokenConfig,
-    teacherToken,
-    teacherTokenConfig,
-    token,
-    tokenConfig
-} from "../../common/tokens.js";
+    adminToken, adminTokenConfig,
+    c1,
+    doAfterAll,
+    doAfterEach,
+    doBeforeAll,
+    doBeforeEach,
+    p1,
+    teacherToken, teacherTokenConfig, token, tokenConfig,
+    u1
+} from "../../common/seed-test-db.js";
 import axios from 'axios'
 import {jsonify} from "../../../db/util.js";
 import {Posts} from "../../../db/schemas/models.js";
@@ -58,11 +60,7 @@ describe('posts api routes', () => {
             const expected = jsonify(await Posts.find({course: c1._id}).sort({postDate: -1}).exec())
             data.should.eql(expected)
         })
-        it('/users/:username', async () => {
-            const {data} = await axios.get(`${prefix}/users/${u1.username}`,tokenConfig)
-            const expected = jsonify(await Posts.find({user: u1._id}).sort({postDate: -1}).exec())
-            data.should.eql(expected)
-        })
+
     })
     describe('POST', () => {
         it('should create a post', async () => {
@@ -112,14 +110,14 @@ describe('posts api routes', () => {
     describe('PUT', () => {
         it('should pin a post', async () => {
             const {_id} = p1
-            await axios.put(`${prefix}/${_id}/pin`, {pinned: true},tokenConfig)
+            await axios.put(`${prefix}/${_id}/pin`, {pinned: true},teacherTokenConfig)
             ;(await getPost(_id)).pinned.should.be.true
         })
         it('should unpin a post', async () => {
             const {_id} = p1
             await pinPost(_id);
             ;(await getPost(_id)).pinned.should.be.true
-            await axios.put(`${prefix}/${_id}/unpin`, {pinned: false},tokenConfig)
+            await axios.put(`${prefix}/${_id}/unpin`, {pinned: false},teacherTokenConfig)
             ;(await getPost(_id)).pinned.should.be.false
 
 

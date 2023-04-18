@@ -1,3 +1,5 @@
+export const toString = o => o.toString()
+
 /**
  * calls toJSON on an object or all objects in an array
  * used for filtering out mongoose query data from results
@@ -22,7 +24,8 @@ export function jsonify(json) {
     }
     if (Array.isArray(json)) return json.map(jstringify)
     return jstringify(json)
-/* c8 ignore start*/
+
+    /* c8 ignore start*/
     function isPrimitive(e) {
         switch (typeof e) {
             case "string":
@@ -35,5 +38,6 @@ export function jsonify(json) {
                 return false
         }
     }
+
     /* c8 ignore stop*/
 }
