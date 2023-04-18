@@ -60,15 +60,15 @@ describe('posts api routes', () => {
             const expected = jsonify(await Posts.find({course: c1._id}).sort({postDate: -1}).exec())
             data.should.eql(expected)
         })
-        it('/users/:username', async () => {
-            const {data} = await axios.get(`${prefix}/users/${u1.username}`,tokenConfig)
-            const expected = jsonify(
-                await Posts
-                    .find({user: u1._id})
-                    .sort({postDate: -1})
-                    .exec())
-            data.should.eql(expected)
-        })
+        // it('/users/:username', async () => {
+        //     const {data} = await axios.get(`${prefix}/users/${u1.username}`,tokenConfig)
+        //     const expected = jsonify(
+        //         await Posts
+        //             .find({user: u1._id})
+        //             .sort({postDate: -1})
+        //             .exec())
+        //     data.should.eql(expected)
+        // })
     })
     describe('POST', () => {
         it('should create a post', async () => {

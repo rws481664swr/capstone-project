@@ -1,19 +1,32 @@
 import express from "express";
 import {getPost, getPostsFromCourse, getPostsFromUser, pinPost, unpinPost, updatePost} from "../db/posts.js";
-import {BadRequestError} from "../util/Errors.js";
+import {BadRequestError, ForbiddenError} from "../util/Errors.js";
 import {Posts} from "../db/schemas/models.js";
-import {ensureLoggedIn} from "../middleware/authToken.js";
+import {ensureLoggedIn, ensureTeacher} from "../middleware/authToken.js";
+import {getCourse} from "../db/courses.js";
+import {ADMIN, STUDENT, TEACHER} from "../roles.js";
+import {getUser} from "../db/users.js";
 
 export const postsRouter = express.Router()
 postsRouter.use(ensureLoggedIn)
-
+const canPost=async ({role,_id},cid)=>{
+    const course= await getCourse(cid)
+    if(role !== ADMIN && !course.hasMember(_id))throw new ForbiddenError()
+}
 postsRouter.get('/', async (req, res) => {
 })
 postsRouter.get('/:_id', async ({params: {_id}, query: {course, user}}, res, next) => {
     try {
-        let opts = {course, user}
-        const post = await getPost(_id, opts)
-        res.json(post)
+        const post = getPost(_id, {course, user})
+        const {role, _id: userid} = res.locals.user
+        const [_p] = await Posts.find({_id})
+            .populate('course')
+            .exec()
+        const _course = await getCourse(_p.course._id)
+
+        if (role !== ADMIN && !_course.hasMember(userid)) throw new ForbiddenError()
+
+        res.json(await post)
     } catch (e) {
         next(e)
     }
@@ -30,19 +43,24 @@ function getSort(sort) {
     return sort
 }
 
-postsRouter.get('/users/:username', async ({params: { username}, query: {sort}}, res, next) => {
-    try {
-        sort = getSort(sort)
-        const results = await getPostsFromUser(username, sort)
-        return res.json(results)
-    } catch (e) {
-        next(e)
-    }
-})
+// postsRouter.get('/users/:username', async ({params: {username}, query: {sort}}, res, next) => {
+//     try {
+//         sort = getSort(sort)
+//         const results = await getPostsFromUser(username, sort)
+//         return res.json(results)
+//     } catch (e) {
+//         next(e)
+//     }
+// })
 
 postsRouter.get('/courses/:course', async ({params: {course}, query: {sort}}, res, next) => {
     try {
+
+        await canPost(res.locals.user,course)
+
         sort = getSort(sort)
+
+
         const results = await getPostsFromCourse(course, sort)
         return res.json(results)
     } catch (e) {
@@ -50,9 +68,14 @@ postsRouter.get('/courses/:course', async ({params: {course}, query: {sort}}, re
     }
 } /*ensureEnrolledOrProf*/)
 
-postsRouter.post('/', async ({   body }, res, next) => {
+
+postsRouter.post('/', async ({body}, res, next) => {
     try {
-        const post = await Posts.create({...body,pinned:false, postDate: new Date()})
+        const {course:cid}=body
+
+        await canPost(res.locals.user,cid)
+        const{username}=res.locals.user
+        const post = await Posts.create({...body,username, pinned: false, postDate: new Date()})
         res.status(201).json(post)
     } catch (err) {
         return next(err)
@@ -63,6 +86,8 @@ postsRouter.post('/', async ({   body }, res, next) => {
 postsRouter.put('/:_id', async ({body: {content}, params: {_id}}, res, next) => {
     try {
         if (!content) throw new BadRequestError('Body has no content')
+        const user = await getUser(res.locals.user.username)
+        if (!(await user.ownsPost(_id))) throw new ForbiddenError()
         await updatePost(_id, {content})
         res.json({message: "Updated!"})
     } catch (e) {
@@ -71,8 +96,10 @@ postsRouter.put('/:_id', async ({body: {content}, params: {_id}}, res, next) => 
 })
 
 
-postsRouter.put('/:_id/pin', async ({params: {_id}}, res, next) => {
+postsRouter.put('/:_id/pin', ensureTeacher,async ({params: {_id}}, res, next) => {
     try {
+        const post = await getPost(_id,{course:true})
+        if (!post.course.hasMember(res.locals.user._id)) throw new ForbiddenError()
         await pinPost(_id)
         res.json({message: "pinned!"})
     } catch (e) {
@@ -80,9 +107,11 @@ postsRouter.put('/:_id/pin', async ({params: {_id}}, res, next) => {
     }
 
 })
-postsRouter.put('/:_id/unpin', async ({params: {_id}}, res, next) => {
+postsRouter.put('/:_id/unpin', ensureTeacher,async ({params: {_id}}, res, next) => {
 
     try {
+        const post = await getPost(_id,{course:true})
+        if (!post.course.hasMember(res.locals.user._id)) throw new ForbiddenError()
         await unpinPost(_id)
         res.json({message: "unpinned!"})
     } catch (e) {
@@ -92,8 +121,23 @@ postsRouter.put('/:_id/unpin', async ({params: {_id}}, res, next) => {
 })
 
 postsRouter.delete('/:_id', async ({params: {_id}}, res, next) => {
-
-    const {...rest} = await Posts.findOneAndDelete({_id}).exec()
-    res.json({deleted: 'true'})
+    try{
+        const {username, role, _id: user_id} = res.locals.user
+        if (role !== ADMIN) {
+            const userDeleting = await getUser(username)
+            if (role === STUDENT && !userDeleting.ownsPost(_id)) {
+                throw new ForbiddenError('cannot delete another users post')
+            } else if (role === TEACHER) {
+                const post = await getPost(_id, {course: true})
+                if (!post.course.hasMember(user_id)) {
+                    throw new ForbiddenError('teacher can only delete in their own course')
+                }
+            }
+        }
+        const {...rest} = await Posts.findOneAndDelete({_id}).exec()
+        res.json({deleted: 'true'})
+    }catch (e) {
+        next(e)
+    }
 
 })
