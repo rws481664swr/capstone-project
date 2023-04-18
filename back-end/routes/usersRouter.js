@@ -70,7 +70,7 @@ usersRouter.put('/:username/password', mustBeUsernameOrAdmin, async ({
 
 })
 
-usersRouter.post('/', async ({body}, res, next) => {
+usersRouter.post('/', ensureAdmin,async ({body}, res, next) => {
     try {
         const post = await createUser(body)
         res.json(post)
