@@ -4,7 +4,7 @@ import {BadRequestError, ForbiddenError} from "../util/Errors.js";
 import {Posts} from "../db/schemas/models.js";
 import {ensureLoggedIn, ensureTeacher} from "../middleware/authToken.js";
 import {getCourse} from "../db/courses.js";
-import {ADMIN, STUDENT, TEACHER} from "../roles.js";
+import {ADMIN, STUDENT, TEACHER} from "../util/roles.js";
 import {getUser} from "../db/users.js";
 
 export const postsRouter = express.Router()

@@ -1,6 +1,6 @@
 import {faker} from "@faker-js/faker";
 import {Schema} from "mongoose";
-import {ADMIN, STUDENT, TEACHER} from "../../roles.js";
+import {ADMIN, STUDENT, TEACHER} from "../../util/roles.js";
 import {Posts} from "./models.js";
 
 export const newUser = (username, role = "STUDENT") =>

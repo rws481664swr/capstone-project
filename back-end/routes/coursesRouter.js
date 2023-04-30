@@ -10,7 +10,7 @@ import {
 } from '../db/courses.js'
 import {getUser} from "../db/users.js";
 import {ensureLoggedIn, ensureTeacher} from "../middleware/authToken.js";
-import {ADMIN, STUDENT, TEACHER} from "../roles.js";
+import {ADMIN, STUDENT, TEACHER} from "../util/roles.js";
 import {BadRequestError, ForbiddenError} from "../util/Errors.js";
 
 
@@ -86,10 +86,7 @@ coursesRouter.post('/:_id/users/:username', ensureLoggedIn, async ({params: {_id
         next(e)
     }
 })
-const courseHasOneTeacher= async(_id)=>{
-    const {teachers}=await getCourse(_id)
-    return teachers.length <2
-}
+
 //unenroll
 coursesRouter.delete('/:_id/users/:username', ensureLoggedIn, async ({params: {_id, username}, ...req}, res, next) => {
 
