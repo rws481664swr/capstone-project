@@ -3,7 +3,7 @@ import {
     createCourse,
     deleteCourse,
     enrollCourse,
-    getCourse, getCourses,
+    getCourse,
     teachCourse,
     unEnrollCourse,
     unTeachCourse
@@ -11,7 +11,7 @@ import {
 import {getUser} from "../db/users.js";
 import {ensureLoggedIn, ensureTeacher} from "../middleware/authToken.js";
 import {ADMIN, STUDENT, TEACHER} from "../util/roles.js";
-import {BadRequestError, ForbiddenError} from "../util/Errors.js";
+import {BadRequestError, ForbiddenError, FourOhFourError} from "../util/Errors.js";
 
 
 export const coursesRouter = express.Router()
@@ -19,9 +19,26 @@ coursesRouter.use(ensureLoggedIn)
 
 coursesRouter.get('/', async ({query: {sort, direction}}, res, next) => {
     try {
+        let user
+        const {courses} = user = await getUser(res.locals.user.username, true)
+        console.log('get c',res.getHeader('Authentication'))
 
-        const {courses} = await getUser(res.locals.user.username, true)
         return res.json(courses)
+
+    } catch (e) {
+        next(e)
+    }
+
+})
+coursesRouter.get('/:_id', async ({params: {_id}, query: {populate}}, res, next) => {
+    try {
+         const course = await getCourse(_id,
+            Boolean(populate)
+                ? {teachers: true, students: true}
+                : {})
+        if (course === null) throw new FourOhFourError('cannot find course')
+        console.log(populate)
+        return res.json(course)
 
     } catch (e) {
         next(e)
@@ -53,7 +70,7 @@ coursesRouter.delete('/:_id', ensureLoggedIn, ensureTeacher, async ({params: {_i
 coursesRouter.post('/:_id/users/:username', ensureLoggedIn, async ({params: {_id, username}}, res, next) => {
     //TODO add conditional to see if student or if teacher. for now, default to teacher
     try {
-        let [coursePromise,userPromise] = [
+        let [coursePromise, userPromise] = [
             getCourse(_id),
             getUser(username)
         ]
@@ -65,15 +82,15 @@ coursesRouter.post('/:_id/users/:username', ensureLoggedIn, async ({params: {_id
         if (user.role === TEACHER && role !== ADMIN)
             throw new ForbiddenError('Only admin can add teachers to courses.')
         const course = await coursePromise
-        if(course.hasMember(user._id))
+        if (course.hasMember(user._id))
             throw new BadRequestError('User is already a member of course')
         switch (user.role) {
             case TEACHER:
-                await teachCourse(user.username, _id,user.role)
+                await teachCourse(user.username, _id, user.role)
                 break
 
             case STUDENT:
-                await enrollCourse(user.username, _id,user.role)
+                await enrollCourse(user.username, _id, user.role)
 
                 break
             default:
@@ -90,7 +107,7 @@ coursesRouter.post('/:_id/users/:username', ensureLoggedIn, async ({params: {_id
 //unenroll
 coursesRouter.delete('/:_id/users/:username', ensureLoggedIn, async ({params: {_id, username}, ...req}, res, next) => {
 
-    const {role,_id:userid} = res.locals.user
+    const {role, _id: userid} = res.locals.user
 
     try {
         const course = await getCourse(_id)

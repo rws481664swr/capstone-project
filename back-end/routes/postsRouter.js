@@ -13,8 +13,7 @@ const canPost=async ({role,_id},cid)=>{
     const course= await getCourse(cid)
     if(role !== ADMIN && !course.hasMember(_id))throw new ForbiddenError()
 }
-postsRouter.get('/', async (req, res) => {
-})
+
 postsRouter.get('/:_id', async ({params: {_id}, query: {course, user}}, res, next) => {
     try {
         const post = getPost(_id, {course, user})
@@ -56,7 +55,7 @@ function getSort(sort) {
 postsRouter.get('/courses/:course', async ({params: {course}, query: {sort}}, res, next) => {
     try {
 
-        await canPost(res.locals.user,course)
+        // await canPost(res.locals.user,course)//TODO figure out why this line of code was here
 
         sort = getSort(sort)
 

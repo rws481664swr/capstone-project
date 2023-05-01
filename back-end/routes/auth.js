@@ -2,16 +2,15 @@ import express from "express";
 import {login} from "../db/creds.js";
 import {BadRequestError, UnauthorizedError} from "../util/Errors.js";
 import {createUser, getUser} from "../db/users.js";
-import createToken from '../createToken.js'
+import createToken, {refreshToken} from '../createToken.js'
 import {isLoggedIn} from "../middleware/predicates.js";
 import {Users,Credentials} from "../db/schemas/models.js";
 import {STUDENT} from "../util/roles.js";
+import {ensureLoggedIn} from "../middleware/authToken.js";
 
 export const authRouter = express.Router()
 
-const notLoggedIn = (req, res, next) => {
 
-}
 
 function ensureLoggedOut(type='log in') {
     return (req, res, next)=> {
@@ -25,6 +24,17 @@ function ensureLoggedOut(type='log in') {
         }
     }
 }
+
+authRouter.get('/token',ensureLoggedIn,async (req,res,next)=>{
+    try {
+        if(!res.locals.token) throw new UnauthorizedError('Unauthorized without token')
+        const token = refreshToken(res.locals.token)
+        res.json({token})
+    }catch (e) {
+        if (e instanceof UnauthorizedError) return next(e)
+        return next({message:`Something went wrong trying to refresh token`})
+    }
+})
 
 authRouter.post('/login', ensureLoggedOut(), async ({body: {username, password}}, res, next) => {
     try {

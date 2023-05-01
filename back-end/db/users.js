@@ -5,6 +5,7 @@ import {BadRequestError} from "../util/Errors.js";
 export const createUser = async (_user) => {
     const {password,username,...user}=_user
     try{
+
         await signUp(username, password)
         return await users.create({username,...user})
     }catch (e) {

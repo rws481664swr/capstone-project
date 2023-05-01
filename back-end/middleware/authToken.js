@@ -1,7 +1,9 @@
 import jwt from "jsonwebtoken";
 import {SECRET_KEY} from '../config.js'
-import {ForbiddenError, UnauthorizedError} from "../util/Errors.js";
-import {isAdmin,isTeacher, isLoggedIn, isStudent} from './predicates.js'
+import {UnauthorizedError} from "../util/Errors.js";
+import {isAdmin, isLoggedIn, isTeacher} from './predicates.js'
+import {refreshToken} from "../createToken.js";
+
 /** Middleware: Authenticate user.
  *
  * If a token was provided, verify it, and, if valid, store the token payload
@@ -16,6 +18,8 @@ export default function authenticateJWT(req, res, next) {
         if (authHeader) {
             const token = authHeader.replace(/^[Bb]earer /, "").trim();
             res.locals.user = jwt.verify(token, SECRET_KEY);
+            res.locals.token=token
+            res.setHeader('Authentication', `Bearer ${refreshToken(token)}`)
         }
         return next();
     } catch (err) {
@@ -23,7 +27,6 @@ export default function authenticateJWT(req, res, next) {
         return next();
     }
 }
-
 
 
 /** Middleware to use when they must be logged in.
@@ -61,7 +64,7 @@ export function ensureAdmin(req, res, next) {
  */
 export function ensureTeacher(req, res, next) {
     try {
-        const validUser=isTeacher(res)||isAdmin(res)
+        const validUser = isTeacher(res) || isAdmin(res)
         if (!isLoggedIn(res) || !validUser) throw new UnauthorizedError('Must be a teacher');
         return next();
     } catch (err) {
