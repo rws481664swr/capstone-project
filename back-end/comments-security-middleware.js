@@ -1,7 +1,7 @@
 import {getPost} from "./db/posts.js";
 import {getUser} from "./db/users.js";
 import {ForbiddenError, NotFoundError} from "./util/Errors.js";
-import {ADMIN, TEACHER} from "./roles.js";
+import {ADMIN, TEACHER} from "./util/roles.js";
 import {Comments, Posts} from "./db/schemas/models.js";
 
 export const userInPostsClass = async ({body: {post: post_id}}, res, next) => {

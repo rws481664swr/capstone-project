@@ -12,7 +12,8 @@ usersRouter.use(ensureLoggedIn)
 
 usersRouter.get('/', ensureAdmin, async ({query: {username}}, res, next) => {
     try {
-        const sort = username === 'asc'
+if (!['asc','desc'].includes(username) ) throw new BadRequestError()
+    const sort = username === 'asc'
             ? 1 : (username === 'desc' ? -1 : 1)
         const response = await getUsers({username: sort})
         res.json(response)
@@ -24,11 +25,13 @@ usersRouter.get('/', ensureAdmin, async ({query: {username}}, res, next) => {
 
 usersRouter.get('/:username', mustBeUsernameOrAdmin, async ({params: {username}}, res, next) => {
     try {
-        res.json(await getUser(username, false))
+        const user= await getUser(username, false)
+        if (user===null)throw new BadRequestError('user not found')
+        res.json(user)
 
     } catch (e) {
 
-        return next(new ExpressError(e.message))
+        return next(e)
     }
 
 })

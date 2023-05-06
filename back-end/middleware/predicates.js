@@ -1,7 +1,7 @@
 import {getUser} from "../db/users.js";
 import {Comments, Posts} from "../db/schemas/models.js";
 import {getPost} from "../db/posts.js";
-import {ADMIN} from "../roles.js";
+import {ADMIN} from "../util/roles.js";
 import {ForbiddenError} from "../util/Errors.js";
 
 export const isLoggedIn = ({locals: {user}}) => user && true

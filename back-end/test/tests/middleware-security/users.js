@@ -24,14 +24,37 @@ describe('users middleware security', () => {
             e.should.not.equal('fail')
         }
     })
+    it('bad query param', async () => {
+        try {
+            await requests.get.admin(prefix(`?username=null`))
+            should.fail('fail')
+        } catch (e) {
+            e.should.not.equal('fail')
+            e.response.status.should.equal(400)
+        }
+
+    })
     it('admin can get user', async () => {
         const {data: _u1, status} = await requests.get.admin(prefix('u1'))
         status.should.equal(200)
         _u1._id.should.equal(u1.getID())
     })
+    it('admin can get users query', async () => {
+        let {data, status} = await requests.get.admin(prefix('?username=asc'))
+        status.should.equal(200)
+            console.log(data.map(({_id})=>_id));
+        ( {data, status} = await requests.get.admin(prefix('?username=desc')))
+            console.log(data.map(({_id})=>_id))
+        status.should.equal(200)
+    })
 
     it('user can get themself', async () => {
         const {data: _u1, status} = await requests.get.student(prefix('u1'))
+        status.should.equal(200)
+        _u1._id.should.equal(u1.getID())
+    })
+    it('user can get themself', async () => {
+        const {data: _u1, status} = await requests.get.admin(prefix('null'))
         status.should.equal(200)
         _u1._id.should.equal(u1.getID())
     })

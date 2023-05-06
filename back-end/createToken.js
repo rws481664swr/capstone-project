@@ -10,3 +10,11 @@ export default function createToken(username, role,_id,rest={}) {
         ...rest
     },SECRET_KEY)
 }
+export const refreshToken=(token)=>{
+    const {timestamp,...tokenData}=
+        jwt.decode(token)
+    return jwt.sign({
+        ...tokenData,
+        timestamp:Date.now()
+    },SECRET_KEY)
+}

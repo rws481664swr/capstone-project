@@ -31,9 +31,3 @@ export class NotFoundError extends ExpressError{
     }
 }
 export {NotFoundError as FourOhFourError}
-export class ServerError extends ExpressError{
-    constructor(message='Bad Request') {
-        super(message,500);
-
-    }
-}

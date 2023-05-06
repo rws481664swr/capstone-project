@@ -1,0 +1,49 @@
+input.login,form.login ,label.login {
+    display: block;
+}
+
+label.login {
+    margin-bottom: 5px;
+}
+
+form.login {
+    margin-left: 10%;
+    margin-top: 5%;
+}
+input.login {
+    width: 50%;
+    padding: 5px;
+}
+div.login {
+    margin-top: 10px;
+}
+
+.btn-primary.login{
+
+}
+@media screen and (max-width: 500px){
+    label.login {
+        margin-bottom: 5px;
+    }
+    .btn.btn-primary.login{
+        margin-top:3%;
+        width: 100%;
+    }
+    input.login {
+        width: 100%;
+        padding: 5px;
+    }
+
+    form.login {
+        margin-left: 10px;
+        margin-top: 5%;
+        width:95%;
+    }
+
+    div.login {
+        margin-top: 20px;
+        /*margin: 0;*/
+        margin-right:5px ;
+
+    }
+}
