@@ -4,19 +4,19 @@ import './index.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.css'
 import {BrowserRouter} from "react-router-dom";
-import {GlobalContextProvider} from "./GlobalContext";
+import {GlobalContextProvider} from "./state/contexts/GlobalContext";
 import {Provider} from 'react-redux'
-import {store} from "./reducers";
+// import {store} from "./reducers";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <BrowserRouter>
-            <Provider store={store}>
+            {/*<Provider store={store}>*/}
                 <GlobalContextProvider>
                     <App/>
                 </GlobalContextProvider>
-            </Provider>
+            {/*</Provider>*/}
         </BrowserRouter>
     </React.StrictMode>
 );

@@ -1,4 +1,4 @@
-import {useGlobalContext} from "../GlobalContext";
+import {useGlobalContext} from "../state/contexts/GlobalContext";
 
 const useToken=()=>{
     const{token}= useGlobalContext()

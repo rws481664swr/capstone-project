@@ -1,7 +1,7 @@
 import './Navbar.css'
 import {Link, NavLink, useNavigate} from "react-router-dom";
 import {memo, useState} from "react";
-import {useGlobalContext} from "../../GlobalContext";
+import {useGlobalContext} from "../../state/contexts/GlobalContext";
 import useGet from "../../hooks/useGet";
 // import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
 const Navbar = () => {

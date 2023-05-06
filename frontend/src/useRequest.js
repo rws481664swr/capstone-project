@@ -1,4 +1,4 @@
-import {useGlobalContext} from "./GlobalContext";
+import {useGlobalContext} from "./state/contexts/GlobalContext";
 import axios from "axios";
 import {BASE_URL} from "./config";
 

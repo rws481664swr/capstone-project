@@ -2,7 +2,7 @@ import useForm from "../../hooks/useForm";
 import './Register.css'
 import axios from 'axios'
 import {BASE_URL} from '../../config.js'
-import {useGlobalContext} from "../../GlobalContext";
+import {useGlobalContext} from "../../state/contexts/GlobalContext";
 import {useNavigate} from "react-router-dom";
 
 const Register = () => {

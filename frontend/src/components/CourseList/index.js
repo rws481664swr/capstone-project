@@ -1,6 +1,6 @@
 import './index.css'
 import CourseListItem from "./CourseListItem";
-import {useGlobalContext} from "../../GlobalContext";
+import {useGlobalContext} from "../../state/contexts/GlobalContext";
 import {useNavigate} from "react-router-dom";
 import useGet from '../../hooks/useGet'
 

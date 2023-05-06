@@ -2,7 +2,7 @@ import useForm from "../../hooks/useForm";
 import axios from "axios";
 import {BASE_URL} from "../../config";
 import './Login.css'
-import {useGlobalContext} from "../../GlobalContext";
+import {useGlobalContext} from "../../state/contexts/GlobalContext";
 import {useNavigate} from "react-router-dom";
 const Login=()=>{
         const navigate = useNavigate()

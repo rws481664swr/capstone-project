@@ -1,6 +1,6 @@
 import {createContext, useCallback, useContext, useState} from "react";
 import jwtDecode from "jwt-decode";
-import useLocalStorageState from "./hooks/useLocalStorageState";
+import useLocalStorageState from "../../hooks/useLocalStorageState";
 
 const value = {
     username: undefined,
