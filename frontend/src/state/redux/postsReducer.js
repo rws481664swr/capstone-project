@@ -6,7 +6,8 @@ function postsReducer(posts = [], {type, payload, id}) {
         case ADD:
             return [...posts, payload]
         case UPDATE:
-            return posts.map(post => post._id !== id ? post : payload)
+            return posts.map(post =>
+                post._id !== id ? post : {...post,...payload})
 
         case REMOVE:
             return posts.filter(post => post._id !== id)
