@@ -5,6 +5,7 @@ import Register from "./components/authentication/Register";
 import Login from "./components/authentication/Login";
 import CourseList from "./components/CourseList";
 import Course from './components/CourseView/Course'
+import Profile from "./components/user/Profile";
 const App=()=>
     <>
     <Navbar/>
@@ -15,6 +16,7 @@ const App=()=>
         <Route path={'/courses/:id'} element={<Course/>}/>
         <Route path={'/register'} element={<Register/>}/>
         <Route path={'/login'} element={<Login/>}/>
+        <Route path={'/profile'} element={<Profile/>}/>
         <Route path={'/user/:id'} element={<></>}/>
         <Route path={'/admin'} element={<></>}/>
       </Routes>

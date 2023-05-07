@@ -19,6 +19,7 @@ const PostList = ({course_id: id}) => {
             }
         })()
     }, [])
+
     const [postDisplay, setPost] = useState(null)
     const posts = useSelector(e => e)
     return <>

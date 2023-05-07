@@ -4,7 +4,7 @@ import {useGlobalContext} from "../../../state/contexts/GlobalContext";
 import useAxios from "../../../api";
 import {ADD} from "../../../state/actions/posts";
 import {useDispatch} from "react-redux";
-import Modal from "../../Modal/Modal";
+import Modal from "../../General/Modal";
 
 const useFlash = () => {
     const [css, setCss] = useState('')

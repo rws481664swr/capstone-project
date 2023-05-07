@@ -1,7 +1,7 @@
 import {useParams} from "react-router-dom";
 import useGet from "../../hooks/useGet";
 import PostList from "./Posts/PostList";
-import Modal, {useModal} from "../Modal/Modal";
+import Modal, {useModal} from "../General/Modal";
 import {CourseContextProvider} from "../../state/contexts/CourseContext";
 import {Provider} from "react-redux";
 import postsStore from "../../state/redux/postsStore";

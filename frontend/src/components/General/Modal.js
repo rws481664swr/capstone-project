@@ -3,9 +3,9 @@ import {useState} from "react";
 // import css from './Modal.css'
 import  './Modal.css'
 
-const Modal = ({visible,hide,children}) => <>
+const Modal = ({visible,hide,children, zIndex=1}) => <>
     {visible &&
-        <div onClick={hide} className={'sr-modal'}>
+        <div style={{zIndex}} onClick={hide} className={'sr-modal'}>
         {/*<div onClick={hide} className={css.modal}>*/}
             <div onClick={e => e.stopPropagation()}
                  className={'sr-modal_content'}>

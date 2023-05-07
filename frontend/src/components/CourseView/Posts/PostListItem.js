@@ -1,8 +1,3 @@
-import useToggle from "../../../hooks/useToggle";
-import Comments from "./Comments";
-import Modal, {useModal} from "../../Modal/Modal";
-import {useCallback, useEffect, useReducer} from "react";
-import useAxios from "../../../api";
 import dayjs from 'dayjs'
 
 const PostListItem = ({post, onClick}) => {
