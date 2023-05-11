@@ -7,6 +7,7 @@ import {useGlobalContext} from "../../../state/contexts/GlobalContext";
 import {EditButton, PinButton} from "./EditPost/Buttons";
 import Edit from "./EditPost/Edit";
 import {useDispatch} from "react-redux";
+import {Link} from "react-router-dom";
 
 const useDisplayPost = ([post,setPost]) => {
     const axios=useAxios()
@@ -47,13 +48,15 @@ const PostDisplay = ({post = null, setPost}) => {
                     <EditButton editable={editable} editMode={editMode} setEditMode={setEditMode}/>
                     <PinButton canPin={canPin} pinned={post.pinned} togglePin={togglePin}/>
                         <div>
-                            <div>{post.pinned && 'pinned'} {post.username} posted at {post.createdAt} </div>
+                            <div>{post.pinned && 'pinned'}
+                                <Link to={`/users/${post.username}`}>{post.username}</Link>
+                                posted at {post.createdAt}
+                            </div>
 
                             <h4>{post.title}</h4>
 
                            <p> {post.content}</p>
                             <div></div>
-                            {/*<div>{console.log(post)}</div>*/}
                             <div></div>
                             <div>{post._id}</div>
                         </div>
