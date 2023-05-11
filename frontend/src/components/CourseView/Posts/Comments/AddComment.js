@@ -1,16 +1,16 @@
 import {useState} from "react";
-import useAxios from "../../../../api";
-
+import useFlash from "../../../../hooks/useFlash";
 const AddComment = ({add}) => {
     const [content, setContent] = useState('')
-    const {post} = useAxios()
-    const clear = () => setContent('')
+    const  [toRender, flash, setCss]= useFlash()
     const submit = async (e) => {
         e.preventDefault()
+        if(!content.trim()) return flash('Comment is required')
         add(content)
-        clear()
+        setContent('')
     }
     return <>
+    {toRender}
         <input
             type="text"
             value={content}

@@ -19,13 +19,13 @@ const useCommentsReducer = (post) => {
             dispatch({type: "SET_STATE", payload})
         })()
     }, [post, dispatch])
-    const add = (async (content) => {
+    const add = async (content) => {
         const payload = await axios.post('comments', {
             post: post._id,
             content
         })
         dispatch({type: "ADD_COMMENT", payload})
-    }, [dispatch])
+    }
     const remove =  async (id) => { //TODO
         await axios.delete('comments', id)
         dispatch({type: REMOVE, id})
