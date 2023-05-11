@@ -8,6 +8,8 @@ import Course from './components/CourseView/Course'
 import Profile from "./components/user/Profile";
 import EditProfile from "./components/user/UserProfile/EditingUser";
 import DisplayProfile from "./components/user/UserProfile/DisplayProfile";
+import Admin from './components/admin/Admin'
+
 const App=()=>
     <>
     <Navbar/>
@@ -22,6 +24,7 @@ const App=()=>
         <Route path="/profile" element={<Profile/>} />
         <Route path={'/profile'} element={<DisplayProfile/>}/>
         <Route path={'/user/:username'} element={<Profile/>}/>
+        <Route path={'/admin/*'} element={<Admin/>}/>
       </Routes>
     </>
 
