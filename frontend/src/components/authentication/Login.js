@@ -4,6 +4,8 @@ import {BASE_URL} from "../../config";
 import './Login.css'
 import {useGlobalContext} from "../../state/contexts/GlobalContext";
 import {useNavigate} from "react-router-dom";
+/**
+ * Login component for user authentication.
 const Login=()=>{
         const navigate = useNavigate()
 const{setToken}=useGlobalContext()

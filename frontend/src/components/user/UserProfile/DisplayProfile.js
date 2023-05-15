@@ -3,7 +3,7 @@ import useProfile from "../useProfile";
 import {useNavigate} from "react-router-dom";
 
 const DisplayProfile=()=>{
-    const {username, _id, role} = useGlobalContext()
+    const {username} = useGlobalContext()
     const user = useProfile(username)
     const navigate  = useNavigate()
     return <>

@@ -8,13 +8,15 @@ import {useNavigate} from "react-router-dom";
 
 const EditProfile = () => {
     const {put} = useAxios()
+    const {username} = useGlobalContext()
+
+    const user = useProfile(username)
+
     const [form, onChange, clear, setFormState] = useForm({
         username: user.username,
         email: user.email,
         password: user.password
     })
-    const {username, _id, role} = useGlobalContext()
-    const user = useProfile(username)
     const navigate = useNavigate()
     const [msg, flash] = useFlash('text-danger')
     const handleSubmit = async (e) => {

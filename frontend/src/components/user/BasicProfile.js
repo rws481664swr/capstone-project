@@ -1,9 +1,8 @@
 import useProfile from "./useProfile";
-import {useNavigate} from "react-router-dom";
 
 const BasicProfile = ({username}) => {
     const user = useProfile(username)
-    const navigate  = useNavigate()
+    // const navigate  = useNavigate()
 
     if (!user) return null
 

@@ -2,7 +2,7 @@ import {useState} from "react";
 import useFlash from "../../../../hooks/useFlash";
 const AddComment = ({add}) => {
     const [content, setContent] = useState('')
-    const  [toRender, flash, setCss]= useFlash()
+    const  [toRender, flash]= useFlash()
     const submit = async (e) => {
         e.preventDefault()
         if(!content.trim()) return flash('Comment is required')

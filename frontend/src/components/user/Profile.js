@@ -7,7 +7,7 @@ import DisplayProfile from "./UserProfile/DisplayProfile";
 const Profile = () => {
     const {username: uparam} = useParams()
 
-    const {username, _id, role} = useGlobalContext()
+    const {username } = useGlobalContext()
     console.log('username', username, 'uparam', uparam)
     return uparam === username
         ? <DisplayProfile username={username}/>
