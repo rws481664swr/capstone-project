@@ -1,0 +1,55 @@
+.createPostButton {
+    background-color: white;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+#postbutton {
+    background: transparent;
+    border: solid black 1px;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 20px;
+    margin: 20px;
+}
+
+#postbutton:hover {
+    color: white;
+    background: black;
+}
+
+button i.fa-plus {
+    margin-left: 15px;
+}
+
+.courseBody {
+    display: flex;
+    justify-content: space-between;
+}
+
+.courseHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+}
+
+.welcome {
+    font-size: large;
+    display: inline-block;
+}
+
+#welcome {
+    font-size: 5vw;
+}

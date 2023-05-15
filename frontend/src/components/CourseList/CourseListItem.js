@@ -1,16 +1,18 @@
-import css from './CourseListItem.css'
+import css from './index.css'
 import {Link} from "react-router-dom";
 
-const CourseListItem = ({clazz: {courseName, subject,_id}}) => {
+const CourseListItem = ({course: {courseName, subject, _id, courseNumber, students,...rest}}) => {
 
     return <>
-        <div className={css.outerDiv}>
-            <Link className={css.courseLink} to={`/courses/${_id}`}>
-            <span className={css.courseName}>{courseName}</span>
-
-            <span className={css.subject}>{subject}</span>
+        <li className={`${css.courseLi}`}>
+            <Link to={`/courses/${_id}`}>
+                <div className={css.courseBody}>
+                    <div className={css.courseName}>{subject}:#{courseNumber} - {courseName} </div>
+                    <div className={css.courseName}>{students.length} Students</div>
+                </div>
+                <h1>{_id}</h1>
             </Link>
-        </div>
+        </li>
 
     </>
 }

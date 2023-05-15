@@ -24,3 +24,5 @@ yarn-error.log*
 /.idea/
 /frontend.iml
 node_modules
+src/components/Fetch.js
+src/components/Fetch.test.js
