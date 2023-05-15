@@ -1,6 +1,6 @@
 import AddComment from "./AddComment";
 import Comment from './Comment'
-import React, {useCallback, useEffect, useReducer} from "react";
+import React, {useEffect, useReducer} from "react";
 import {REMOVE} from "../../../../state/actions/posts";
 import useAxios from "../../../../api";
 import commentsReducer from "../../../../state/redux/commentsReducer";
@@ -18,7 +18,7 @@ const useCommentsReducer = (post) => {
             console.log(payload, typeof payload, Array.isArray(payload))
             dispatch({type: "SET_STATE", payload})
         })()
-    }, [post, dispatch])
+    }, [post, dispatch, axios])
     const add = async (content) => {
         const payload = await axios.post('comments', {
             post: post._id,

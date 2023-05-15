@@ -1,14 +1,19 @@
 import PostListItem from './PostListItem'
 import {useDispatch, useSelector} from "react-redux";
-import { useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {SET_STATE} from "../../../state/actions/posts";
 import useAxios from "../../../api";
 import PostDisplay from "./PostDisplay";
 
+/*
+    * PostList is a component that displays a list of posts
+ */
 const PostList = ({course_id: id}) => {
-    // const posts = useGet(`posts/courses`,{init:[],id})
+
     const {get} = useAxios()
     const dispatch = useDispatch()
+
+    // get posts for the course
     useEffect(() => {
         (async () => {
             try {
@@ -18,10 +23,11 @@ const PostList = ({course_id: id}) => {
                 console.error(e)
             }
         })()
-    }, [])
+    }, [dispatch, id]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const [postDisplay, setPost] = useState(null)
     const posts = useSelector(e => e)
+
     return <>
         <div>
             {posts && <PostDisplay post={postDisplay} setPost={setPost}/>}
@@ -33,4 +39,6 @@ const PostList = ({course_id: id}) => {
         </div>
     </>
 }
+
+
 export default PostList

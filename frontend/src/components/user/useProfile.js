@@ -1,6 +1,5 @@
 import useAxios from "../../api";
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
 
 const useProfile = (username) => {
     const {get} = useAxios()
@@ -14,7 +13,7 @@ const useProfile = (username) => {
                 console.error(e)
             }
         })()
-    }, [])
+    }, [get,username])
     return user
 }
 

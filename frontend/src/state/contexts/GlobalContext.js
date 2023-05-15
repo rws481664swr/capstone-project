@@ -1,4 +1,4 @@
-import {createContext, useContext} from "react";
+import {createContext, useCallback, useContext} from "react";
 import jwtDecode from "jwt-decode";
 import useLocalStorageState from "../../hooks/useLocalStorageState";
 
@@ -17,7 +17,7 @@ export default GlobalContext
 export const GlobalContextProvider = ({children}) => {
     const [context,setContext] =
         useLocalStorageState( 'ctx',value||{})
-    const setToken= (token)=>{
+    const setToken= useCallback((token)=>{
         if (token){
             const {
 
@@ -30,13 +30,15 @@ export const GlobalContextProvider = ({children}) => {
         }else{
             setContext({})
         }
-    }
-    const logout= ()=> {
+    },[setContext])
+   const logout=useCallback (()=> {
         setToken(null)
-    }
+    },[setToken])
     return <GlobalContext.Provider value={{...context,setToken,logout}}>
         {children}
     </GlobalContext.Provider>
 }
-export const useGlobalContext = () =>     useContext(GlobalContext)
+
+export const useGlobalContext = () =>
+    useContext(GlobalContext)
 
