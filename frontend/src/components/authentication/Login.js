@@ -10,7 +10,7 @@ import {useNavigate} from "react-router-dom";
  */
 const Login=()=>{
         const navigate = useNavigate()
-const{setToken}=useGlobalContext()
+    const{setToken}=useGlobalContext()
     const [form, onChange] = useForm({
         username: "",
         password: ''

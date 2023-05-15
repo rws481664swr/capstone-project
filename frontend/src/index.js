@@ -5,6 +5,7 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.css'
 import {BrowserRouter} from "react-router-dom";
 import {GlobalContextProvider} from "./state/contexts/GlobalContext";
+import '@fortawesome/fontawesome-svg-core/styles.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

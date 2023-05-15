@@ -37,7 +37,7 @@ export default Navbar
 
 
 const Links = () => {
-    const {token: loggedIn, logout} = useGlobalContext()
+    const {token: {current:loggedIn}, logout} = useGlobalContext()
     return (
         <>
             <NavLink to={'/'} className={'link'}>Home</NavLink>
