@@ -1,11 +1,11 @@
 import AddComment from "./AddComment";
 import Comment from './Comment'
-import React, {useEffect, useReducer} from "react";
+import React, {useCallback, useEffect, useReducer} from "react";
 import {REMOVE} from "../../../../state/actions/posts";
 import useAxios from "../../../../api";
 import commentsReducer from "../../../../state/redux/commentsReducer";
 import useToggle from "../../../../hooks/useToggle";
-
+import './Comments.css'
 const useCommentsReducer = (post) => {
 
     const [comments, dispatch] = useReducer(commentsReducer, [])
@@ -18,18 +18,18 @@ const useCommentsReducer = (post) => {
             console.log(payload, typeof payload, Array.isArray(payload))
             dispatch({type: "SET_STATE", payload})
         })()
-    }, [post, dispatch, axios])
-    const add = async (content) => {
+    }, [post, dispatch])
+    const add =useCallback (async (content) => {
         const payload = await axios.post('comments', {
             post: post._id,
             content
-        })
+        },[dispatch,axios])
         dispatch({type: "ADD_COMMENT", payload})
-    }
-    const remove =  async (id) => { //TODO
+    },[dispatch,axios])
+    const remove = useCallback( async (id) => { //TODO
         await axios.delete('comments', id)
         dispatch({type: REMOVE, id})
-    }
+    },[dispatch,axios])
     return [comments, add, remove]
 }
 const Comments = ({post}) => {
@@ -38,17 +38,23 @@ const Comments = ({post}) => {
     if (!post) return null
     return <>
         <div>
-         <span
+         <span className={'PostDisplay-ShowComments'}
              onClick={toggleComments}>
-                        {commentsVisible ? 'Show ' : 'Hide'}
-             Comments
+                        {commentsVisible ? 'Show' : 'Hide'}
+             &nbsp;Comments
                     </span>
         </div>
-        {!commentsVisible&&<div>
+        {!commentsVisible&&
+            <div className={'Comments-CredentialsContainer'}>
             {comments.length > 0
-                ? comments.map(c => <Comment key={c._id} comment={c} remove={() => remove(c._id)}/>)
+                ?
+                comments.map(c =>
+                    <Comment key={c._id}
+                             comment={c}
+                             remove={() => remove(c._id)}/>)
+
                 : 'No Comments'}
-            <AddComment add={add}/>
+                <AddComment add={add}/>
         </div>}
     </>
 }

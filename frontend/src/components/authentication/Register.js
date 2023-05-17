@@ -6,8 +6,8 @@ import {useGlobalContext} from "../../state/contexts/GlobalContext";
 import {useNavigate} from "react-router-dom";
 
 const Register = () => {
-    const {setToken} = useGlobalContext()
-    const navigate=useNavigate()
+    const {setToken, token: tokenRef} = useGlobalContext()
+    const navigate = useNavigate()
     const [form, onChange] = useForm({
         username: "",
         password: '',
@@ -17,12 +17,12 @@ const Register = () => {
     })
     const submit = async (e) => {
         e.preventDefault()
-        try{
+        try {
             const {data: {token}} = await axios.post(`${BASE_URL}/auth/register`, form)
-
+            tokenRef.current = token
             setToken(token)
             navigate('/')
-        }catch ({response:{data}}) {
+        } catch ({response: {data}}) {
             console.error(data.message)
             alert(`Error: ${data.message}`)
         }

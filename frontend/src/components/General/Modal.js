@@ -4,12 +4,13 @@ import './Modal.css'
 /**
  * Modal is a component that displays a modal.
  */
-const Modal = ({visible, hide, children, zIndex = 1}) => <>
+const Modal = ({visible, hide, children, zIndex = 1,className=''}) => <>
     {visible &&
-        <div style={{zIndex}} onClick={hide} className={'sr-modal'}>
+        <div onClick={hide} className={`sr-modal`}>
             {/*<div onClick={hide} className={css.modal}>*/}
             <div onClick={e => e.stopPropagation()}
-                 className={'sr-modal_content'}>
+                 style={{zIndex}}
+                 className={`${className} sr-modal_content`}>
                 {/*className={css.modal_content}>*/}
                 {children}
             </div>

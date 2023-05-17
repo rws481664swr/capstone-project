@@ -1,16 +1,16 @@
-import {createContext, useCallback, useContext, useEffect, useRef, useState} from "react";
+import {createContext, useCallback, useContext, useRef} from "react";
 import jwtDecode from "jwt-decode";
 import useLocalStorageState from "../../hooks/useLocalStorageState";
-import axios from "axios";
-import {BASE_URL} from "../../config";
 
 const value = {
     username: undefined,
     role: undefined,
     _id: undefined,
     timestamp: undefined,
-    token:null,
-    setToken:()=>{}
+    token: null,
+    loggedIn: false,
+    setToken: () => {
+    }
 
 }
 const GlobalContext = createContext(value)
@@ -18,26 +18,27 @@ export default GlobalContext
 
 
 export const GlobalContextProvider = ({children}) => {
-    const [context,setState] =
-        useLocalStorageState( 'ctx',value||{})
-    const tokenRef= useRef(null)
+    const token = useRef(null)
+    const [context, setState] =
+        useLocalStorageState('ctx', {token, loggedIn: false})
 
-
-    const updateContext= useCallback((token)=>{
-        if (token){
-            tokenRef.current=token
-            setState({...jwtDecode(token), token:tokenRef})
-        }else{
-            setState({})
+    const updateContext = useCallback((newToken) => {
+        if (newToken) {
+            token.current = newToken
+            setState({...jwtDecode(newToken), loggedIn: true, token})
+        } else {
+            token.current = null
+            setState({loggedIn: false})
         }
-    },[setState])
+    }, [setState])
 
-   const logout=useCallback (()=> {
+    const logout = useCallback(() => {
+        token.current = null
         updateContext(null)
-    },[updateContext])
+    }, [updateContext])
 
 
-    return <GlobalContext.Provider value={{...context,setToken: updateContext,logout}}>
+    return <GlobalContext.Provider value={{...context, setToken: updateContext, logout}}>
         {children}
     </GlobalContext.Provider>
 }

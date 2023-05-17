@@ -6,6 +6,9 @@ import {CourseContextProvider} from "../../state/contexts/CourseContext";
 import {Provider} from "react-redux";
 import postsStore from "../../state/redux/postsStore";
 import CreatePost from "./CreatePost";
+import './Course.css'
+import CourseDashboard from "./CourseDashboard";
+
 
 const Course = () => {
     const {id} = useParams()
@@ -14,29 +17,13 @@ const Course = () => {
     const [visible, {show, hide}] = useModal()
     return course &&
         <CourseContextProvider course={course}>
-            <div id={'Course'}>
-                <div className={'d-flex justify-content-between css.courseHeader'}>
-                <div id={'welcome'} >Welcome to {course.courseName}</div>
-                    {!visible &&
-                        <button id={'postbutton'} className={` createPostButton}`} onClick={show}>
-                            Create a post <i className="fa  fa-plus"></i>
-
-                        </button>
-                    }
-                </div>
-                {/*<div>COURSE {id} - {JSON.stringify(course)} </div>*/}
-                {Object.keys(course).join(' ')}
-                <div>COURSE END</div>
-            </div>
-            <div>PostList BEGIN</div>
-            <div>
+            <CourseDashboard modalIsVisible={visible} showModal={show}/>
                 <Provider store={postsStore}>
                     {visible&& <CreatePost hide={hide} visible={visible} course={course}/>}
 
                     <PostList course_id={id}/>
                 </Provider>
-            </div>
-            <div>PostList END</div>
         </CourseContextProvider>
 }
 export default Course
+

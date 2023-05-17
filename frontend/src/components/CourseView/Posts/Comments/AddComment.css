@@ -1,0 +1,9 @@
+.LabeledInput.comment{
+    font-size: 1.2rem;
+    padding:0;
+    margin:0;
+}
+
+#add-comment-button.Button{
+    font-size: 1rem;
+}

@@ -1,12 +1,17 @@
 import dayjs from 'dayjs'
+import './PostListItem.css'
 
 const PostListItem = ({post, onClick}) => {
 
     const date = dayjs(new Date(post.postDate))
-    return <li onClick={()=> onClick()}>
+    const dateStr=`${date.format(' h:mm A')} on ${date.format('M/DD')}`
+    return <li className={'PostListItem'} onClick={onClick}>
         <h4>{post.title}</h4>
-        {Object.keys(post).join(' ')}
-        {`${date.format(' h:mm A')} on ${date.format('M/DD')}`}
+
+
+      <span className={'PostListItem-subtitle'}>
+          Posted by {post.username} {dateStr}
+      </span>
     </li>
 }
 

@@ -1,0 +1,94 @@
+
+
+div.PostDisplay{
+    /*display: flex;*/
+    list-style: none;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    min-height: 10rem;
+    font-size: 1.6rem;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease-out;
+}
+
+.split-between{
+  display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.PostDisplay span a{
+    /*font-size: 1rem;*/
+    /*font-weight: 600;*/
+    color: #000;
+  /*  background-color: #fff;*/
+  /*  border: none;*/
+  /*  cursor: pointer;*/
+  /*text-decoration: none;*/
+}
+.EditButton{
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 300;
+    background-color: #fff;
+    border: none;
+}
+
+.PostedByOn {
+    /*cursor: pointer;*/
+
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 300;
+    background-color: #fff;
+    border: none;
+
+}
+.PostedByOn a{
+    cursor: pointer;
+    text-decoration: none;
+  color: #000;
+  /*font-size: 1rem;*/
+  /*font-weight: 600;*/
+  /*background-color: #fff;*/
+  /*border: none;*/
+}
+.PostDisplayHeading{display: flex;justify-content: space-between;}
+
+.PostDisplay-Buttons{
+
+}
+
+.PostDisplay-Title{
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #fff;
+    border: none;
+}
+.PostDisplay-Content{
+    font-size: 1rem;
+    color: #333;
+    text-decoration: none;
+
+}
+.PostDisplay-ShowComments{
+    cursor: pointer;
+
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 300;
+    background-color: #fff;
+    border: none;
+}

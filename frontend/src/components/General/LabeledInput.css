@@ -1,12 +1,32 @@
-.LabeledInput-div{
-
+.LabeledInput-main-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
 }
-.LabeledInput-input{
-
+.LabeledInput-title-input{
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
 }
-.LabeledInput-label{
-
+.LabeledInput-input-text{
+    width: 100%;
+    font-size: .9rem;
+    font-weight: 300;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
 }
 .LabeledInput-textarea{
-
+    width: 100%;
+    height: 10rem;
+    font-size: .9rem;
+    font-weight: 300;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
 }

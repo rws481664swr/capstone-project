@@ -1,0 +1,44 @@
+.PostListItem{
+    /*display: flex;*/
+    list-style: none;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    width: 100%;
+    max-width: 90%;
+    /*min-height: 10rem;*/
+    font-size: 1.6rem;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease-out;
+}
+.course-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 2rem;
+}
+.split-between{
+  display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.PostListItem:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.26);
+}
+
+.PostListItem-subtitle{
+    font-size: 1.2rem;
+    font-weight: 200;
+    color: #888888;
+    margin-bottom: 0.5rem;
+}

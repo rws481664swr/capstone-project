@@ -13,9 +13,9 @@ const LabeledInput = ({
                           ...inputProps
                       }) =>
     <div className={`LabeledInput-div ${className}`}>
-        <label className={`LabeledInput-label ${labelClass}`}
+        <label className={`LabeledInput-input-label ${labelClass}`}
                htmlFor={id}>{label}</label>
-        <input className={`LabeledInput-input ${inputClass}`}
+        <input className={`LabeledInput-input-text ${inputClass}`}
                id={id}
                name={name}
                type={type}

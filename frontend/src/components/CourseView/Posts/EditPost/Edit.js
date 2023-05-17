@@ -2,8 +2,10 @@ import useForm from "../../../../hooks/useForm";
 import LabeledInput, {LabeledTextBox} from "../../../General/LabeledInput";
 import {useDispatch} from "react-redux";
 import useAxios from "../../../../api";
+import './EditPost.css'
 
-const Edit = ({editMode, post, setEditMode, setPost}) => {
+
+const Edit = ({  post, setEditMode, setPost}) => {
     const [form, onChange, resetForm] = useForm({
         title: post.title, content: post.content
     })
@@ -21,15 +23,13 @@ const Edit = ({editMode, post, setEditMode, setPost}) => {
         }
     }
     return <form onSubmit={updateForm}>
-        {editMode &&
             <div>
-                edit mode
                 <LabeledInput
                     id={'edit-title'}
                     label={'Title'}
                     value={form.title}
                     onChange={onChange}
-                    className={''}
+                    className={'LabeledInput'}
                     name={'title'}
                 />
 
@@ -38,12 +38,11 @@ const Edit = ({editMode, post, setEditMode, setPost}) => {
                     label={'Content'}
                     value={form.body}
                     onChange={onChange}
-                    className={''}
+                    className={'LabeledTextBox'}
                     name={'content'}
                 />
                 <button type="submit">Save</button>
             </div>
-        }
     </form>
 }
 export default Edit

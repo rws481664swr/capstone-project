@@ -6,20 +6,7 @@ import './index.css'
 import {useGlobalContext} from "../../state/contexts/GlobalContext";
 import {useEffect} from "react";
 
-const useDebug= () => {
-    const{username:id}=useGlobalContext()
-    const user = useGet('users', {init: null, id})
-    useEffect(() => {
-    if (user) {
-        console.log('user: ', user)
-        console.log(user.courses.map(e => e.toString()))
-    }
-    alert('using hook useDebug')
-}, [user])
-}
 const CourseList = () => {
-    useDebug()
-
 
     const navigate = useNavigate()
     const courses = useGet('courses', {init: []})

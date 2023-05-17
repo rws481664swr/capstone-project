@@ -9,18 +9,18 @@ label.register {
 form.register {
     margin-left: 10%;
     margin-top: 5%;
+
 }
 input.register {
     width: 50%;
     padding: 5px;
+
 }
 div.register {
     margin-top: 10px;
-}
-
-.btn-primary.register{
 
 }
+
 @media screen and (max-width: 500px){
     label.register {
         margin-bottom: 5px;
