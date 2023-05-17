@@ -22,7 +22,7 @@ isMainModule && printReport();
 const app = express();
 
 // middleware
-app.use(cors({ origin: process.env.EDU_FRONT || `http://localhost:3000` }));
+app.use(cors());
 app.use(express.json());
 app.use(authenticateJWT);
 
@@ -35,14 +35,6 @@ app.use("/comments", commentsRouter);
 app.use("/courses", coursesRouter);
 app.use("/users", usersRouter);
 app.use("/posts", postsRouter);
-
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  next();
-});
 
 //error handling
 app.use(notFound);
