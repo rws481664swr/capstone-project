@@ -51,15 +51,6 @@ function getSort(sort) {
   return sort;
 }
 
-// postsRouter.get('/users/:username', async ({params: {username}, query: {sort}}, res, next) => {
-//     try {
-//         sort = getSort(sort)
-//         const results = await getPostsFromUser(username, sort)
-//         return res.json(results)
-//     } catch (e) {
-//         next(e)
-//     }
-// })
 
 postsRouter.get(
   "/courses/:course",
@@ -80,7 +71,6 @@ postsRouter.get(
 postsRouter.post("/", async ({ body }, res, next) => {
   try {
     const { course: cid } = body;
-
     await canPost(res.locals.user, cid);
     const { username } = res.locals.user;
     const post = await Posts.create({
