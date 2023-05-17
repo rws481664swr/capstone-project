@@ -9,7 +9,33 @@
     font-size: 16px;
 }
 
-#postbutton {
+.displayPanel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.createPostFAB{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2rem;
+    z-index: 1;
+}
+.createPostFAB:hover{
+    background-color: black;
+    color: white;
+}
+.postbutton {
     background: transparent;
     border: solid black 1px;
     color: black;
@@ -43,6 +69,9 @@ button i.fa-plus {
     margin-bottom: 10px;
     margin-top: 10px;
 
+}
+.Course {
+    margin-left: 20px;
 }
 
 .welcome {
