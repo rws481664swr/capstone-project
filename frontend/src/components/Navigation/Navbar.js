@@ -1,13 +1,14 @@
 import './Navbar.css'
-import {NavLink} from "react-router-dom";
 import {useState} from "react";
 import {useGlobalContext} from "../../state/contexts/GlobalContext";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Links} from "./Links";
+
 const Navbar = () => {
-   const {
-        token,loggedIn
-    }=useGlobalContext()
+    const {
+        token, loggedIn
+    } = useGlobalContext()
     const [open, setOpen] = useState(false)
     const toggle = () =>
         setOpen(e => !e)
@@ -21,8 +22,7 @@ const Navbar = () => {
 
             <div id={"hamburger"} onClick={toggle} className={'link openbtn'}>
                 <FontAwesomeIcon icon={faBars}/>
-                {/*<i className="fa fa-bars"></i>*/}
-                {/*&#9776;*/}
+
             </div>
 
         </div>
@@ -37,16 +37,3 @@ const Navbar = () => {
 
 export default Navbar
 
-
-const Links = () => {
-    const {loggedIn, logout} = useGlobalContext()
-    return (
-        <>
-            <NavLink to={'/'} className={'link'}>Home</NavLink>
-            {!loggedIn && <NavLink className={'link'} to={'/login'}>Log In</NavLink>}
-            {!loggedIn && <NavLink className={'link'} to={'/register'}>Register</NavLink>}
-            {loggedIn && <NavLink className={'link'} to={'/courses'}>Courses</NavLink>}
-            {loggedIn && <NavLink className={'link'} to={'/profile'}>Profile</NavLink>}
-            {loggedIn && <NavLink className={'link'} onClick={logout} to={'/login'}>Log Out</NavLink>}
-        </>)
-}
