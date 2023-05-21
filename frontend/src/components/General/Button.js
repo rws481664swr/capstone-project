@@ -1,5 +1,5 @@
 import './Button.css'
-const Button= (props)=>
-    <button className="Button" {...props} />
+const Button= ({className,...props})=>
+    <button className={`${className} Button`} {...props} />
 
 export default Button
