@@ -23,3 +23,19 @@ export const {
     UPDATE
 }=POST_ACTIONS
 export default POST_ACTIONS
+export const USERS_ACTIONS={
+    INIT:'INIT',
+    ADD:'ADD',
+    REMOVE:'REMOVE',
+    UPDATE:'UPDATE',
+}
+export const COURSES_ACTIONS={
+INIT:'INIT',
+ADD:'ADD',
+REMOVE:'REMOVE',
+UPDATE:'UPDATE',
+
+}
+export const {
+    INIT
+}=COURSES_ACTIONS

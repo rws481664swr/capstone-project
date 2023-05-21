@@ -1,0 +1,10 @@
+.PostList.sr-container{
+    margin: 0;
+    padding: 0;
+    border: none;/*1px solid #ccc;*/
+    border-radius: 5px;
+    box-shadow: 0 0 1px rgba(0,0,0,.1);
+}
+.PostList_Header{
+
+}

@@ -9,11 +9,15 @@ export const usersRouter = express.Router()
 usersRouter.use(ensureLoggedIn)
 
 
-
 usersRouter.get('/', ensureAdmin, async ({query: {username}}, res, next) => {
     try {
-if (!['asc','desc'].includes(username) ) throw new BadRequestError()
-    const sort = username === 'asc'
+        //if query is empty, return all users
+        if (!username) return res.json(await getUsers())
+        //if query is not empty, return users sorted by username
+        if (!['asc', 'desc'].includes(username))
+            throw new BadRequestError()
+
+        const sort = username === 'asc'
             ? 1 : (username === 'desc' ? -1 : 1)
         const response = await getUsers({username: sort})
         res.json(response)
@@ -73,7 +77,7 @@ usersRouter.put('/:username/password', mustBeUsernameOrAdmin, async ({
 
 })
 
-usersRouter.post('/', ensureAdmin,async ({body}, res, next) => {
+usersRouter.post('/', ensureAdmin, async ({body}, res, next) => {
     try {
         const post = await createUser(body)
         res.json(post)
