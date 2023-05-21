@@ -39,11 +39,10 @@ authRouter.get('/token',ensureLoggedIn,async (req,res,next)=>{
 authRouter.post('/login', ensureLoggedOut(), async ({body: {username, password}}, res, next) => {
     try {
         const isLoggedIn = await login(username, password)
-        console.log(isLoggedIn)
         if (!isLoggedIn) throw new UnauthorizedError("Invalid username/password")
         const user = await getUser(username)
-        //TODO deal with case where user === NULL & send 404
-        //TODO fix tests for 404 case
+        if (user===null) throw new UnauthorizedError("Invalid username/password")
+
         const {role,_id}=user
         const token = createToken(username, role,_id.toString())
         return res.json({token})

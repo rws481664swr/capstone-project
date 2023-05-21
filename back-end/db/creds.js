@@ -19,8 +19,10 @@ export const signUp = async (username, rawPassword) => {
 
 }
 export const changePassword = async (username, _old, _new) => {
-    const {password} = await Credentials.findOne({username})
-    if (await compare(_old, password)) {
+    const auth=await Credentials.findOne({username}).exec()
+    if(!auth) throw new Error("User not found")
+
+    if (await compare(_old,  auth.password)) {
         const password = await hash(_new, BCRYPT_WORK_FACTOR)
         await Credentials.findOneAndUpdate({username}, {password})
     } else {

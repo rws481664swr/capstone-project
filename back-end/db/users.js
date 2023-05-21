@@ -1,5 +1,5 @@
 import {Credentials, Users, Users as users} from "./schemas/models.js";
-import {removeCredentials, signUp} from "./creds.js";
+import {changePassword, removeCredentials, signUp} from "./creds.js";
 import {BadRequestError} from "../util/Errors.js";
 
 export const createUser = async (_user) => {
@@ -30,8 +30,16 @@ export const getUser = async (username, showCourses) => {
 }
 
 
-export const updateUser = async(username, update) => {
-    return await users.findOneAndUpdate({username}, update).exec()
+export const updateUser = async(username, data) => {
+    try{
+        const {password,old,update}=data
+        if (password) await changePassword(username, old,password)
+
+        await Credentials.findOneAndUpdate({username}, update).exec()
+        return await users.findOneAndUpdate({username}, update).exec()
+    }catch (e) {
+        throw e
+    }
 }
 
 
