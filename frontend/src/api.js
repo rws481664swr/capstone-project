@@ -14,13 +14,15 @@ const useAxios = () => {
             tokenRef.current= newToken
 
         })()
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [ ]) // eslint-disable-line react-hooks/exhaustive-deps
 
 
     const config = useCallback((query = {}) => ({
         headers: {authorization: `Bearer ${tokenRef.current}`, 'Access-Control-Allow-Origin': '*'},
         params: query,
     }),[tokenRef])
+
+
 
 
    return useMemo (
