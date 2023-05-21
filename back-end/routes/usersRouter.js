@@ -4,6 +4,7 @@ import {BadRequestError, ExpressError} from "../util/Errors.js";
 import {changePassword} from "../db/creds.js";
 import {ensureAdmin, ensureLoggedIn} from "../middleware/authToken.js";
 import {mustBeUsernameOrAdmin} from '../middleware/predicates.js'
+import {ADMIN} from "../util/roles.js";
 
 export const usersRouter = express.Router()
 usersRouter.use(ensureLoggedIn)
@@ -27,11 +28,15 @@ usersRouter.get('/', ensureAdmin, async ({query: {username}}, res, next) => {
 
 })
 
-usersRouter.get('/:username', mustBeUsernameOrAdmin, async ({params: {username}}, res, next) => {
+usersRouter.get('/:username', async ({params: {username}}, res, next) => {
     try {
-        const user= await getUser(username, false)
-        if (user===null)throw new BadRequestError('user not found')
-        res.json(user)
+        let user = await getUser(username, true)
+        if (user === null) throw new BadRequestError('User not found')
+
+        const {first_name, last_name, email, ...user_rest} = user
+        if (username === res.locals.user.username || res.locals.user.role === ADMIN)
+            return res.json(user)
+        return res.json({username, first_name, last_name, email})
 
     } catch (e) {
 
@@ -65,9 +70,9 @@ usersRouter.put('/:username', mustBeUsernameOrAdmin, async ({params: {username},
 })
 
 usersRouter.put('/:username/password', mustBeUsernameOrAdmin, async ({
-                                                                    params: {username},
-                                                                    body: {password, old}
-                                                                }, res, next) => {
+                                                                         params: {username},
+                                                                         body: {password, old}
+                                                                     }, res, next) => {
     try {
         await changePassword(username, old, password)
         res.json({message: "updated"})
