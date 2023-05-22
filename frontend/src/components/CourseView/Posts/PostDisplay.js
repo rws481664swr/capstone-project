@@ -1,4 +1,4 @@
-import useAxios from "../../../api";
+import useAxios from "../../../hooks/useAxios";
 import useToggle from "../../../hooks/useToggle";
 import Modal, {useModal} from "../../General/Modal";
 import React, {useCallback} from "react";

@@ -1,4 +1,4 @@
-import useAxios from "../../../api";
+import useAxios from "../../../hooks/useAxios";
 import {useEffect, useReducer, useState} from "react";
 import coursesReducer from "../../../state/redux/coursesReducer";
 import './AdminCourses.css'

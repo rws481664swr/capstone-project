@@ -1,6 +1,6 @@
 import axios from "axios";
-import {BASE_URL} from "./config";
-import {useGlobalContext} from "./state/contexts/GlobalContext";
+import {BASE_URL} from "../config";
+import {useGlobalContext} from "../state/contexts/GlobalContext";
 import {useCallback, useEffect, useMemo} from "react";
 
 const NETWORK_ERROR = 'ERR_NETWORK'

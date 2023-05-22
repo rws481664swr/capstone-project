@@ -2,7 +2,7 @@ import AddComment from "./AddComment";
 import Comment from './Comment'
 import React, {useCallback, useEffect, useReducer} from "react";
 import {REMOVE} from "../../../../state/actions/actions";
-import useAxios from "../../../../api";
+import useAxios from "../../../../hooks/useAxios";
 import commentsReducer from "../../../../state/redux/commentsReducer";
 import useToggle from "../../../../hooks/useToggle";
 import './Comments.css'

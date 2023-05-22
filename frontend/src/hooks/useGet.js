@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 
 
-import useAxios from '../api'
+import useAxios from './useAxios'
 
 /**
  * useGet is a hook that returns the result of a get request to the api

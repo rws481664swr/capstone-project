@@ -1,4 +1,4 @@
-import useAxios from "../../../api";
+import useAxios from "../../../hooks/useAxios";
 import React, {useEffect, useReducer, useState} from "react";
 import usersReducer from "../../../state/redux/usersReducer";
 import './AdminUsers.css'

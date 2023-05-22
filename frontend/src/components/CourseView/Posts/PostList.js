@@ -2,7 +2,7 @@ import PostListItem from './PostListItem'
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {SET_STATE} from "../../../state/actions/actions";
-import useAxios from "../../../api";
+import useAxios from "../../../hooks/useAxios";
 import PostDisplay from "./PostDisplay";
 
 /*
