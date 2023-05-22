@@ -2,6 +2,15 @@ input.register,form.register ,label.register {
     display: block;
 }
 
+.sr-container{
+    margin: 5% 10%;
+    padding: 5%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,.2);
+    background-color: #fff;
+}
+
 label.register {
     margin-bottom: 5px;
 }

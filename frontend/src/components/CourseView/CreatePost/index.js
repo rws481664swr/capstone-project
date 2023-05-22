@@ -2,7 +2,7 @@ import useForm from "../../../hooks/useForm";
 import useFlash from "../../../hooks/useFlash";
 import {useGlobalContext} from "../../../state/contexts/GlobalContext";
 import useAxios from "../../../api";
-import {ADD} from "../../../state/actions/posts";
+import {ADD} from "../../../state/actions/actions";
 import {useDispatch} from "react-redux";
 import Modal from "../../General/Modal";
 import {useCallback} from "react";
@@ -43,7 +43,7 @@ function useSubmitPost(course, form, clear, hide) {
             return flash(err)
         }
     }
-    , [hide,clear,dispatch,form,flash,setCss,username,user, course._id]) // eslint-disable-line react-hooks/exhaustive-deps
+    , [hide,clear,dispatch,form,flash,setCss,username,user, course._id ,postRequest])
     return [submit, msg];
 }
 

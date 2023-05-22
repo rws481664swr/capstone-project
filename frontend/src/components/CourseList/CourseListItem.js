@@ -10,8 +10,7 @@ const CourseListItem = ({course: {courseName, subject, _id, courseNumber, studen
                     <div className={css.courseName}>{subject}:#{courseNumber} - {courseName} </div>
                     <div className={css.courseName}>{students.length} Students</div>
                 </div>
-                <h1>{_id}</h1>
-            </Link>
+             </Link>
         </li>
 
     </>

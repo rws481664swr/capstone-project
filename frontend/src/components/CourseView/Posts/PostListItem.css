@@ -1,26 +1,14 @@
 .PostListItem{
-    /*display: flex;*/
     list-style: none;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
     padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 1rem;
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    width: 100%;
-    max-width: 90%;
-    /*min-height: 10rem;*/
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     font-size: 1.6rem;
-    color: #333;
-    text-decoration: none;
-    transition: all 0.3s ease-out;
 }
 .course-header{
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;

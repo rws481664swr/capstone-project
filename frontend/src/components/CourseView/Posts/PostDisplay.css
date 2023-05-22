@@ -1,6 +1,5 @@
 
-
-div.PostDisplay{
+div.PostDisplay {
     /*display: flex;*/
     list-style: none;
     flex-direction: column;
@@ -17,22 +16,14 @@ div.PostDisplay{
     transition: all 0.3s ease-out;
 }
 
-.split-between{
-  display: flex;
+.split-between {
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.PostDisplay span a{
-    /*font-size: 1rem;*/
-    /*font-weight: 600;*/
-    color: #000;
-  /*  background-color: #fff;*/
-  /*  border: none;*/
-  /*  cursor: pointer;*/
-  /*text-decoration: none;*/
-}
-.EditButton{
+
+.EditButton {
     text-decoration: none;
     color: #000;
     font-size: 1rem;
@@ -42,32 +33,24 @@ div.PostDisplay{
 }
 
 .PostedByOn {
-    /*cursor: pointer;*/
 
-    text-decoration: none;
-    color: #000;
     font-size: 1rem;
     font-weight: 300;
-    background-color: #fff;
     border: none;
 
 }
-.PostedByOn a{
+
+.PostedByOn a span{
     cursor: pointer;
-    text-decoration: none;
-  color: #000;
-  /*font-size: 1rem;*/
-  /*font-weight: 600;*/
-  /*background-color: #fff;*/
-  /*border: none;*/
-}
-.PostDisplayHeading{display: flex;justify-content: space-between;}
-
-.PostDisplay-Buttons{
-
 }
 
-.PostDisplay-Title{
+.PostDisplayHeading {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.PostDisplay-Title {
     font-size: 1.6rem;
     font-weight: 600;
     color: #000;
@@ -76,13 +59,15 @@ div.PostDisplay{
     background-color: #fff;
     border: none;
 }
-.PostDisplay-Content{
+
+.PostDisplay-Content {
     font-size: 1rem;
     color: #333;
     text-decoration: none;
 
 }
-.PostDisplay-ShowComments{
+
+.PostDisplay-ShowComments {
     cursor: pointer;
 
     text-decoration: none;

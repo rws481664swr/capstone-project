@@ -2,6 +2,19 @@ input.login,form.login ,label.login {
     display: block;
 }
 
+.Login_form{
+    margin: 5% 10%;
+    padding: 5%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,.2);
+    background-color: #fff;
+}
+.Login_button{
+    /*override margin from .Button */
+    margin-top: 1rem !important;
+}
+
 label.login {
     margin-bottom: 5px;
 }

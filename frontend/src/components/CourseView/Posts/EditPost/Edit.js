@@ -3,6 +3,7 @@ import LabeledInput, {LabeledTextBox} from "../../../General/LabeledInput";
 import {useDispatch} from "react-redux";
 import useAxios from "../../../../api";
 import './EditPost.css'
+import Button from "../../../General/Button";
 
 
 const Edit = ({  post, setEditMode, setPost}) => {
@@ -40,8 +41,9 @@ const Edit = ({  post, setEditMode, setPost}) => {
                     onChange={onChange}
                     className={'LabeledTextBox'}
                     name={'content'}
+                    children={form.content}
                 />
-                <button type="submit">Save</button>
+                <Button type="submit">Save</Button>
             </div>
     </form>
 }

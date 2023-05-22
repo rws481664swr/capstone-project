@@ -1,17 +1,18 @@
 import './CourseDashboard.css'
-import {useCourseContext} from "../../state/contexts/CourseContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {formatDate} from "../../util/date-helpers";
+import {Link} from "react-router-dom";
+import FAB from "../General/FAB";
 
 
-const CourseDashboard = ({modalIsVisible: visible, showModal: show}) => {
-    const course = useCourseContext()
+const CourseDashboard = ({modalIsVisible: visible, showModal: show, course}) => {
     if (!course) return null
+    const {teachers} = course
     return (
         <div id={'Course'}>
             <div className={'course-div  '}>
-                <h1 id={'welcome'} >Welcome to {course.courseName}</h1>
+                <h1 id={'welcome'}>Welcome to {course.courseName}</h1>
                 <div className="CourseDashboard_course-attributes">
                     <div>
                         {course.subject} #{course.courseNumber}
@@ -22,12 +23,26 @@ const CourseDashboard = ({modalIsVisible: visible, showModal: show}) => {
 
                 </div>
                 {!visible &&
-                    <button className={`createPostFAB`} onClick={show}>
+                    <FAB id={'addPostFAB'} onClick={show} className={''}>
                         <FontAwesomeIcon icon={faPlus}/>
-                    </button>
+                    </FAB>
+
                 }
-                {Object.keys(course).join(' ')}
             </div>
+            <div id="CourseTeachers">
+                <h4 id={'Dashboard_Teachers_Heading '}>Teachers</h4>
+                <div className={'course-div Dashboard_Teachers_Container'}>
+
+                    {teachers.map(({username}) =>
+                        <span key={username} className={'Dashboard_TeacherLink'}> <Link
+                            to={`/users/${username}`}
+                            key={username}>
+                             {username}
+                     </Link></span>)}
+
+                </div>
+            </div>
+
         </div>
     )
 }

@@ -7,8 +7,9 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    margin-top: 1rem;
+    margin-left: 1rem;
 }
-
 .displayPanel{
     display: flex;
     flex-direction: column;
@@ -72,6 +73,11 @@ button i.fa-plus {
 }
 .Course {
     margin-left: 20px;
+}
+
+.Course_Container.sr-container {
+    margin: 1% 1%;
+    padding:3%;
 }
 
 .welcome {

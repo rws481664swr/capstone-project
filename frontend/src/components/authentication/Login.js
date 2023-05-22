@@ -4,11 +4,14 @@ import {BASE_URL} from "../../config";
 import './Login.css'
 import {useGlobalContext} from "../../state/contexts/GlobalContext";
 import {useNavigate} from "react-router-dom";
+import useFlash from "../../hooks/useFlash";
+import Button from "../General/Button";
 
 /**
  * Login component for user authentication.
  */
 const Login=()=>{
+    const [toRender, flash, , {danger}]= useFlash()
         const navigate = useNavigate()
     const{setToken}=useGlobalContext()
     const [form, onChange] = useForm({
@@ -17,12 +20,21 @@ const Login=()=>{
     })
     const submit = async (e)=>{
         e.preventDefault()
-        const {data:{token}} = await axios.post(`${BASE_URL}/auth/login`,form)
-        setToken(token)
-        navigate('/')
+        try{
+            const {data: {token}} = await axios.post(`${BASE_URL}/auth/login`, form)
+            setToken(token)
+            navigate('/')
+        }catch (e) {
+            console.error(e)
+            danger()
+            flash(`Something went wrong logging in: ${
+                e.response ? e.response.data.message : e.message
+            }`)
+        }
     }
-    return <form onSubmit={submit} className={'login'}>
-        Log In
+    return <form onSubmit={submit} className={'login Login_form'}>
+        <div>{toRender}</div>
+        <h4>Log In</h4>
         <div className={'login'}>
             <label className={'login'} htmlFor={'username'}>Username</label>
             <input name={'username'}
@@ -40,10 +52,10 @@ const Login=()=>{
                    className={'login'}
                    id={'password'}
                    type={'password'}/>
-            <button
-                className="btn btn-primary register"
+            <Button
+                className="Login_button  register"
                 type="submit">Log In
-            </button>
+            </Button>
         </div>
     </form>
 }

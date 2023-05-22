@@ -1,7 +1,5 @@
 
-.courseListContainer {
 
-}
 
 .CourseList {
 
@@ -19,7 +17,7 @@
 }
 
 #CourseList li {
-    /*text-decoration: none;*/
+    margin-top: 20px;
     width:100%;
     padding: 10px;
     border-bottom: 1px solid #ccc;

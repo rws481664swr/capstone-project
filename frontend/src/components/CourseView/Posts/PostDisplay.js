@@ -10,6 +10,8 @@ import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 import './PostDisplay.css'
 import dayjs from "dayjs";
+import Timestamp from "../../General/Timestamp";
+
 const useDisplayPost = ([post, setPost]) => {
     const axios = useAxios()
     const [visible, {hide: hideModal}] = useModal()
@@ -31,9 +33,9 @@ const useDisplayPost = ([post, setPost]) => {
     return {togglePin, hide, visible}
 }
 const PostDisplay = ({post = null, setPost}) => {
-    const {togglePin, hide:hideModal} = useDisplayPost([post, setPost])
-    const [editMode, toggleEditMode,setEditMode] = useToggle(false)
-    const hide = ()=> {
+    const {togglePin, hide: hideModal} = useDisplayPost([post, setPost])
+    const [editMode, toggleEditMode, setEditMode] = useToggle(false)
+    const hide = () => {
         hideModal()
         setEditMode(false)
     }
@@ -50,10 +52,7 @@ const PostDisplay = ({post = null, setPost}) => {
         user,
         course
     } = post
-    let date = dayjs(new Date(postDate))
-    const part1_date = `${date.format(' h:mm A')}`
-    const part2_date = ` ${date.format('M/DD')}`
-    date = part1_date + part2_date
+
     const editable = currentUser === username
     const canPin = role !== "STUDENT"
     return (
@@ -63,22 +62,26 @@ const PostDisplay = ({post = null, setPost}) => {
                 {/*<PostedByOn postDate={postDate} username={username}/>*/}
             </div>
 
-           <div className={'PostDisplayHeading'}>
-               <h4 className={'PostDisplay-Title'}>{title}</h4>
-               <div className="PostDisplay-Buttons">
-                   <EditButton className={'EditButton'}
-                               editable={editable}
-                               editMode={editMode}
-                               setEditMode={toggleEditMode}/>
-                   <PinButton className={'PinButton'}
-                              canPin={canPin}
-                              pinned={pinned}
-                              togglePin={togglePin}/>
-               </div>
-        </div>
-            <span className={'PostedByOn'}>  posted by
-                <Link to={`/users/${username}`}>  {username}  </Link>  at
-                <span className={'PostDisplay-TimeStamp'}>{date}</span>
+            <div className={'PostDisplayHeading'}>
+                <h4 className={'PostDisplay-Title'}>{title}</h4>
+                <div className="PostDisplay-Buttons">
+                    <EditButton className={'EditButton'}
+                                editable={editable}
+                                editMode={editMode}
+                                setEditMode={toggleEditMode}/>
+                    <PinButton className={'PinButton'}
+                               canPin={canPin}
+                               pinned={pinned}
+                               togglePin={togglePin}/>
+                </div>
+            </div>
+            <span className={'PostedByOn'}>
+                <span> posted by </span>
+               <span> <Link to={`/users/${username}`}>
+                    {username}
+                </Link>
+               </span>
+                <span className={' PostDisplay-TimeStamp'}> <Timestamp date={postDate}/></span>
             </span>
             <div>{pinned && 'pinned'}</div>
 

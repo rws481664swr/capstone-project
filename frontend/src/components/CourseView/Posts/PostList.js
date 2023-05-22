@@ -1,7 +1,7 @@
 import PostListItem from './PostListItem'
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {SET_STATE} from "../../../state/actions/posts";
+import {SET_STATE} from "../../../state/actions/actions";
 import useAxios from "../../../api";
 import PostDisplay from "./PostDisplay";
 
@@ -23,17 +23,23 @@ const PostList = ({course_id: id}) => {
                 console.error(e)
             }
         })()
-    }, [dispatch, id]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [dispatch, id, get])
+
 
     const [postDisplay, setPost] = useState(null)
     const posts = useSelector(e => e)
 
     return <>
-        <div>
+        <h4 className={'PostList_Header'}>Posts</h4>
+        <div className={'PostList  sr-container'}>
             {posts && <PostDisplay post={postDisplay} setPost={setPost}/>}
             <ul>
                 {posts.map(p =>
-                    (<PostListItem onClick={() => setPost(p)} key={p._id} post={p}/>)
+                    (<PostListItem
+                        onClick={() => setPost(p)}
+                        key={p._id}
+                        post={p}
+                    />)
                 )}
             </ul>
         </div>
