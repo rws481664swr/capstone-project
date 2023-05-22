@@ -1,4 +1,4 @@
-import {ADD, PIN, REMOVE, SET_STATE, UNPIN, UPDATE} from "../actions/posts";
+import {ADD, PIN, REMOVE, SET_STATE, UNPIN, UPDATE} from "../actions/actions";
 
 
 function postsReducer(posts = [], {type, payload, id}) {

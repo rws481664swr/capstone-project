@@ -1,3 +1,4 @@
+import {ADD} from "../actions/actions";
 
 const commentsReducer = (state = [], action) => {
     console.log('REDUCER')
@@ -7,7 +8,7 @@ const commentsReducer = (state = [], action) => {
         case "SET_STATE":
             console.log("SET_STATE")
             return payload
-        case "ADD":
+        case ADD:
         case "ADD_COMMENT":
             console.log("ADD_COMMENT")
             console.log('add',id,payload)
