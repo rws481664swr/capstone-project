@@ -82,7 +82,10 @@
     .sidepanel{
         display: none;
     }
-
+    .active{
+        background: white;
+        color:white;
+    }
     /* The dropdown container */
     .dropdown {
         float: left;
@@ -143,4 +146,8 @@
     .dropdown:hover .dropdown-content {
         display: block;
     }
+}
+.active  {
+    background-color:  grey;
+    color: #fff;
 }
