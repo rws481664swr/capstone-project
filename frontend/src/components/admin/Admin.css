@@ -1,0 +1,46 @@
+.AdminNav{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0 1rem;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,.2);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    height: 60px;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+}
+.AdminNav a{
+    text-decoration: none;
+    color: #555;
+    font-size: 1.2rem;
+    font-weight: 300;
+    padding: 0.5rem;
+    /*border-radius: 0.5rem;*/
+    transition: all 0.3s ease-in-out;
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+    margin: 0 0 0 2px;
+}
+#AdminUserEditor.sr-modal_content{
+    overflow-y: scroll;
+    margin :5% auto;
+    width: 40%;
+}
+
+.AdminNav a:hover{
+    background-color: #a4a4a4;
+    color: #fff;
+}
+div.AdminNav a  {
+    background-color:  lightgray;
+    color: #fff;
+}
+
+
+ .AdminNav .active  {
+    background-color:  grey;
+    color: #fff;
+}
