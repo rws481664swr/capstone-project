@@ -1,9 +1,8 @@
-/*div,ul{*/
-/*    border:black 1px solid;*/
-/*    padding: 10px;*/
-/*}*/
-
-/*li{*/
-/*    border:gray 1px solid;*/
-/*    padding: 10px;*/
-/*}*/
+.sr-container{
+    margin: 5% 10%;
+    padding: 5%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,.2);
+    background-color: #fff;
+}
