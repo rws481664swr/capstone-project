@@ -1,6 +1,6 @@
 import useAxios from "../../../hooks/useAxios";
 import useToggle from "../../../hooks/useToggle";
-import Modal, {useModal} from "../../General/Modal";
+import Modal, {useModal} from "../../General/Modal/Modal";
 import React, {useCallback} from "react";
 import Comments from "./Comments";
 import {useGlobalContext} from "../../../state/contexts/GlobalContext";

@@ -1,7 +1,7 @@
 import {useGlobalContext} from "../../../../state/contexts/GlobalContext";
 import useProfile from "../../useProfile";
 import {useNavigate} from "react-router-dom";
-import FAB from "../../../General/FAB";
+import FAB from "../../../General/FAB/FAB";
 import './DisplayProfile.css'
 import './DisplayProfile.css'
 import DisplayProfileContent from "./sections/DisplayProfileContent";

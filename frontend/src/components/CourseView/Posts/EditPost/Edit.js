@@ -1,9 +1,9 @@
 import useForm from "../../../../hooks/useForm";
-import LabeledInput, {LabeledTextBox} from "../../../General/LabeledInput";
+import LabeledInput, {LabeledTextBox} from "../../../General/LabeledInput/LabeledInput";
 import {useDispatch} from "react-redux";
 import useAxios from "../../../../hooks/useAxios";
 import './EditPost.css'
-import Button from "../../../General/Button";
+import Button from "../../../General/Button/Button";
 
 
 const Edit = ({  post, setEditMode, setPost}) => {

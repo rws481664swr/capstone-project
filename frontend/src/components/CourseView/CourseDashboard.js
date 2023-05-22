@@ -3,7 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {formatDate} from "../../util/date-helpers";
 import {Link} from "react-router-dom";
-import FAB from "../General/FAB";
+import FAB from "../General/FAB/FAB";
 
 
 const CourseDashboard = ({modalIsVisible: visible, showModal: show, course}) => {

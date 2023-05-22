@@ -1,7 +1,7 @@
 import './NewCourse.css'
 import useForm from "../../../hooks/useForm";
 import {useCallback} from "react";
-import LabeledInput from "../../General/LabeledInput";
+import LabeledInput from "../../General/LabeledInput/LabeledInput";
 
 
 

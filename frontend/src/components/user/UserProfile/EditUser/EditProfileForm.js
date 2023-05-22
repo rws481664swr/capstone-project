@@ -1,5 +1,5 @@
-import LabeledInput from "../../../General/LabeledInput";
-import Button from "../../../General/Button";
+import LabeledInput from "../../../General/LabeledInput/LabeledInput";
+import Button from "../../../General/Button/Button";
 
  const EditProfileForm = ({editingUser,flashState: [msg, flash], form, onChange, handleSubmit, username, cancel}) => <>
     <div className={'flash'}>{msg}</div>
