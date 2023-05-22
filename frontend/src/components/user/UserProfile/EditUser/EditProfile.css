@@ -1,0 +1,27 @@
+
+.EditProfilePage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+
+.Button.EditProfileButton{
+    padding: .2rem .7rem;
+    font-size: 1.2rem;
+}
+.Button.Edit-Cancel.EditProfileButton{
+margin-right:1rem;
+}
+.Button.Edit-Save.EditProfileButton{
+margin-right: 1rem;
+}
+.Button.Edit-Cancel.EditProfileButton:hover{
+background: #ff0a0a;
+}
+.Button.Edit-Save.EditProfileButton:hover{
+    background:green;
+}

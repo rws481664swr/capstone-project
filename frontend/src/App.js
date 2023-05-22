@@ -5,10 +5,10 @@ import Register from "./components/authentication/Register";
 import Login from "./components/authentication/Login";
 import CourseList from "./components/CourseList";
 import Course from './components/CourseView/Course'
-import Profile from "./components/user/Profile";
-import EditProfile from "./components/user/UserProfile/EditingUser";
+import EditProfile from "./components/user/UserProfile/EditUser/EditingUser";
 import DisplayProfile from "./components/user/UserProfile/DisplayProfile";
 import Admin from './components/admin/Admin'
+import BasicProfile from "./components/user/BasicProfile";
 
 const App=()=>
     <>
@@ -21,9 +21,8 @@ const App=()=>
         <Route path={'/register'} element={<Register/>}/>
         <Route path={'/login'} element={<Login/>}/>
         <Route path="/profile/edit" element={<EditProfile/>} />
-        <Route path="/profile" element={<Profile/>} />
-        <Route path={'/profile'} element={<DisplayProfile/>}/>
-        <Route path={'/user/:username'} element={<Profile/>}/>
+        <Route path="/profile" element={<DisplayProfile/>} />
+        <Route path={'/user/:username'} element={<BasicProfile/>}/>
         <Route path={'/admin/*'} element={<Admin/>}/>
       </Routes>
     </>
