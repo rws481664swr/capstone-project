@@ -1,7 +1,8 @@
 import './NewCourse.css'
 import useForm from "../../../hooks/useForm";
 import {useCallback} from "react";
-import LabeledInput from "../../General/LabeledInput/LabeledInput";
+import LabeledInput from "../../../components/General/LabeledInput/LabeledInput";
+import useAxios from "../../../hooks/useAxios";
 
 
 
@@ -11,18 +12,27 @@ import LabeledInput from "../../General/LabeledInput/LabeledInput";
 const NewCourse = () => {
     const [form, onChange, clear] = useForm({
         courseName: '',
-        courseNumber: -1,
+        courseNumber:undefined ,
         courseDescription: '',
-        startDate: null,
-        endDate: null,
-        teacherId: null,
-        subject: null,
+        startDate: Date.now(),
+        endDate: Date.now(),
+        teacherId: '',
+        subject: '',
     })
-    const submit = useCallback((e) => {
+    const {post}= useAxios()
+    const submit = useCallback(async (e) => {
         e.preventDefault()
+        console.log('submitting')
         console.log(form)
+        try{
+            const course = await post('courses', form)
+            console.log(`Created Course ${course.courseName}`,course)
         clear()
-        throw new Error('Not implemented')
+        }catch (e) {
+            console.error(e.message)
+
+        }
+
     }, [form, clear])
 
     return (
@@ -77,7 +87,7 @@ const NewCourse = () => {
                               label={'Subject'}
                               id={'input-subject'}
                 />
-                <button id={'submit-course'} type={'submit'}>Submit</button>
+                <button  id={'submit-course'} type={'submit'}>Submit</button>
             </form>
         </div>
     )

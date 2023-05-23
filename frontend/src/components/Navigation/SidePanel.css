@@ -1,0 +1,77 @@
+
+
+
+
+#hamburger {
+    float:right;
+}
+
+
+
+
+
+@media(max-width: 400px) {
+    #hamburger {
+        display: block;
+    }
+    /* The sidepanel menu */
+    .sidepanel {
+
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        padding-top: 60px;
+        transition: 0.5s;
+    }
+
+    /* The sidepanel links */
+    .sidepanel a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.5s;
+    }
+
+    /* When you mouse over the navigation links, change their color */
+    .sidepanel a:hover {
+        color: white;
+    }
+    .sidepanel.active a:hover {
+        color: black;
+    }
+    /* Position and style the close button (top right corner) */
+    .sidepanel .closebtn {
+        position: absolute;
+        background: transparent;
+        border:none;
+        color: #898989;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+    .sidepanel .closebtn:hover{
+        color: white;
+    }
+    .link.active{
+        background: #737373;
+        color: #c7c7c7;
+    }
+    .link.active:hover{
+        background: #a8a8a8;
+        color: black;
+    }
+}
+@media(min-width:  401px) {
+    #hamburger ,
+    .sidepanel{
+        display: none;
+    }
+}

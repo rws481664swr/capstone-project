@@ -2,8 +2,8 @@ import {useState} from "react";
 import useFlash from "../../../../hooks/useFlash";
 import './Comments.css'
 import './AddComment.css'
-import LabeledInput from "../../../General/LabeledInput/LabeledInput";
-import Button from "../../../General/Button/Button";
+import LabeledInput from "../../../../components/General/LabeledInput/LabeledInput";
+import Button from "../../../../components/General/Button/Button";
 const AddComment = ({add}) => {
     const [content, setContent] = useState('')
     const  [toRender, flash]= useFlash()

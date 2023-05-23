@@ -5,7 +5,7 @@ import './Login.css'
 import {useGlobalContext} from "../../state/contexts/GlobalContext";
 import {useNavigate} from "react-router-dom";
 import useFlash from "../../hooks/useFlash";
-import Button from "../General/Button/Button";
+import Button from "../../components/General/Button/Button";
 
 /**
  * Login component for user authentication.

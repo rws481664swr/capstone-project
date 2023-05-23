@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import './Comments.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashAlt} from "@fortawesome/free-solid-svg-icons";
-import Timestamp from "../../../General/Timestamp";
+import Timestamp from "../../../../components/General/Timestamp";
 
 const Comment = ({className = '', comment: {_id, post, username, content, timestamp}, remove}) => {
     const {username: uname} = useGlobalContext()

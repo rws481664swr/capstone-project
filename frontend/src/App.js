@@ -1,19 +1,18 @@
 import './App.css';
 import {Route, Routes} from "react-router-dom";
 import Navbar from "./components/Navigation/Navbar";
-import Register from "./components/authentication/Register";
-import Login from "./components/authentication/Login";
-import CourseList from "./components/CourseList";
-import Course from './components/CourseView/Course'
-import EditProfile from "./components/user/UserProfile/EditUser/EditingUser";
-import DisplayProfile from "./components/user/UserProfile/DisplayProfile";
-import Admin from './components/admin/Admin'
-import BasicProfile from "./components/user/BasicProfile";
+import Register from "./pages/authentication/Register";
+import Login from "./pages/authentication/Login";
+import CourseList from "./pages/CourseList";
+import Course from './pages/CourseView/Course'
+import EditProfile from "./pages/user/UserProfile/EditUser/EditingUser";
+import DisplayProfile from "./pages/user/UserProfile/DisplayProfile";
+import Admin from './pages/admin/Admin'
+import BasicProfile from "./pages/user/BasicProfile";
 
 const App=()=>
     <>
     <Navbar/>
-
       <Routes>
         <Route path={'/'} element={<></>}/>
         <Route path={'/courses'} element={<CourseList/>}/>
@@ -26,5 +25,6 @@ const App=()=>
         <Route path={'/admin/*'} element={<Admin/>}/>
       </Routes>
     </>
+
 
 export default App;

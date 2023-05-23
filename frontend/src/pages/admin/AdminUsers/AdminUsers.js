@@ -3,7 +3,7 @@ import React, {useEffect, useReducer, useState} from "react";
 import usersReducer from "../../../state/redux/usersReducer";
 import './AdminUsers.css'
 import {INIT} from "../../../state/actions/actions";
-import Modal, {useModal} from "../../General/Modal/Modal";
+import Modal, {useModal} from "../../../components/General/Modal/Modal";
 import EditProfileForm from "../../user/UserProfile/EditUser/EditProfileForm";
 import useForm from "../../../hooks/useForm";
 import useFlash from "../../../hooks/useFlash";
@@ -50,9 +50,15 @@ const AdminUsers = () => {
                 }} key={user.username} className="AdminUser">
 
                     <div className="AdminUser_UserCard">
-                        {user.username} - {user.email}
+
+                        <div>
+                        <div>{user.username} - {user.email}</div>
+                        <div>id: {user._id}</div>
+                        </div>
                     </div>
+
                 </div>
+
             ))}
         </>
     )

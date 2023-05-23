@@ -4,8 +4,8 @@ import axios from 'axios'
 import {BASE_URL} from '../../config.js'
 import {useGlobalContext} from "../../state/contexts/GlobalContext";
 import {useNavigate} from "react-router-dom";
-import Button from "../General/Button/Button";
-import LabeledInput from "../General/LabeledInput/LabeledInput";
+import Button from "../../components/General/Button/Button";
+import LabeledInput from "../../components/General/LabeledInput/LabeledInput";
 
 const Register = () => {
     const {setToken, token: tokenRef} = useGlobalContext()

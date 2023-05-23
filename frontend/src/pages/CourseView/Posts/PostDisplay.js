@@ -1,6 +1,6 @@
 import useAxios from "../../../hooks/useAxios";
 import useToggle from "../../../hooks/useToggle";
-import Modal, {useModal} from "../../General/Modal/Modal";
+import Modal, {useModal} from "../../../components/General/Modal/Modal";
 import React, {useCallback} from "react";
 import Comments from "./Comments";
 import {useGlobalContext} from "../../../state/contexts/GlobalContext";
@@ -10,7 +10,7 @@ import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 import './PostDisplay.css'
 import dayjs from "dayjs";
-import Timestamp from "../../General/Timestamp";
+import Timestamp from "../../../components/General/Timestamp";
 
 const useDisplayPost = ([post, setPost]) => {
     const axios = useAxios()

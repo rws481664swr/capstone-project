@@ -1,4 +1,6 @@
 import './Navbar.css'
+import './SidePanel.css'
+import './Dropdown.css'
 import {useState} from "react";
 import {useGlobalContext} from "../../state/contexts/GlobalContext";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
@@ -13,8 +15,7 @@ const Navbar = () => {
     const toggle = () =>
         setOpen(e => !e)
     return <>
-        {/*<link rel="stylesheet"*/}
-        {/*      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>*/}
+
         <div className="navbar">
             <div className={'bar'}>
                 <Links/>

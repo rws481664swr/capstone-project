@@ -3,7 +3,7 @@ import {
     createCourse,
     deleteCourse,
     enrollCourse,
-    getCourse,
+    getCourse, getCourses,
     teachCourse,
     unEnrollCourse,
     unTeachCourse
@@ -20,6 +20,8 @@ coursesRouter.use(ensureLoggedIn)
 coursesRouter.get('/', async ({query: {sort, direction}}, res, next) => {
     try {
         let user
+        if(res.locals.user.role===ADMIN)  return res.json( await getCourses())
+
         const {courses} = user = await getUser(res.locals.user.username, true)
         console.log('get c',res.getHeader('Authentication'))
 

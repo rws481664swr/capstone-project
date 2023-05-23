@@ -4,7 +4,7 @@ import {useGlobalContext} from "../../../state/contexts/GlobalContext";
 import useAxios from "../../../hooks/useAxios";
 import {ADD} from "../../../state/actions/actions";
 import {useDispatch} from "react-redux";
-import Modal from "../../General/Modal/Modal";
+import Modal from "../../../components/General/Modal/Modal";
 import {useCallback} from "react";
 
 
