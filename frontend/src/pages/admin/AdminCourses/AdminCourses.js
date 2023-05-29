@@ -1,23 +1,24 @@
 import useAxios from "../../../hooks/useAxios";
-import {useEffect, useReducer, useState} from "react";
+import React, {useEffect, useReducer, useState} from "react";
 import coursesReducer from "../../../state/redux/coursesReducer";
 import './AdminCourses.css'
-import {INIT} from "../../../state/actions/actions";
+import Modal, {useModal} from "../../../components/General/Modal/Modal";
+import {COURSES_ACTIONS} from '../../../state/actions/actions'
+import AdminCourseListItem from "./AdminCourseListItem";
 
+const {INIT, ADD, REMOVE, UPDATE} = COURSES_ACTIONS
 /**
  * AdminCourses component for administration of courses. It displays a list of all courses.
  */
 const AdminCourses = () => {
-    const {get} = useAxios()
-    const [courses, setCourses] = useState(null)
+    const {get, delete: _delete} = useAxios()
     const [coursesList, dispatchCourses] = useReducer(coursesReducer, [])
     useEffect(() => {
         (async () => {
-            console.log('getting courses')
+
 
             try {
                 const payload = await get('courses')
-                // setCourses(response)
                 dispatchCourses({type: INIT, payload})
                 console.log(payload)
 
@@ -26,22 +27,56 @@ const AdminCourses = () => {
             }
         })()
     }, [])
+    const deleteCourse = async (_id) => {
+        try {
+            await _delete(`courses/${_id}`)
+            dispatchCourses({type: REMOVE, id: _id})
+        } catch (e) {
+            console.error(e)
+        }
+    }
+    const [course, setCourse] = useState(null)
+    const [
+        showing, {
+            show,
+            hide,
+            toggle
+        }
+
+    ] = useModal()
     return (
         <>
             <h1>Admin Courses</h1>
+            {course && course._id}
+            {course && <Modal hide={() => {
+                hide() || setCourse(null)
+            }} visible={showing}>
+                <div className="AdminCourse">
+                    <div className="AdminCourse_Card">
+                        <div>
+                            <div>{course.courseName} - {course.courseNumber}</div>
+                            <div>id: {course._id}</div>
+                        </div>
+                    </div>
+                </div>
+            </Modal>}
             {coursesList.map((course) => (
-                <AdminCourseListItem course={course}/>
+                <AdminCourseListItem
+                    deleteCourse={(e) => {
+                        e.stopPropagation()
+                        deleteCourse(course._id)
+                    }}
+                    key={course._id} onClick={
+                    () => {
+                        setCourse(course)
+                        show()
+                    }}
+                    course={course}/>
             ))}
+
         </>
     )
 }
-const AdminCourseListItem = ({course: {_id, courseName, courseNumber}}) =>
-    <div key={_id} className="AdminCourse">
-        <div className="AdminCourse_CourseCard">
-            <div>
-                <div>{courseName} - {courseNumber}</div>
-                <div>id: {_id}</div>
-            </div>
-        </div>
-    </div>
+
+
 export default AdminCourses

@@ -1,4 +1,9 @@
 
+@media (max-width: 400px) {
+    .navbar .dropdown {
+        display: none
+    }
+}
 @media (min-width: 401px) {
 
     /* The dropdown container */

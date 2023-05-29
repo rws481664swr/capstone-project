@@ -1,4 +1,4 @@
-import css from './index.css'
+import css from './CourseList.css'
 import {Link} from "react-router-dom";
 
 const CourseListItem = ({course: {courseName, subject, _id, courseNumber, students,...rest}}) => {

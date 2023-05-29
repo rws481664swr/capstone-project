@@ -40,7 +40,8 @@ const AdminUsers = () => {
                 }}
                 visible={showing}
 
-                user={user}/>
+                user={user}
+            />
             <h1>Admin Users</h1>
 
             {users.map((user) => (

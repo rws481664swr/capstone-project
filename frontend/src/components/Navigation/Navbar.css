@@ -18,6 +18,11 @@
     padding: 14px 16px;
     text-decoration: none;
 }
+.navbar .link:hover {
+
+    text-decoration:  underline;
+
+}
 
 
 @media (max-width: 400px) {
@@ -25,9 +30,7 @@
         display: none
     }
 
-    .navbar .dropdown {
-        display: none
-    }
+
 
 
     /* Style the button that is used to open the sidepanel */

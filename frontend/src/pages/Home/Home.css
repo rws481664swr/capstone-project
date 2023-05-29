@@ -1,0 +1,30 @@
+#Home_Content{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    margin-bottom: 20px;
+ }
+#Home_CourseList{
+    width: 50%;
+    margin-left: 10px;
+}
+.Home_Welcome{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    margin-right: 10px;
+}
+#HomePage.sr-container{
+margin: 2% 2%;
+padding: 3%;
+    padding-bottom: 28vh;
+}
+
+
+#HomePage h1{
+    font-size: 3rem;
+    margin-bottom: 20px;
+    margin-left: 4rem;
+    margin-top: 2rem;
+}

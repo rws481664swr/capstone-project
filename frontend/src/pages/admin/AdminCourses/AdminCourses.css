@@ -1,0 +1,34 @@
+
+.AdminCourse {
+    display: flex;
+    justify-content: center;
+}
+
+.AdminCourse_Card {
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.AdminCourse_Card:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.AdminCourse_DeleteButton {
+    padding: 0.1rem 0.5rem;
+    color:red;
+}
+
+.AdminCourse_DeleteButton:hover {
+    background-color: red;
+    color: white;
+
+}

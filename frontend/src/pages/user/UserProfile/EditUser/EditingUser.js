@@ -7,13 +7,16 @@ import './EditProfile.css'
 import {useEffect, useState} from "react";
 import EditProfileForm from "./EditProfileForm";
 
-const EditProfile = ({navigation = true}) => {
-    const {put} = useAxios()
+const EditProfile = ({navigation = true,onCancel}) => {
+    const {put,get} = useAxios()
     const {username} = useGlobalContext()
-    const {get} = useAxios()
     const [user, setUser] = useState(null)
+    const navigate = useNavigate()
+    const [msg, flash] = useFlash('text-danger')
+
     const [form, onChange, clear, setFormState] =
         useForm({email: '', password: '', old: ''})
+
     useEffect(() => {
         (async () => {
             try {
@@ -26,8 +29,7 @@ const EditProfile = ({navigation = true}) => {
         })()
     }, [get, username, setFormState])
 
-    const navigate = useNavigate()
-    const [msg, flash] = useFlash('text-danger')
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
@@ -48,7 +50,8 @@ const EditProfile = ({navigation = true}) => {
         handleSubmit={handleSubmit}
         flashState={[msg, flash]}
         username={username}
-        cancel={() => navigate('/profile')}
+        editingUser={username}
+        cancel={onCancel}
     />
 
 }

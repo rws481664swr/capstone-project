@@ -1,0 +1,10 @@
+#UserCard {
+    margin-left: 20px;
+}
+
+#Profile_EditLine {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     align-items: center;
+ }

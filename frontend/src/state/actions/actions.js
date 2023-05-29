@@ -18,7 +18,7 @@ export const {
     PIN,
     ADD,
     REMOVE,
-    SET_STATE,
+     SET_STATE,
     UNPIN,
     UPDATE
 }=POST_ACTIONS

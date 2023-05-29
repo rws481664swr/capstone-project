@@ -1,0 +1,27 @@
+.MyPost{
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #ccc;
+    background-color: #fff;
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all ease 0.2s;
+}
+.MyPost:hover{
+    background-color: #eee;
+}
+.MyPost .MyPostTitle{
+    font-size: 20px;
+    font-weight: bold;
+}
+.MyPost .MyPostContent{
+    font-size: .7rem;
+    font-weight: normal;
+}
+.MyPostTimestamp{
+    font-style: italic;
+}

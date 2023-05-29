@@ -33,15 +33,18 @@ const getPosition = (quadrant, offset='1rem') => {
 const FAB = ({id='',onClick,className='', children, quadrant=BOTTOM_RIGHT}) => {
 
     const position=getPosition(quadrant)
-    return <>
-        <div
+    const styleString = Object.entries(position)
+        .map(([property, value]) => `${property}: ${value};`)
+        .join(' ');
+
+         return <div
+            data-testid='fab'
             id={id}
-             style={{...position }}
+             style={position }
              className={`${className} FAB`}
-             onClick={onClick}
-        >
+             onClick={onClick}>
             {children}
         </div>
-    </>
+
 }
 export default FAB

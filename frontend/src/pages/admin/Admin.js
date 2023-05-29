@@ -1,4 +1,4 @@
-import {Link, NavLink, Route, Routes} from "react-router-dom";
+import {Link, Navigate, NavLink, Route, Routes} from "react-router-dom";
 import './Admin.css'
 import NewCourse from "./NewCourse/NewCourse";
 import AdminCourses from "./AdminCourses/AdminCourses";
@@ -19,6 +19,7 @@ const Admin = () => {
             </div>
               <Link to={ '/admin/courses/new'}> </Link>
             <Routes>
+                <Route path={'/'} element={<Navigate to={'/admin/courses'}/>}/>
                 <Route path={'courses/new'} element={<NewCourse/>}/>
                 <Route path={'courses'} element={<AdminCourses/>}/>
                 <Route path={'users'} element={<AdminUsers/>}/>

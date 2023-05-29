@@ -51,6 +51,14 @@ function getSort(sort) {
   return sort;
 }
 
+postsRouter.get('/users/:username', async ({ params: { username } }, res, next) => {
+    try {
+        const results = await getPostsFromUser(username);
+        return res.json(results);
+    } catch (e) {
+        next(e);
+    }
+})
 
 postsRouter.get(
   "/courses/:course",
@@ -87,12 +95,13 @@ postsRouter.post("/", async ({ body }, res, next) => {
 
 postsRouter.put(
   "/:_id",
-  async ({ body: { content }, params: { _id } }, res, next) => {
+  async ({ body: { title, content }, params: { _id } }, res, next) => {
     try {
+        console.log(_id, content)
       if (!content) throw new BadRequestError("Body has no content");
       const user = await getUser(res.locals.user.username);
       if (!(await user.ownsPost(_id))) throw new ForbiddenError();
-      await updatePost(_id, { content });
+      await updatePost(_id, { title, content });
       res.json({ message: "Updated!" });
     } catch (e) {
       return next(e);

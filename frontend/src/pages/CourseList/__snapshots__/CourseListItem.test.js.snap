@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render CourseListItem 1`] = `
+<DocumentFragment>
+  <li
+    class="undefined"
+  >
+    <a
+      href="/courses/test"
+    >
+      <div>
+        <div>
+          testSubj:#test - testName 
+        </div>
+        <div>
+          0 Students
+        </div>
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;

@@ -29,7 +29,8 @@ const useAxios = () => {
 
            async function get(resource, id = '', query = {}) {
                try {
-                   const {data} = await axios.get(`${BASE_URL}/${resource}/${id}`, config(query))
+
+                   const {data} =    await axios.get(`${BASE_URL}/${resource}/${id}`, config(query))
                    return data;
 
                }catch (e) {
@@ -55,7 +56,7 @@ const useAxios = () => {
 
            async function put(resource, id = '', body) {
                try {
-                   const {data} = await axios.put(`${BASE_URL}/${resource}`, body, config())
+                    const {data} = await axios.put(`${BASE_URL}/${resource}`, body, config())
                    return data
                }catch (e) {
                    if (e.code===NETWORK_ERROR){

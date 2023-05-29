@@ -204,5 +204,5 @@ const writeout = {
     teacher: teacher_1,
 };
 
-writeFileSync("./file.json", JSON.stringify(writeout, null, 4));
+writeFileSync("./data.json", JSON.stringify(writeout, null, 4));
 await connection.disconnect();

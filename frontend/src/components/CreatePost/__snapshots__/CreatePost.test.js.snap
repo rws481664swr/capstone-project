@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sr-modal"
+    style="z-index: 1;"
+  >
+    <div
+      class=" sr-modal_content"
+      style="z-index: 1;"
+    >
+      <div>
+        <form
+          class="CreatePost "
+        >
+          <div
+            class="CreatePost"
+          >
+             
+          </div>
+          <div
+            class="LabeledInput-div CreatePost"
+          >
+            <label
+              class="LabeledInput-input-label "
+              for="input-title"
+            >
+              Post Title
+            </label>
+            <input
+              class="LabeledInput-input-text "
+              id="input-title"
+              name="title"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            class="LabeledInput-div CreatePost"
+          >
+            <label
+              class="LabeledInput-label "
+              for="input-content"
+            >
+              Post Content
+            </label>
+            <textarea
+              class="LabeledInput-textarea "
+              id="input-content"
+              name="content"
+            />
+          </div>
+          <button
+            class="CreatePost  Button"
+            type="submit"
+          >
+            Post
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

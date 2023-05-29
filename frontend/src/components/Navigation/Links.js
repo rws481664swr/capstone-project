@@ -7,7 +7,8 @@ export const Links = () => {
 
     return (
         <>
-            <NavLink to={'/'} className={'link'}>Home</NavLink>
+            {loggedIn && <NavLink to={'/'} className={'link'}>Home</NavLink>}
+
             {!loggedIn && <NavLink className={'link'} to={'/login'}>Log In</NavLink>}
             {!loggedIn && <NavLink className={'link'} to={'/register'}>Register</NavLink>}
 
@@ -16,5 +17,5 @@ export const Links = () => {
 
             {loggedIn && <NavLink className={'link'} to={'/profile'}>Profile</NavLink>}
             {loggedIn && <NavLink className={'link'} onClick={logout} to={'/login'}>Log Out</NavLink>}
-        </>)
+        </> )
 }
