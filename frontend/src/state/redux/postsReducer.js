@@ -11,12 +11,12 @@ function postsReducer(posts = [], {type, payload, id}) {
         case UPDATE:
 
 
-            const fn = post => {
-                if(post._id !== payload._id) return  post
 
-                return {...post,content:payload.content, title: payload.title}
-            }
-            return posts.map(fn)
+
+            return posts.map(post =>
+                post._id !== payload._id
+                    ?  post
+                    : {...post,content:payload.content, title: payload.title})
 
         case REMOVE:
             return posts.filter(post => post._id !== id)

@@ -27,8 +27,6 @@ const DisplayProfile = () => {
     return (
         <div id="UserProfile">
             <h1>Profile: {user.username}</h1>
-            {/*<Provider store={store}>*/}
-            {/*<PostDisplay post={post} setPost={setDisplayPost}/>*/}
             <EditProfileModal hide={editProfileModal.hide} showing={ editProfileModalVisible}/>
 
             <div className="row">
@@ -41,7 +39,6 @@ const DisplayProfile = () => {
                     <h3 id={'Profile_MyPosts'}>My Posts</h3>
                     <Provider store={store}>
 
-                    {/*<MyPosts  username={username} setPost={setDisplayPost}/>*/}
                         <PostList Post={MyPost} url={`posts/users/${username}`}   /></Provider>
                 </div>
                 <div className="col-3"><h3 id={'Profile_MyCourses'}>Courses</h3>
