@@ -8,7 +8,7 @@ import PostDisplay from "../Posts/PostDisplay/PostDisplay";
 /*
     * PostList is a component that displays a list of posts
  */
-const PostList = ({course_id: id}) => {
+const PostList = ({className='' ,Post,  url}) => {
 
     const {get} = useAxios()
     const dispatch = useDispatch()
@@ -17,25 +17,24 @@ const PostList = ({course_id: id}) => {
     useEffect(() => {
         (async () => {
             try {
-                const payload = await get(`posts/courses/${id}`)
+                const payload = await get(url)
                  dispatch({type: SET_STATE, payload})
             } catch (e) {
                 console.error(e)
             }
         })()
-    }, [dispatch, id, get])
+    }, [dispatch,  get])
 
 
     const [postDisplay, setPost] = useState(null)
     const posts = useSelector(e => e)
 
     return <>
-        <h4 className={'PostList_Header'}>Posts</h4>
-        <div className={'PostList  sr-container'} >
+        <div className={`${className}`} >
             {posts && <PostDisplay post={postDisplay} setPost={setPost}/>}
-            <ul  data-testid={'PostList'} >
+            <ul id={'PostListElement'} data-testid={'PostList'} >
                 {posts.map(p =>
-                    (<PostListItem
+                    (<Post
                         onClick={() => setPost(p)}
                         key={p._id}
                         post={p}

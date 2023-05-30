@@ -25,3 +25,7 @@
 .MyPostTimestamp{
     font-style: italic;
 }
+
+#PostListElement{
+    padding:0;
+}

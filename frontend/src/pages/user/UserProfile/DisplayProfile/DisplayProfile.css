@@ -25,6 +25,15 @@
     font-weight: 600;
     margin: 0 0 1rem 1rem;
 }
+  #Profile_MyProfile {
+padding: 0 0 0 1rem;
+}
+#Profile_MyPosts{
+ padding-left: .5rem;
+}
+#Profile_MyCourses{
+}
+
 
 #UserProfile  #UserProfileCoursesList li a {
     /*color: #000;*/

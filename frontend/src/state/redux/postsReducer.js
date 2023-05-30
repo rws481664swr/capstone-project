@@ -4,7 +4,6 @@ import {ADD, PIN, REMOVE, SET_STATE, UNPIN, UPDATE} from "../actions/actions";
 function postsReducer(posts = [], {type, payload, id}) {
     console.log('reducer ran action', type, id? 'with id': 'without id', 'with payload', payload)
 
-    console.log('*'.repeat(20))
      switch (type) {
         case ADD:
 

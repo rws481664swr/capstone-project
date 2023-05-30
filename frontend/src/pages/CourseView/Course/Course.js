@@ -9,6 +9,7 @@ import './Course.css'
 import CourseDashboard from "./CourseDashboard";
 import {useMemo} from "react";
 import { useSearchParams } from "react-router-dom";
+import PostListItem from "../../../components/PostList/PostListItem";
 
 
 const Course = () => {
@@ -30,8 +31,9 @@ const Course = () => {
                             visible={visible}
                             course={course}/>
                     }
+                    <h4 className={'PostList_Header'}>Posts</h4>
 
-                    <PostList course_id={id}/>
+                    <PostList className={'CoursePostList PostList  sr-container '} Post={PostListItem} url={`posts/courses/${id}`}/>
                  </Provider>
 
         </div>
