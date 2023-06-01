@@ -27,10 +27,11 @@ describe('test user queries', () => {
 
         })
         it("should update a User", async () => {
-            const {username} = u1, first_name = 'password'
+            const {username} = u1
+                const first_name = 'new first name'
+
 
             await updateUser(username, {first_name})
-
             const user1 = await Users.findOne({username})
             user1.first_name.should.equal(first_name)
         })

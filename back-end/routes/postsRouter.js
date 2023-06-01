@@ -64,7 +64,7 @@ postsRouter.get(
   "/courses/:course",
   async ({ params: { course }, query: { sort } }, res, next) => {
     try {
-      // await canPost(res.locals.user,course)//TODO figure out why this line of code was here
+      await canPost(res.locals.user,course)
 
       sort = getSort(sort);
 

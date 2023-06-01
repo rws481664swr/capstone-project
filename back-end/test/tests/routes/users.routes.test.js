@@ -4,7 +4,8 @@ import {should} from "chai";
 import {jsonify} from "../../../db/util.js";
 import {Users} from "../../../db/schemas/models.js";
 import {login} from "../../../db/creds.js";
-import {getUser, updateUser} from "../../../db/users.js";
+import {TEST_PORT} from "../../../config.js";
+
 should()
 let server
 

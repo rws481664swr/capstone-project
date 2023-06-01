@@ -12,15 +12,24 @@ usersRouter.use(ensureLoggedIn)
 
 usersRouter.get('/', ensureAdmin, async ({query: {username}}, res, next) => {
     try {
-        //if query is empty, return all users
-        if (!username) return res.json(await getUsers())
-        //if query is not empty, return users sorted by username
-        if (!['asc', 'desc'].includes(username))
-            throw new BadRequestError()
 
-        const sort = username === 'asc'
-            ? 1 : (username === 'desc' ? -1 : 1)
-        const response = await getUsers({username: sort})
+        switch(username){
+            case !username:
+            case undefined:
+            case 'asc':
+            case '1':
+                username = 1
+                break
+            case 'desc':
+            case '-1':
+                username = -1
+                break;
+            default:
+                throw new BadRequestError("Illegal value for username sort: "+username)
+
+        }
+
+        const response = await getUsers({username})
         res.json(response)
     } catch (e) {
         return next(e)

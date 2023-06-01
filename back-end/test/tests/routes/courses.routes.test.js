@@ -1,9 +1,9 @@
-import {PORT} from "../../../config.js";
+import {TEST_PORT as PORT} from "../../../config.js";
 import axios from "axios";
 import {jsonify} from "../../../db/util.js";
 import {should as chaiShould} from "chai";
 import {getUser} from '../../../db/users.js'
-import {c1, c2, default as common, teacherTokenConfig, token, tokenConfig, u1} from "../../common/seed-test-db.js";
+import {c1, c2, default as common, teacherTokenConfig, token, tokenConfig, u1, u2} from "../../common/seed-test-db.js";
 import {getCourse, getCourses} from "../../../db/courses.js";
 const should = chaiShould()
 const prefix = `http://localhost:${PORT}`

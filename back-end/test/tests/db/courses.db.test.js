@@ -1,5 +1,5 @@
 import common, {c1, c2, u1, u2} from '../../common/seed-test-db.js'
-import {should} from "chai";
+import {should as _should} from "chai";
 import {
     createCourse,
     deleteCourse,
@@ -14,7 +14,7 @@ import {Courses} from "../../../db/schemas/models.js";
 import {jsonify} from "../../../db/util.js";
 import {getUser} from "../../../db/users.js";
 
-should()
+const should =_should()
 
 
 describe('test courses queries', () => {

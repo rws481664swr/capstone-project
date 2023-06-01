@@ -5,7 +5,7 @@ import {$c1, $c2, $p1, $p2, $p3, $u1, $u2, $u3} from "./mock-data.js";
 import {hash} from "bcrypt";
 import {disconnect} from 'mongoose'
 import jwt from "jsonwebtoken";
-import {SECRET_KEY} from "../../config.js";
+import {SECRET_KEY,TEST_PORT} from "../../config.js";
 import {createConfigToken} from "./tokens.js";
 import axios from 'axios'
 import {createRequests} from '../tests/middleware-security/requests.js'
@@ -27,9 +27,8 @@ export let requests,
 const password = await hash('password', 1)
 export const doBeforeAll = async function () {
     this.timeout(10000)
-    this.server = await startServer()
+    this.server = await startServer(TEST_PORT)
     this.conn = conn
-
     try {
         await Posts.deleteMany({}).exec()
         await Courses.deleteMany({}).exec()
@@ -38,6 +37,7 @@ export const doBeforeAll = async function () {
         await Comments.deleteMany({}).exec();
     } catch (e) {
         console.error('TEST BEFORE ALL ERROR', e)
+        process.exit(1)
         throw e
     }
 }
