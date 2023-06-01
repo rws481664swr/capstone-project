@@ -19,10 +19,10 @@ coursesRouter.use(ensureLoggedIn)
 
 coursesRouter.get('/', async ({query: {sort, direction}}, res, next) => {
     try {
-        let user
+
         if(res.locals.user.role===ADMIN)  return res.json( await getCourses())
 
-        const {courses} = user = await getUser(res.locals.user.username, true)
+        const {courses}  = await getUser(res.locals.user.username, true)
         console.log('get c',res.getHeader('Authentication'))
 
         return res.json(courses)
@@ -34,12 +34,17 @@ coursesRouter.get('/', async ({query: {sort, direction}}, res, next) => {
 })
 coursesRouter.get('/:_id', async ({params: {_id}, query: {populate}}, res, next) => {
     try {
+
          const course = await getCourse(_id,
             Boolean(populate)
                 ? {teachers: true, students: true}
                 : {})
-        if (course === null) throw new FourOhFourError('cannot find course')
-        console.log(populate)
+        if (course === null)
+            throw new FourOhFourError('cannot find course')
+        if (res.locals.user.role === ADMIN)
+            return res.json(course)
+        if (!course.hasMember(res.locals.user._id ) )
+            throw new ForbiddenError('user is not a member of the course')
         return res.json(course)
 
     } catch (e) {
@@ -70,7 +75,6 @@ coursesRouter.delete('/:_id', ensureLoggedIn, ensureTeacher, async ({params: {_i
 
 //enroll in course
 coursesRouter.post('/:_id/users/:username', ensureLoggedIn, async ({params: {_id, username}}, res, next) => {
-    //TODO add conditional to see if student or if teacher. for now, default to teacher
     try {
         let [coursePromise, userPromise] = [
             getCourse(_id),
