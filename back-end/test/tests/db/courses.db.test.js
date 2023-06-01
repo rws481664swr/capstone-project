@@ -139,13 +139,19 @@ describe('test courses queries', () => {
         userCourses.should.include(jsonify(c3)._id)
     })
     it('should enroll a student in a Course', async () => {
+
+        let user= await getUser(u1.username, true)
+        let userCourses = jsonify(user).courses.map(({_id}) => _id)
+        userCourses.should.not.include(jsonify(c2)._id)
+
         await enrollCourse(u1.username, c2._id)
 
         const students = jsonify(await Courses.findById(c2._id).exec())
         jsonify(students).should.include(u1._id)
-        const user = await getUser(u1.username, true)
 
-        const userCourses = jsonify(user).courses.map(({_id}) => _id)
+         user = await getUser(u1.username, true)
+
+         userCourses = jsonify(user).courses.map(({_id}) => _id)
         userCourses.should.include(jsonify(c2)._id)
     })
     it('should un-enroll a student from a Course', async () => {
