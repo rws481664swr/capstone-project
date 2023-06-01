@@ -24,7 +24,7 @@ export default function authenticateJWT(req, res, next) {
         return next();
     } catch (err) {
         /* c8 ignore next */
-        return next();
+        return next(err);
     }
 }
 

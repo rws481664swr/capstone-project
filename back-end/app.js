@@ -15,6 +15,8 @@ import { connect } from "./db/db.js";
 import { testIsMainModule, isTest, PORT, printReport } from "./config.js";
 import cors from "cors";
 import morgan from "morgan";
+import {getUser} from "./db/users.js";
+import staleOrInvalidData from "./middleware/staleOrInvalidData.js";
 const isMainModule = testIsMainModule(import.meta.url);
 
 export let conn;
@@ -25,9 +27,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(authenticateJWT);
+app.use(staleOrInvalidData)
 
 //only use if not in test environment
 !isTest && app.use(morgan("tiny"));
+
+
 
 //Routers
 app.use("/auth", authRouter);

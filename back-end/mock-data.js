@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import {connect, Credentials} from "./db/db.js";
 import {Comments as Comment, Courses as Course, Posts as Post, Users as User,} from "./db/schemas/models.js";
 import {faker} from "@faker-js/faker";

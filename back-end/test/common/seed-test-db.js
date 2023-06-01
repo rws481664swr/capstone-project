@@ -18,6 +18,7 @@ export let requests,
     , cm1, cm2, cm3
     , cred1, cred2
     , adminToken, token, teacherToken
+    ,tokenPayload
     , admin
     , tokenConfig
     , teacherTokenConfig
@@ -48,13 +49,14 @@ export const doBeforeEach = async function () {
         u1 = await Users.create($u1())
         u2 = await Users.create($u2())
         admin = await Users.create($u3())
-
+        tokenPayload = {
+            username: 'u1',
+            role: 'STUDENT',
+            _id: u1._id.toString(),
+            isAdmin: false
+        }
         token = jwt.sign(
-            {
-                username: 'u1',
-                role: 'STUDENT',
-                _id: u1._id.toString()
-            }, SECRET_KEY)
+            tokenPayload, SECRET_KEY)
         teacherToken = jwt.sign(
             {
                 username: 'u2',
