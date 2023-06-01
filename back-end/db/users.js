@@ -32,10 +32,8 @@ export const getUser = async (username, showCourses) => {
 
 export const updateUser = async(username, data) => {
     try{
-        const {password,old,update}=data
+        const {password,old,...update}=data
         if (password) await changePassword(username, old,password)
-
-        await Credentials.findOneAndUpdate({username}, update).exec()
         return await users.findOneAndUpdate({username}, update).exec()
     }catch (e) {
         throw e
