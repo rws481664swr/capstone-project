@@ -15,8 +15,6 @@ describe('Courses routes', () => {
     describe('GET /courses', () => {
 
 
-
-
         it('should GET /courses', async () => {
             const courses = jsonify((await axios.get(`${prefix}/courses?sort=date&direction=desc`, tokenConfig)).data)
         courses.should.eql(jsonify([c1]))
