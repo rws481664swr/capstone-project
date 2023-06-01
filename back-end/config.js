@@ -12,6 +12,7 @@ const{
   EDU_DB}
 }= process
 
+export const TEST_PORT = 3002;
 
 export let DB_URI =
   NODE_ENV === "test"

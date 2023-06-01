@@ -13,7 +13,7 @@ import {
 import axios from 'axios'
 import {jsonify} from "../../../db/util.js";
 import {Posts} from "../../../db/schemas/models.js";
-import {PORT} from "../../../config.js";
+import {TEST_PORT as PORT} from "../../../config.js";
 import {getPost, pinPost} from "../../../db/posts.js";
 
 const itShould = should()

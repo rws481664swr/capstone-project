@@ -2,7 +2,7 @@ import axios from "axios";
 import common, {u1} from '../../common/seed-test-db.js'
 import jwt from "jsonwebtoken";
 import {should as chaiShould} from 'chai'
-import {PORT} from "../../../config.js";
+import {TEST_PORT as PORT} from "../../../config.js";
 const should = chaiShould()
 
 const prefix = `http://localhost:${PORT}/auth`

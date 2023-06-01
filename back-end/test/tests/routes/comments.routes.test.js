@@ -1,4 +1,4 @@
-import {PORT} from "../../../config.js";
+import {TEST_PORT as PORT} from "../../../config.js";
 import _axios from "axios";
 import {jsonify} from "../../../db/util.js";
 import {should as chaiShould} from "chai";

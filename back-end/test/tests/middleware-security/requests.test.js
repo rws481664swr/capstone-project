@@ -1,6 +1,6 @@
 import {createRequests as requests} from "./requests.js";
 import {should as chaiShould} from 'chai'
-import {PORT} from "../../../config.js";
+import {TEST_PORT as PORT} from "../../../config.js";
 import {
     adminTokenConfig as admin,
     default as common,

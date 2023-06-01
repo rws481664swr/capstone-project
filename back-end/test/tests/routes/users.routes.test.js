@@ -9,8 +9,7 @@ should()
 let server
 
 
-
-const prefix = `http://localhost:3001/users`
+const prefix = `http://localhost:${TEST_PORT}/users`
 
 
 describe('user api routes tests', function ()  {

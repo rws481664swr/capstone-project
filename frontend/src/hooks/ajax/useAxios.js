@@ -1,15 +1,24 @@
 import axios from "axios";
-import {BASE_URL} from "../config";
-import {useGlobalContext} from "../state/contexts/GlobalContext";
+import {BASE_URL} from "../../config";
+import {useGlobalContext} from "../../state/contexts/GlobalContext";
 import {useCallback, useEffect, useMemo} from "react";
+
+const dateIsLessThanOneMinuteOld = (date) => {
+    const now = new Date()
+    const then = new Date(date)
+    const diff = (now.getTime() - then.getTime()) / 1000
+    return diff < 60
+}
 
 const NETWORK_ERROR = 'ERR_NETWORK'
 const useAxios = () => {
 
-    const {token:tokenRef} = useGlobalContext()
+    const {token:tokenRef,timestamp} = useGlobalContext()
 
     useEffect(() => {
+
         (async () => {
+            if(dateIsLessThanOneMinuteOld(timestamp))return console.log('should not have token refreshed')
             const {data: {token: newToken}} = await axios.get(`${BASE_URL}/auth/token`,
                 {headers: {authorization: `Bearer ${tokenRef.current}`}})
             tokenRef.current= newToken

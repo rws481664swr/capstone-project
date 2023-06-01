@@ -1,12 +1,12 @@
 import common,{requests} from "../../common/seed-test-db.js";
 import {should as chaiShould} from 'chai'
-import {PORT} from "../../../config.js";
+import {PORT, TEST_PORT} from "../../../config.js";
 
 
 
 const should = chaiShould()
 
-const prefix = (rest) => `http://localhost:${PORT}/auth${rest}`
+const prefix = (rest) => `http://localhost:${TEST_PORT}/auth${rest}`
 
 describe('auth middleware security',() => {
     common();

@@ -1,6 +1,6 @@
-import common, {c1, c2, requests, u1} from "../../common/seed-test-db.js";
-import {should as chaiShould,expect} from "chai";
-import {PORT} from "../../../config.js";
+import common, {c1, c2, requests, u1, u2} from "../../common/seed-test-db.js";
+import {expect, should as chaiShould} from "chai";
+import {TEST_PORT as PORT} from "../../../config.js";
 import {getUser} from "../../../db/users.js";
 import axios from "axios";
 

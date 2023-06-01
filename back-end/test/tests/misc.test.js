@@ -1,10 +1,10 @@
-import {should as chaiShould,expect} from 'chai'
+import {expect, should as chaiShould} from 'chai'
 import {jsonify} from "../../db/util.js";
-import {c1, u1,default as common} from "../common/seed-test-db.js";
-import {Schema} from "mongoose";
+import {c1, default as common, u1} from "../common/seed-test-db.js";
 
 import _404 from '../../middleware/404.js'
 import error from '../../middleware/error.js'
+
 const should = chaiShould()
 
 describe('jsonify',()=>{

@@ -1,6 +1,6 @@
 import common, {cm1, cm2, p1, p2, requests} from "../../common/seed-test-db.js";
 import {should as chaiShould} from "chai";
-import {PORT} from "../../../config.js";
+import {TEST_PORT as PORT} from "../../../config.js";
 import {Comments} from "../../../db/schemas/models.js";
 
 

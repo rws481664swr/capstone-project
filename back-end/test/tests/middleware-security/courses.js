@@ -1,6 +1,6 @@
 import common, {c1, c2, requests, u1, u2} from "../../common/seed-test-db.js";
 import {should as chaiShould} from "chai";
-import {PORT} from "../../../config.js";
+import {TEST_PORT as PORT} from "../../../config.js";
 import {createCourse, getCourse, teachCourse} from "../../../db/courses.js";
 import {jsonify} from "../../../db/util.js";
 import {createUser} from "../../../db/users.js";
