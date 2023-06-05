@@ -1,9 +1,9 @@
 import {useState} from "react";
-import useFlash from "../../hooks/useFlash";
+import useFlash from "../../hooks/form/useFlash";
 import './Comments.css'
 import './AddComment.css'
 import LabeledInput from "../General/LabeledInput/LabeledInput";
-import Button from "../General/Button/Button";
+import Button from "../General/Button/GenericButton/Button";
 const AddComment = ({add}) => {
     const [content, setContent] = useState('')
     const  [toRender, flash]= useFlash()
@@ -23,7 +23,7 @@ const AddComment = ({add}) => {
             className={'LabeledInput comment'}
             name={'content'}
             />
-        <Button id={'add-comment-button'} onClick={submit}>Comment</Button>
+        <Button id={'add-comment-button'} onClick={submit}>Add a Comment</Button>
     </>
     //TODO
 }

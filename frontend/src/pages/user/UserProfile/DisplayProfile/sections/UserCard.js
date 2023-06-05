@@ -1,16 +1,20 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEdit} from "@fortawesome/free-solid-svg-icons";
+import {faEdit,faCopy} from "@fortawesome/free-solid-svg-icons";
 import './UserCard.css'
-const UserCard = ({user, showEdit}) =>
-    <div id={"UserCard"}>
+
+const UserCard = ({ user,viewer = user, showEdit, className = ''}) =>
+    <div id={"UserCard"} className={className}>
         <div id={'Profile_EditLine'}>
             <div>Name: {user.first_name} {user.last_name}</div>
-            <span id={'EditUserButton'}
-                  onClick={showEdit}>
+            {viewer === user && <span id={'EditUserButton'}
+                                      onClick={showEdit}>
                 <FontAwesomeIcon icon={faEdit}/>
-            </span>
+            </span>}
         </div>
         <div>Username: {user.username}</div>
-        <div>Email: {user.email}</div>
+        <div>Email: {user.email}{viewer !== user &&
+            <span onClick={()=>navigator.clipboard.writeText(user.email)}  className={'BasicProfile_Copy'}><FontAwesomeIcon icon={faCopy}/></span>
+        }</div>
     </div>
+
 export default UserCard

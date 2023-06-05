@@ -1,0 +1,11 @@
+#join-course{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-top: 2rem;
+}

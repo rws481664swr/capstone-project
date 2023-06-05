@@ -6,15 +6,26 @@ import getData from "../../mock_data/data";
 import {default as GlobalContext} from '../../state/contexts/GlobalContext'
 import {extractKeysAsList, MOCK_TOKEN} from "../../../mock-backend";
 import {BASE_URL} from "../../config";
+import chalk from "chalk";
+const mockCoursesList = extractKeysAsList(getData().courses)
 
-jest.mock('axios')
-const coursesList = extractKeysAsList(getData().courses)
+jest.mock('axios'  ,()=>({
+    ...jest.requireActual('axios'),
+    get:jest.fn()
+}))
+const mockGet= (url, cfg) => {
 
-
+    if(url.includes(`/courses`)){
+        return   Promise.resolve({data:mockCoursesList})
+    }else if (url.includes(`/auth/token`)){
+        return  Promise.resolve({data: {token:MOCK_TOKEN.current}})
+    }
+    throw new Error( `MOCK GET: ${url} not implemented`)
+}
 it('should render CourseList', async () => {
+    // axios.get.mockImplementation()
+    axios.get.mockImplementation(mockGet)
 
-    axios.get.mockResolvedValueOnce({data:coursesList})
-    axios.get.mockResolvedValueOnce({data:coursesList})
 
     const fromCourse = ({subject, courseName, courseNumber}) =>
         `${subject}:#${courseNumber} - ${courseName}`
@@ -24,17 +35,18 @@ it('should render CourseList', async () => {
                 <CourseList/>
             </GlobalContext.Provider>
         </MemoryRouter>))
-    coursesList.forEach(course => {
+    mockCoursesList.forEach(course => {
         const txt =
             getByText(fromCourse(course))
         expect(txt).toBeInTheDocument()
     })
 
 })
+ it('should render CourseList as Fragment', async () => {
 
-it('should render CourseList', async () => {
+     axios.get.mockImplementation(mockGet)
 
-    axios.get.mockResolvedValue({data: coursesList})
+
 
     const {getByText, asFragment} = await act(() => render(
         <MemoryRouter>

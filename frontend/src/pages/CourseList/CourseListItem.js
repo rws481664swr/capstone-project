@@ -1,19 +1,28 @@
-import css from './CourseList.css'
 import {Link} from "react-router-dom";
+import useDropCourse from "../../hooks/ajax/useDropCourse";
+import {DeleteButton} from "../../components/General/Button/IconButtons/IconButtons";
 
-const CourseListItem = ({course: {courseName, subject, _id, courseNumber, students,...rest}}) => {
+const CourseListItem = ({drop,course: {courseName, subject, _id, courseNumber, students, ...rest}}) => {
 
-    return <>
-        <li className={`${css.courseLi}`}>
-            <Link to={`/courses/${_id}`}>
-                <div className={css.courseBody}>
-                    <div className={css.courseName}>{subject}:#{courseNumber} - {courseName} </div>
-                    <div className={css.courseName}>{students.length} Students</div>
-                </div>
-             </Link>
+    const dropCourse= drop(useDropCourse(_id))
+    return(
+
+        <li className={`CourseListItem`}>
+                <Link to={`/courses/${_id}`}>
+                    <div className={'CourseListItem_Body'}>
+                        <div>
+                            <div>{subject}:#{courseNumber} - {courseName} </div>
+                            <div>{students.length} Students</div>
+                        </div>
+                        <div>
+                             <DeleteButton onClick={dropCourse}/>
+                        </div>
+                    </div>
+                </Link>
         </li>
+)
 
-    </>
+
 }
 export default CourseListItem
 

@@ -1,14 +1,14 @@
-import useForm from "../../hooks/useForm";
-import useFlash from "../../hooks/useFlash";
+import useForm from "../../hooks/form/useForm";
+import useFlash from "../../hooks/form/useFlash";
 import {useGlobalContext} from "../../state/contexts/GlobalContext";
-import useAxios from "../../hooks/useAxios";
+import useAxios from "../../hooks/ajax/useAxios";
 import {ADD} from "../../state/actions/actions";
 import {useDispatch} from "react-redux";
 import Modal from "../General/Modal/Modal";
 import {useCallback} from "react";
 import './CreatePost.css'
 import LabeledInput, {LabeledTextBox} from "../General/LabeledInput/LabeledInput";
-import Button from "../General/Button/Button";
+import Button from "../General/Button/GenericButton/Button";
 
 const formValidate = ({content, title}, flash, danger) => {
     content = content.trim()

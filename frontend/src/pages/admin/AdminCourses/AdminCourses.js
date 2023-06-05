@@ -1,4 +1,4 @@
-import useAxios from "../../../hooks/useAxios";
+import useAxios from "../../../hooks/ajax/useAxios";
 import React, {useEffect, useReducer, useState} from "react";
 import coursesReducer from "../../../state/redux/coursesReducer";
 import './AdminCourses.css'
@@ -29,9 +29,12 @@ const AdminCourses = () => {
     }, [])
     const deleteCourse = async (_id) => {
         try {
+            console.log('tryiing to dispatch')
             await _delete(`courses/${_id}`)
-            dispatchCourses({type: REMOVE, id: _id})
+            console.log('http call not failed')
+            dispatchCourses({type: REMOVE, payload: _id})
         } catch (e) {
+            console.log('err')
             console.error(e)
         }
     }
@@ -63,7 +66,9 @@ const AdminCourses = () => {
             {coursesList.map((course) => (
                 <AdminCourseListItem
                     deleteCourse={(e) => {
+                        e.preventDefault()
                         e.stopPropagation()
+                        console.log('courseid ' ,course._id)
                         deleteCourse(course._id)
                     }}
                     key={course._id} onClick={

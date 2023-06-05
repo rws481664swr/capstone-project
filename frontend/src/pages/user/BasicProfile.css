@@ -1,0 +1,25 @@
+.BasicProfile_container{
+     margin: 1% 1%;
+     padding:3%;
+     display: flex;
+        flex-direction: column;
+        justify-content: center;
+}
+#UserCard.BasicProfile_UserCard{
+    max-width: 40%;
+padding :2rem;
+}
+#UserCard .BasicProfile_Copy {
+padding: 10px;
+    margin-left:2rem;
+}
+#UserCard .BasicProfile_Copy:hover {
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+@media only screen and (max-width: 760px) {
+    #UserCard.BasicProfile_UserCard {
+        max-width: 100%;
+    }
+
+}

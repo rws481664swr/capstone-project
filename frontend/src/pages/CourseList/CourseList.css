@@ -1,4 +1,8 @@
+#CourseList{
+    /*display: flex;*/
+    /*justify-content: center;*/
 
+}
 
 #join-fab{
     padding: 30px;
@@ -10,7 +14,6 @@
 #CourseList ul {
     padding: 0;
     margin: 12px 10px;
-
 }
 
 #CourseList li {
@@ -45,10 +48,10 @@
 
 }
 
-#CourseList li{
-    display:flex;
-    justify-content: space-between;
-}
+/*#CourseList li{*/
+/*    display:flex;*/
+/*    justify-content: space-between;*/
+/*}*/
 
 .subject {
 
@@ -58,7 +61,8 @@
 
 }
 .course-scroll{
-    overflow-y: auto;
+    /*overflow-x: auto;*/
+    /*overflow-y: auto;*/
     height: 100%;
     width: 100%;
 }
@@ -67,3 +71,24 @@
     justify-content: center;
     align-items: center;
 }
+
+#CourseList li.CourseListItem{
+    width:100%;
+    padding: .7rem;
+    padding-top: .3rem;
+    padding-right: .4rem;
+}
+.fa-x:hover{
+    color: #fff;
+    background: #333;
+    padding:2px;
+    border-radius: 2px;
+
+}
+#CourseList .CourseListItem .CourseListItem_Body{
+display: flex;
+    justify-content: space-between;
+}
+
+
+

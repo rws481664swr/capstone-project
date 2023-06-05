@@ -12,7 +12,6 @@ const Modal = ({id,visible, hide, children, zIndex = 1,className=''}) => <>
                 onClick={e => e.stopPropagation()}
                  style={{zIndex}}
                  className={`${className} sr-modal_content`}>
-                {/*className={css.modal_content}>*/}
                 {children}
             </div>
         </div>}

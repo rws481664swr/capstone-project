@@ -10,11 +10,13 @@ const LabeledInput = ({
                           type = 'text',
                           value,
                           onChange,
+        flash,
                           ...inputProps
                       }) =>
     <div className={`LabeledInput-div ${className}`}>
         <label className={`LabeledInput-input-label ${labelClass}`}
                htmlFor={id}>{label}</label>
+        <div>{flash}</div>
         <input className={`LabeledInput-input-text ${inputClass}`}
                id={id}
                name={name}

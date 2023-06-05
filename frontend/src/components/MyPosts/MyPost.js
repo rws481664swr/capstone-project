@@ -11,8 +11,8 @@ const MyPost = ({post,onClick}) => {
          className={'MyPost'} key={post._id}>
         <div className={'MyPostTitle'}>{post.title}</div>
         <div className={'MyPostContent'}>
-            {post.content}
-            <Timestamp className={'MyPostTimestamp'} date={post.postDate}/>
+            {/*{post.content}*/}
+           Posted <Timestamp className={'MyPostTimestamp'} date={post.postDate}/>
         </div>
     </div>
         </>

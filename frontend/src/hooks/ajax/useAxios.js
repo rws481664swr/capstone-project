@@ -18,7 +18,7 @@ const useAxios = () => {
     useEffect(() => {
 
         (async () => {
-            if(dateIsLessThanOneMinuteOld(timestamp))return console.log('should not have token refreshed')
+            if(dateIsLessThanOneMinuteOld(timestamp))return //do not need to refresh token
             const {data: {token: newToken}} = await axios.get(`${BASE_URL}/auth/token`,
                 {headers: {authorization: `Bearer ${tokenRef.current}`}})
             tokenRef.current= newToken
@@ -76,10 +76,12 @@ const useAxios = () => {
            }
 
            async function delete_(resource, id = '') {
+             console.log('DELETE ',resource,id)
                try {
                    const {data} = await axios.delete(`${BASE_URL}/${resource}/${id}`, config())
                    return data;
                }catch (e) {
+                 console.error(e)
                    if (e.code===NETWORK_ERROR){
                        return alert(`Site is down.`)
                    }

@@ -28,7 +28,6 @@ const axiosGetImplementation =
         const {coursesList:[course]}=getData()
 
         if (url.includes('/posts')) {
-            console.log(url, '/posts')
             return Promise.resolve({
                 data: mockExtractKeysAsList(mockGetData().posts).filter(post => post.course === course._id)
             })

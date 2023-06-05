@@ -1,11 +1,13 @@
-import useForm from "../../hooks/useForm";
+import useForm from "../../hooks/form/useForm";
 import axios from "axios";
 import {BASE_URL} from "../../config";
 import './Login.css'
 import {useGlobalContext} from "../../state/contexts/GlobalContext";
 import {useNavigate} from "react-router-dom";
-import useFlash from "../../hooks/useFlash";
-import Button from "../../components/General/Button/Button";
+import useFlash from "../../hooks/form/useFlash";
+import Button from "../../components/General/Button/GenericButton/Button";
+import {debug} from "../../debug";
+import {useEffect} from "react";
 
 /**
  * Login component for user authentication.
@@ -18,6 +20,7 @@ const Login=()=>{
         username: "",
         password: ''
     })
+
     const submit = async (e)=>{
         e.preventDefault()
         try{
@@ -26,13 +29,13 @@ const Login=()=>{
             navigate('/')
         }catch (e) {
             console.error(e)
-            danger()
-            flash(`Something went wrong logging in: ${
+            danger(e.message)
+            danger(`Something went wrong logging in: ${
                 e.response ? e.response.data.message : e.message
             }`)
         }
     }
-    return <form onSubmit={submit} className={'login Login_form'}>
+    return <form onSubmit={()=>alert('onsubmit')} className={'login Login_form'}>
         <div>{toRender}</div>
         <h4>Log In</h4>
         <div className={'login'}>
@@ -53,6 +56,7 @@ const Login=()=>{
                    id={'password'}
                    type={'password'}/>
             <Button
+                onClick={submit}
                 className="Login_button  register"
                 type="submit">Log In
             </Button>

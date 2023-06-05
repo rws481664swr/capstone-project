@@ -1,8 +1,8 @@
 import './NewCourse.css'
-import useForm from "../../../hooks/useForm";
+import useForm from "../../../hooks/form/useForm";
 import {useCallback} from "react";
 import LabeledInput from "../../../components/General/LabeledInput/LabeledInput";
-import useAxios from "../../../hooks/useAxios";
+import useAxios from "../../../hooks/ajax/useAxios";
 
 
 
@@ -45,6 +45,7 @@ const NewCourse = () => {
                     onChange={onChange}
                     label={'Course Name'}
                     id={'input-courseName'}
+
                 />
                 <LabeledInput
                     name={'courseNumber'}
@@ -52,6 +53,7 @@ const NewCourse = () => {
                     onChange={onChange}
                     label={'Course Number'}
                     id={'input-courseNumber'}
+
 
                 />
                 <LabeledInput name={'courseDescription'}

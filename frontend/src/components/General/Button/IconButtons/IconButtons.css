@@ -1,0 +1,24 @@
+
+.IconButton {
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 300;
+    background-color: #fff;
+    border: none;
+}
+
+.DeleteButton{
+
+}
+.DeleteButton:hover{
+    color: red;
+    font-size: 1.1rem;
+}
+.EditButton {
+
+}
+
+.PinButton {
+
+}

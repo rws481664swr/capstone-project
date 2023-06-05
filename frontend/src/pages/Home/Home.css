@@ -1,30 +1,67 @@
-#Home_Content{
+#Home_Content {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 20px;
     margin-bottom: 20px;
- }
-#Home_CourseList{
-    width: 50%;
-    margin-left: 10px;
+
 }
-.Home_Welcome{
+
+#Home_CourseList {
+    width: 70%;
+    margin-left: 10px;
+
+}
+
+.Home_Welcome {
     display: flex;
     justify-content: center;
     width: 50%;
     margin-right: 10px;
 }
-#HomePage.sr-container{
-margin: 2% 2%;
-padding: 3%;
+
+#HomePage.sr-container {
+    margin: 2% 2%;
+    padding: 3%;
     padding-bottom: 28vh;
 }
 
 
-#HomePage h1{
+#HomePage h1 {
     font-size: 3rem;
     margin-bottom: 20px;
     margin-left: 4rem;
     margin-top: 2rem;
+}
+
+
+@media screen and (max-height: 770px) {
+    #HomePage.sr-container {
+
+        padding-bottom: 20vh;
+    }
+}
+
+@media screen and (max-height: 730px) {
+    #HomePage.sr-container {
+
+        padding-bottom: 15vh;
+    }
+}
+
+
+@media screen and (max-height: 650px) {
+    #HomePage.sr-container {
+
+        padding-bottom: 10vh;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    #HomePage.sr-container {
+        margin: 0;
+        box-shadow: none;
+        border: none;
+        padding-bottom: 7vh;
+    }
 }

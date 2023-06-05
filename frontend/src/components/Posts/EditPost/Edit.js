@@ -1,14 +1,14 @@
-import useForm from "../../../hooks/useForm";
+import useForm from "../../../hooks/form/useForm";
 import LabeledInput, {LabeledTextBox} from "../../General/LabeledInput/LabeledInput";
 import {useDispatch, useSelector} from "react-redux";
-import useAxios from "../../../hooks/useAxios";
+import useAxios from "../../../hooks/ajax/useAxios";
 import './EditPost.css'
-import Button from "../../General/Button/Button";
+import Button from "../../General/Button/GenericButton/Button";
 import {UPDATE} from "../../../state/actions/actions";
 import {useCallback} from "react";
 
 
-const Edit = ({  post, setEditMode, setPost}) => {
+const Edit = ({  post, setEditMode, setPost,editMode}) => {
     const [form, onChange, resetForm] = useForm({
         title: post.title, content: post.content
     })
@@ -16,22 +16,21 @@ const Edit = ({  post, setEditMode, setPost}) => {
 
     const dispatch = useDispatch()
     const {put} = useAxios()
+    if(!editMode)return null;
     const updateForm =async (e)  => {
         e.preventDefault()
 
         try {
             await put(`posts/${post._id}`, '', form)
-            console.log("UPDATED")
-
             dispatch({type: UPDATE , payload: {...post, ...form,id:post._id}})
             setPost({...post, ...form})
-            console.log("UPDATED 2")
             setEditMode(false)
             resetForm()
         } catch (e) {
             console.error(e)
         }
     }
+
     return <form onSubmit={updateForm}>
             <div>
                 <LabeledInput

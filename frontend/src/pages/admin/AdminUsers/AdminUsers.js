@@ -1,12 +1,12 @@
-import useAxios from "../../../hooks/useAxios";
+import useAxios from "../../../hooks/ajax/useAxios";
 import React, {useEffect, useReducer, useState} from "react";
 import usersReducer from "../../../state/redux/usersReducer";
 import './AdminUsers.css'
 import {INIT} from "../../../state/actions/actions";
 import Modal, {useModal} from "../../../components/General/Modal/Modal";
 import EditProfileForm from "../../user/UserProfile/EditUser/EditProfileForm";
-import useForm from "../../../hooks/useForm";
-import useFlash from "../../../hooks/useFlash";
+import useForm from "../../../hooks/form/useForm";
+import useFlash from "../../../hooks/form/useFlash";
 import {useGlobalContext} from "../../../state/contexts/GlobalContext";
 
 /**

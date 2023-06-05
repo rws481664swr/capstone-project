@@ -1,10 +1,10 @@
-import useForm from "../../hooks/useForm";
+import useForm from "../../hooks/form/useForm";
 import './Register.css'
 import axios from 'axios'
 import {BASE_URL} from '../../config.js'
 import {useGlobalContext} from "../../state/contexts/GlobalContext";
 import {useNavigate} from "react-router-dom";
-import Button from "../../components/General/Button/Button";
+import Button from "../../components/General/Button/GenericButton/Button";
 import LabeledInput from "../../components/General/LabeledInput/LabeledInput";
 
 const Register = () => {

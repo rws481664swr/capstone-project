@@ -1,14 +1,18 @@
-import {useCallback, useState} from "react";
+import {useCallback, useMemo, useState} from "react";
 
 const useFlash = (_css='') => {
     const [css, setCss] = useState(_css)
-    const [msg, flash] = useState('')
+    const [msg, setState] = useState('')
+    const flash = useCallback((message,css='') => {
+        css && setCss(css)
+        setState(message)
+    }, [setState, setCss])
     const toRender=msg ? <span className={css}>{msg}</span> : ''
-    const danger =  useCallback(() => setCss('text-danger'),
-        [setCss])
-    const success = useCallback(   () => setCss('text-success'),
-        [setCss])
-    return [toRender, flash, setCss, {danger, success}]
-}
+    const styledFlashes= useMemo(()=>({
+        danger: (msg) => flash(msg,'text-danger'),
+        success: (msg) => flash(msg,'text-success')
+    } ),[flash])
 
+    return [toRender, flash, setCss, styledFlashes]
+}
 export default useFlash

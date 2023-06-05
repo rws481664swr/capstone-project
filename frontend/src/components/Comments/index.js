@@ -1,11 +1,17 @@
 import AddComment from "./AddComment";
 import Comment from './Comment'
-import React, {useCallback, useEffect, useReducer} from "react";
+import React, {useEffect, useReducer} from "react";
 import {REMOVE} from "../../state/actions/actions";
-import useAxios from "../../hooks/useAxios";
+import useAxios from "../../hooks/ajax/useAxios";
 import commentsReducer from "../../state/redux/commentsReducer";
-import useToggle from "../../hooks/useToggle";
+import useToggle from "../../hooks/state/useToggle";
 import './Comments.css'
+
+function useComments(post, dispatch) {
+
+
+}
+
 const useCommentsReducer = (post) => {
 
     const [comments, dispatch] = useReducer(commentsReducer, [])
@@ -14,21 +20,25 @@ const useCommentsReducer = (post) => {
     useEffect(() => {
         (async () => {
             if (!post) return
-            const payload = await axios.get(`comments`, post._id)
+            console.log('POSTID', post._id)
+            const payload = await axios.get(`comments/${post._id}`)
             dispatch({type: "SET_STATE", payload})
         })()
     }, [post, dispatch])
-    const add =useCallback (async (content) => {
+
+    const add = async (content) => {
+
         const payload = await axios.post('comments', {
             post: post._id,
             content
-        },[dispatch,axios])
+        }, [dispatch, axios])
         dispatch({type: "ADD_COMMENT", payload})
-    },[dispatch,axios])
-    const remove = useCallback( async (id) => { //TODO
-        await axios.delete('comments', id)
-        dispatch({type: REMOVE, id})
-    },[dispatch,axios])
+    }
+    const remove = async (id) => {
+        await axios.delete(`comments/${id}`)
+        dispatch({type: "REMOVE_COMMENT", id})
+    }
+
     return [comments, add, remove]
 }
 const Comments = ({post}) => {
@@ -38,23 +48,23 @@ const Comments = ({post}) => {
     return <>
         <div>
          <span className={'PostDisplay-ShowComments'}
-             onClick={toggleComments}>
+               onClick={toggleComments}>
                         {commentsVisible ? 'Show' : 'Hide'}
              &nbsp;Comments
                     </span>
         </div>
-        {!commentsVisible&&
+        {!commentsVisible &&
             <div className={'Comments-CredentialsContainer'}>
-            {comments.length > 0
-                ?
-                comments.map(c =>
-                    <Comment key={c._id}
-                             comment={c}
-                             remove={() => remove(c._id)}/>)
+                {comments.length > 0
+                    ?
+                    comments.map(c =>
+                        <Comment key={c._id}
+                                 comment={c}
+                                 remove={() => remove(c._id)}/>)
 
-                : 'No Comments'}
+                    : 'No Comments'}
                 <AddComment add={add}/>
-        </div>}
+            </div>}
     </>
 }
 export default Comments

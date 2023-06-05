@@ -1,6 +1,6 @@
-import useAxios from "../../../../hooks/useAxios";
-import useForm from "../../../../hooks/useForm";
-import useFlash from "../../../../hooks/useFlash";
+import useAxios from "../../../../hooks/ajax/useAxios";
+import useForm from "../../../../hooks/form/useForm";
+import useFlash from "../../../../hooks/form/useFlash";
 import {useGlobalContext} from "../../../../state/contexts/GlobalContext";
 import {useNavigate} from "react-router-dom";
 import './EditProfile.css'

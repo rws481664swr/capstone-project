@@ -1,6 +1,7 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faX} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
+import {DeleteButton} from "../../../components/General/Button/IconButtons/IconButtons";
 
 const AdminCourseListItem = ({deleteCourse,onClick,course: {_id, courseName, courseNumber}}) => {
 
@@ -16,10 +17,7 @@ const AdminCourseListItem = ({deleteCourse,onClick,course: {_id, courseName, cou
                     <div>{courseName} - {courseNumber}</div>
                     <div>id: {_id}</div>
                 </div>
-                     <span className={'AdminCourse_DeleteButton'}
-                           onClick={deleteCourse}>
-                         <FontAwesomeIcon icon={faX}/>
-                     </span>
+                     <DeleteButton onClick={deleteCourse}/>
              </div>
 
         </div>

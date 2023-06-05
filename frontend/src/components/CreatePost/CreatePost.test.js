@@ -8,7 +8,7 @@ import {MOCK_TOKEN} from "../../../mock-backend";
 import axios from "axios";
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect'
-import '../../hooks/useAxios'
+import '../../hooks/ajax/useAxios'
 jest.mock('axios')
 const {
     coursesList: [{_id: TEST_COURSE_ID}],
@@ -49,8 +49,7 @@ it('should fill out the form', async () => {
       {data: {token: MOCK_TOKEN}}
   ))
     axios.post.mockImplementation ((url,body)=> {
-        // console.log(url,body)
-        console.log("MOCK POST", url, body)
+
        expect(body).toEqual({
            user: '646e33a759eab5cd39bbb8a7',
            username: 'admin',
