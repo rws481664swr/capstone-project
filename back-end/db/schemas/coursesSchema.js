@@ -14,11 +14,16 @@ const courseSchema = new Schema({
 courseSchema.methods.hasMember = function (test) {
     test = test.toString()
     try {
-        if ([
-            ...this.students.map(toString),
-            ...this.teachers.map(toString),
-        ].includes(test))
-            return true
+        if (typeof this.teachers[0] === 'object')
+            if ([
+                ...this.teachers.map(t => t._id.toString()),
+                ...this.students.map(t => t._id.toString())
+            ].includes(test))// if teachers are populated
+                return true
+            else return [
+                ...this.students.map(toString),
+                ...this.teachers.map(toString),
+            ].includes(test) // if teachers are not populated
     } catch (e) {
         console.error('error in hasMember()', e.message)
     }
@@ -31,10 +36,10 @@ courseSchema.methods.getStudents = function () {
     return this.students.map(toString)
 }
 courseSchema.methods.hasOneTeacher = function () {
-    return this.teachers.length===1
+    return this.teachers.length === 1
 }
 
-courseSchema.methods.getID = function(){
+courseSchema.methods.getID = function () {
     return this._id.toString()
 }
 export default courseSchema

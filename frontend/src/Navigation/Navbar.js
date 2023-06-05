@@ -2,7 +2,7 @@ import './Navbar.css'
 import './SidePanel.css'
 import './Dropdown.css'
 import {useState} from "react";
-import {useGlobalContext} from "../../state/contexts/GlobalContext";
+import {useGlobalContext} from "../state/contexts/GlobalContext";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Links} from "./Links";

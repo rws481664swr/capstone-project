@@ -64,8 +64,9 @@ export function ensureAdmin(req, res, next) {
  */
 export function ensureTeacher(req, res, next) {
     try {
+
         const validUser = isTeacher(res) || isAdmin(res)
-        if (!isLoggedIn(res) || !validUser) throw new UnauthorizedError('Must be a teacher');
+        if (!validUser) throw new UnauthorizedError('Must be a teacher');
         return next();
     } catch (err) {
         return next(err);

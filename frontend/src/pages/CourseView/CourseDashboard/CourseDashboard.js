@@ -3,7 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {formatDate} from "../../../util/date-helpers";
 import {Link} from "react-router-dom";
-import FAB from "../../../components/General/FAB/FAB";
+import FAB from "../../../components/General/Button/FAB/FAB";
 
 
 const CourseDashboard = ({modalIsVisible: visible, showModal: show, course}) => {
@@ -35,7 +35,7 @@ const CourseDashboard = ({modalIsVisible: visible, showModal: show, course}) => 
 
                     {teachers.map(({username}) =>
                         <span key={username} className={'Dashboard_TeacherLink'}> <Link
-                            to={`/users/${username}`}
+                            to={`/user/${username}`}
                             key={username}>
                              {username}
                      </Link></span>)}
