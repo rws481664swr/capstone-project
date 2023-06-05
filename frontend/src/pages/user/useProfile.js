@@ -1,4 +1,3 @@
-import useAxios from "../../hooks/useAxios";
 import {useEffect, useState} from "react";
 
 const useProfile = (username,get) => {

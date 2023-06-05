@@ -1,0 +1,27 @@
+ul.scrollable{
+    overflow-y: scroll;
+}
+
+ul.scrollable {
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
+
+
+
+ul.scrollable::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+ul.scrollable::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+@media only screen and (max-width: 600px) {
+     ul.scrollable::-webkit-scrollbar {
+         width: 0;
+     }
+    ul.scrollable::-webkit-scrollbar {
+        width: 0.5rem;
+    }
+}
