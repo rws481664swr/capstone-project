@@ -20,12 +20,14 @@
     "@faker-js/faker": "^7.6.0",
     "c8": "^7.13.0",
     "chai": "^4.3.7",
-    "mocha": "^10.2.0"
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.22"
   },
   "scripts": {
     "start": "node app.js",
     "test": "export NODE_ENV='test';mocha  --recursive   ./test/tests/",
-    "coverage": " export NODE_ENV='test' ;c8 mocha ./test/tests/ --recursive  "
+    "coverage": " export NODE_ENV='test' ;c8 mocha ./test/tests/ --recursive  ",
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",

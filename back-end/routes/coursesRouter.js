@@ -1,7 +1,7 @@
 import express from "express";
 import {
     createCourse,
-    deleteCourse,
+    deleteCourse, deleteCourseCascade,
     enrollCourse,
     getCourse, getCourses,
     teachCourse,
@@ -61,13 +61,23 @@ coursesRouter.post('/', ensureLoggedIn, ensureTeacher, async ({body = {}}, res, 
         next(e)
     }
 })
+
 coursesRouter.delete('/:_id', ensureLoggedIn, ensureTeacher, async ({params: {_id}}, res, next) => {
     try {
+        let deleted=false
+        //short circuit to avoid extra db call
+        if ( res.locals.user.role === ADMIN) {
+            await deleteCourseCascade(_id)
+            return res.json({message: 'deleted'})
+        }
+
         const course = await getCourse(_id)
-        if (!course.hasMember(res.locals.user._id))
-            throw new ForbiddenError('Cannot delete course')
-        await deleteCourse(_id)
-        res.json({message: 'deleted'})
+        if (course.hasMember(res.locals.user._id)  ) {
+            await deleteCourseCascade(_id)
+            return res.json({message: 'deleted'})
+        }
+
+        throw new ForbiddenError('Cannot delete course')
     } catch (e) {
         next(e)
     }

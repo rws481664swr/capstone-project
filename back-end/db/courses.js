@@ -30,6 +30,11 @@ export const getCourses = async (sort) => {
 export const deleteCourse = async (_id) => {
     return await Courses.findOneAndDelete({_id})
 }
+export const deleteCourseCascade = async (_id) => {
+    const course = await Courses.findOne({_id}).exec()
+    await Users.updateMany({courses: _id}, {$pull: {courses: _id}}).exec()
+    await Courses.deleteOne({_id}).exec()
+}
 
 
 export const teachCourse = async (username, course_id) => {

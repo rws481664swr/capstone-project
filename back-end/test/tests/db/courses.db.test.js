@@ -2,7 +2,7 @@ import common, {c1, c2, u1, u2} from '../../common/seed-test-db.js'
 import {should as _should} from "chai";
 import {
     createCourse,
-    deleteCourse,
+    deleteCourse, deleteCourseCascade,
     enrollCourse,
     getCourse,
     getCourses,
@@ -118,6 +118,25 @@ describe('test courses queries', () => {
         const c1Prime = await Courses.find({_id: c1._id}).exec()
         c1Prime.should.eql([])
 
+
+    })
+    it('should delete a course and all references to it', async () => {
+        const getID = ({_id}) => _id
+        await deleteCourseCascade(c1._id)
+
+        // course should be deleted
+        const c1Prime = await Courses.findOne({_id: c1._id}).exec()
+        should.not.exist(c1Prime) // c1 should not exist
+
+        // students should not have course
+        const user1 = await getUser(u1.username, true)
+        const userCourses = jsonify(user1).courses.map(getID)
+        userCourses.should.not.include(jsonify(c1)._id)
+
+        // teachers should not have course
+        const user2 = await getUser(u2.username, true)
+        const userCourses2 = jsonify(user2).courses.map(getID)
+        userCourses2.should.not.include(jsonify(c1)._id)
 
     })
     it('should add a teacher to Course', async () => {
