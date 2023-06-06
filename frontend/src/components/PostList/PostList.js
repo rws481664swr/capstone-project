@@ -14,15 +14,16 @@ const PostList = ({showCollapse,className = '', Post, url,showPostContent=false}
     const [collapsed, toggleCollapsed] = useToggle(false)
 
     const posts = usePostList(url)
+    console.log(posts)
     const padding = {padding: '0'}
     return <>
-        <div style={{overflowY: 'scroll'}} className={`${className}`}>
+        <div style={{overflowY: 'scroll'}} className={`PostList ${className}`}>
             {posts && <PostDisplay post={postDisplay} setPost={setPost}/>}
-            <div className={`collapsible-list ${collapsed ? 'collapsed' : ''}`}>
+            <div className={` collapsible-list ${collapsed ? 'collapsed' : ''}`}>
                 {showCollapse && <button className={'collapse-button'}
                          onClick={toggleCollapsed}>{collapsed ? 'Show Posts' : 'Hide Posts'}</button>}
 
-                <ul style={padding} className={'scrollable'} id={'PostList_ul'} data-testid={'PostList'}>
+                <ul style={padding} className={' scrollable'} id={'PostList_ul'} data-testid={'PostList'}>
                     {posts.map(p =>
                         <Post
                             onClick={() => setPost(p)}
