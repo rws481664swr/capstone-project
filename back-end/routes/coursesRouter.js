@@ -56,6 +56,7 @@ coursesRouter.get('/:_id', async ({params: {_id}, query: {populate}}, res, next)
 coursesRouter.post('/', ensureLoggedIn, ensureTeacher, async ({body = {}}, res, next) => {
     try {
         const data = await createCourse(body)
+        if(res.locals.user.role===TEACHER) await teachCourse(res.locals.user.username, data._id)
         res.status(201).json(data)
     } catch (e) {
         next(e)

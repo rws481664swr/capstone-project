@@ -10,7 +10,6 @@ import EditProfile from "./pages/user/UserProfile/EditUser/EditingUser";
 import DisplayProfile from "./pages/user/UserProfile/DisplayProfile";
 import BasicProfile from "./pages/user/BasicProfile";
 import Join from "./pages/join/Join";
-import JoinCourse from "./pages/join/JoinCourse";
 
 const NavRoutes = ({isAdmin}) =>
     <Routes>

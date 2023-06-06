@@ -9,7 +9,7 @@
 }
 
 .DeleteButton{
-
+    background-color:transparent;
 }
 .DeleteButton:hover{
     color: red;
