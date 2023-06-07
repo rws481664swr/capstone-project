@@ -26,13 +26,16 @@ const app = express();
 // middleware
 app.use(cors());
 app.use(express.json());
+app.get('/',(req,res,next)=>
+    res.json({message:'online'}))
 app.use(authenticateJWT);
 app.use(staleOrInvalidData)
+app.use(express.static('static'));
 
 //only use if not in test environment
 !isTest && app.use(morgan("tiny"));
 
-
+app.get('/favicon.ico', (req, res) => res.status(204));
 
 //Routers
 app.use("/auth", authRouter);

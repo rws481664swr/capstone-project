@@ -9,7 +9,8 @@ const{
     NODE_ENV,
   SECRET_KEY:SECRET,
   EDU_PORT,
-  EDU_DB}
+  EDU_DB
+  }
 }= process
 
 export const TEST_PORT = 3002;

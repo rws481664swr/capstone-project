@@ -4,10 +4,10 @@ import {Users} from "./schemas/models.js";
 
 export * from './schemas/models.js'
 
-const {MONGO_PASSWORD,MONGO_USER} = process.env
+const {MONGO_PASSWORD,MONGO_USER,EDU_DB_DOMAIN} = process.env
 export const connect = async () => {
     try{let conn
-        conn = await mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@edu-db.xjvpbbc.mongodb.net/?retryWrites=true&w=majority`)
+        conn = await mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${EDU_DB_DOMAIN}/?retryWrites=true&w=majority`)
         return conn
 }catch (e) {
         try{
