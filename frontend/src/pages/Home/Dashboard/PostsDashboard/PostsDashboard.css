@@ -1,0 +1,24 @@
+
+#Dashboard_MyPosts ul {
+    width: auto;
+    height: 60vh;
+}
+
+#PostCard {
+    max-width: 700px;
+}
+
+@media only screen and (max-width: 700px) {
+    #PostCard {
+        margin-left: 8px;
+
+
+        margin-right: 8px;
+
+
+    }
+    #PostCard ul{
+        max-width: 80%;
+
+    }
+}

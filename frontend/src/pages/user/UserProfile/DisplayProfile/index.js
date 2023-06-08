@@ -16,8 +16,8 @@ import '../../../../components/MyPosts/MyPosts.css'
 const DisplayProfile = () => {
     const {get} = useAxios()
     const {username} = useGlobalContext()
-    const user = useProfile(username, get)
     const {courses} = user || {}
+    const user = useProfile(username)
     const [editProfileModalVisible, editProfileModal] = useModal()
     // const [post, setDisplayPost] = useState(null)
     const store =

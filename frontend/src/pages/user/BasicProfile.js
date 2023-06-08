@@ -8,8 +8,8 @@ import {useGlobalContext} from "../../state/contexts/GlobalContext";
 const BasicProfile = () => {
     const {get} = useAxios()
     const {username} = useParams()
-    const user = useProfile(username,get)
     const {username:viewer}=useGlobalContext()
+    const user = useProfile(username)
     if (!user) return null
 
     return <>

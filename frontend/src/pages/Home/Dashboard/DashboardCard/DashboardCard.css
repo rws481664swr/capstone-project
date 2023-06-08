@@ -1,0 +1,22 @@
+
+
+/*a card container for components*/
+ .Dashboard_Card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    max-height: 80vh;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: .1rem;
+    background-color: #fff;
+    box-shadow: 0 0 1rem rgba(0,0,0,0.4);
+}
+
+
+@media only screen and (max-width: 700px) {
+   .Dashboard_Card{
+      width:100%;
+   }
+}

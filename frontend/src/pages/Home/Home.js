@@ -1,42 +1,14 @@
-import CourseList from "../CourseList";
 import './Home.css'
-import {useGlobalContext} from "../../state/contexts/GlobalContext";
-import {Link} from "react-router-dom";
+import Dashboard from "./Dashboard/Dashboard";
+import Admin from "../admin/Admin";
+import {Navigate} from "react-router-dom";
+import Login from "../authentication/Login";
 
-const Home = () => {
-
-const {loggedIn}=useGlobalContext()
-
-    return (
-        <div id={"HomePage"} className={'sr-container' }>
-            <h1>Home</h1>
-            <div className={'Home_Welcome'}>
-                <p>Welcome to the home page</p>
-                <p>
-                    {!loggedIn &&
-                        <p>
-                        <Link to={'/login'}>
-                            Click Here to log in
-                        </Link>
-                        </p>
-                    }
-                    {!loggedIn &&
-                        <Link to={'/register'}>
-                            Click Here to sign up
-                        </Link>
-                    }
-
-            </p>
-            </div>
-
-            {loggedIn && <div id={'Home_Content'} className={'Home_content'}>
-                <div id="Home_CourseList">
-                    <CourseList displayFAB={false} scroll={true}/>
-                </div>
-            </div>}
-        </div>
-    )
+const Home = ({loggedIn,isAdmin}) => {
+    if(!loggedIn)return <Login to={'/login'}/>
+    // test special case of user first
+    if(isAdmin)return <Admin/>
+    // must be regular user at this point
+    return <Dashboard/>
 }
-
-
 export default Home

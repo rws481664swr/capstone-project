@@ -7,6 +7,7 @@
 
 }
 
+
 #Home_CourseList {
     width: 70%;
     margin-left: 10px;
@@ -33,6 +34,26 @@
     margin-left: 4rem;
     margin-top: 2rem;
 }
+#PostCard{
+    /*overflow-y:scroll;*/
+}
+#PostCard ul{
+    overflow-y:scroll;
+}
+.post-card {
+    height: 400px; /* Set the desired height for the card */
+    overflow: auto; /* Enable scrolling when the content exceeds the height */
+}
+
+
+/*#Dashboard .PostList {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    overflow-y: scroll;*/
+
+/*}*/
+
 
 
 @media screen and (max-height: 770px) {
@@ -65,3 +86,12 @@
         padding-bottom: 7vh;
     }
 }
+
+
+/*@media screen and (max-height: 685px) {*/
+
+/*    #Dashboard .PostList ul{*/
+/*        height:320px;*/
+/*    }*/
+
+/*}*/
