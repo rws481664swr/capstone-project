@@ -1,17 +1,6 @@
-import {faker} from "@faker-js/faker";
 import {Schema} from "mongoose";
 import {ADMIN, STUDENT, TEACHER} from "../../util/roles.js";
 import {Posts} from "./models.js";
-
-export const newUser = (username, role = "STUDENT") =>
-    ({
-        username,
-        password: 'password',
-        first_name: faker.name.firstName(),
-        last_name: faker.name.lastName(),
-        email: faker.internet.email(),
-        role
-    })
 
 const userSchema = new Schema({
         username: {type: String, required: true, unique: true, index: true},

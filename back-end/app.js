@@ -1,22 +1,13 @@
 import express from "express";
-import {
-  authRouter,
-  commentsRouter,
-  coursesRouter,
-  postsRouter,
-  usersRouter,
-} from "./routes/routers.js";
-import {
-  authenticateJWT,
-  errorHandler,
-  notFound,
-} from "./middleware/middleware.js";
-import { connect } from "./db/db.js";
-import { testIsMainModule, isTest, PORT, printReport } from "./config.js";
+import {authRouter, commentsRouter, coursesRouter, postsRouter, usersRouter,} from "./routes/routers.js";
+import {authenticateJWT, errorHandler, notFound,} from "./middleware/middleware.js";
+
+import {connect} from "./db/db.js";
+import {isTest, PORT, printReport, testIsMainModule} from "./config.js";
 import cors from "cors";
 import morgan from "morgan";
-import {getUser} from "./db/users.js";
 import staleOrInvalidData from "./middleware/staleOrInvalidData.js";
+
 const isMainModule = testIsMainModule(import.meta.url);
 
 export let conn;
@@ -26,8 +17,6 @@ const app = express();
 // middleware
 app.use(cors());
 app.use(express.json());
-app.get('/',(req,res,next)=>
-    res.json({message:'online'}))
 app.use(authenticateJWT);
 app.use(staleOrInvalidData)
 app.use(express.static('static'));
@@ -55,15 +44,15 @@ app.use(errorHandler);
  * @returns the server started by express.
  */
 export async function startServer(PORT_NUM = PORT) {
-  conn = await connect(true);
-  return app.listen(
-    PORT_NUM,
-    () => !isTest && console.log(`Listening on Port ${PORT_NUM}`)
-  );
+    conn = await connect(true);
+    return app.listen(
+        PORT_NUM,
+        () => !isTest && console.log(`Listening on Port ${PORT_NUM}`)
+    );
 }
 
 /* c8 ignore next 2*/
 if (isMainModule) {
-  await startServer();
-  // can't programatically stop server so no reason to save return value
+    await startServer();
+    // can't programatically stop server so no reason to save return value
 }

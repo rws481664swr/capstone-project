@@ -74,3 +74,12 @@ export const $u2 = () =>
         email: faker.internet.email(),
         role: "TEACHER"
     })
+export const newUser = (username, role = "STUDENT") =>
+    ({
+        username,
+        password: 'password',
+        first_name: faker.name.firstName(),
+        last_name: faker.name.lastName(),
+        email: faker.internet.email(),
+        role
+    })
