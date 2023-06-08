@@ -18,7 +18,9 @@
 .EditButton {
 
 }
-
-.PinButton {
-
+.PinButton:hover{
+    cursor:default  ;
+}
+.pointerOnHover.PinButton {
+    cursor: pointer;
 }

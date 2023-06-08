@@ -21,3 +21,11 @@
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
 }
+@media screen and (max-width: 768px) {
+    .sr-modal .sr-modal_content{
+        margin:15% auto ;
+        padding: 1rem 2rem;
+        border: 1px solid #888 ;
+
+    }
+}
