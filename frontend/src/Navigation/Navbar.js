@@ -6,14 +6,15 @@ import {useGlobalContext} from "../state/contexts/GlobalContext";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Links} from "./Links";
+import useToggle from "../hooks/state/useToggle";
 
 const Navbar = () => {
+    //TODO  STICK TOP NAVBAR
     const {
         token, loggedIn
     } = useGlobalContext()
-    const [open, setOpen] = useState(false)
-    const toggle = () =>
-        setOpen(e => !e)
+    const [open, toggle,setDrawer] = useToggle(false)
+
     return <>
 
         <div className="navbar">
@@ -29,7 +30,7 @@ const Navbar = () => {
         </div>
         <div id="sidePanel" style={{width: open ? '100%' : 0}} className={`sidepanel`}>
             <button className="closebtn" onClick={toggle}>&times;</button>
-            <Links/>
+            <Links close={()=>setDrawer(false)}/>
         </div>
 
     </>

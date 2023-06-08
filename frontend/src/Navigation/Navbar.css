@@ -25,7 +25,7 @@
 }
 
 
-@media (max-width: 400px) {
+@media (max-width: 519px) {
     .navbar .link {
         display: none
     }
@@ -48,7 +48,7 @@
     }
 }
 
-@media (min-width: 401px) {
+@media (min-width: 520px) {
 
     .active {
         background: white;
