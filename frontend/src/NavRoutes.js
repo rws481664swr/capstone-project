@@ -11,10 +11,10 @@ import DisplayProfile from "./pages/user/UserProfile/DisplayProfile";
 import BasicProfile from "./pages/user/BasicProfile";
 import Join from "./pages/join/Join";
 
-const NavRoutes = ({isAdmin}) =>
+const NavRoutes = ({isAdmin ,loggedIn}) =>
     <Routes>
-        <Route path={'/'} element={<>{isAdmin ? <Admin/> : <Home/>}</>}/>
-        <Route path={'/courses'} element={<CourseList/>}/>
+        <Route path={'/'} element={   <Home isAdmin={isAdmin} loggedIn={loggedIn}/>   }/>
+        <Route path={'/courses/all'} element={<CourseList/>}/>
         <Route path={'/courses/new'} element={<CreateCourse/>}/>
         <Route path={'/courses/:id'} element={<Course/>}/>
         <Route path={'/register'} element={<Register/>}/>

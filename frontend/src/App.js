@@ -4,11 +4,11 @@ import {useGlobalContext} from "./state/contexts/GlobalContext";
 import NavRoutes from "./NavRoutes";
 
 const App = () => {
-    const {role} = useGlobalContext()
+    const {role,loggedIn} = useGlobalContext()
     return (
         <>
             <Navbar/>
-           <NavRoutes isAdmin={role === "ADMIN"}/>
+           <NavRoutes isAdmin={role === "ADMIN"} loggedIn={loggedIn}/>
         </>
     )
 }
