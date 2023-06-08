@@ -23,3 +23,14 @@ padding: 10px;
     }
 
 }
+@media only screen  and (max-width: 706px){
+    .BasicProfile_UserCard{
+        width: 100%;
+    }
+    #BasicUserCard_CopyDiv{
+        display: flex;
+        justify-content:space-between;
+    }
+
+
+}

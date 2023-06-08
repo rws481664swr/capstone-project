@@ -1,13 +1,15 @@
 #UserCard {
-    /*margin-left: 20px;*/
-margin-left:1rem;}
+    margin-left: 1rem;
+    max-width: 500px;
+}
 
 #Profile_EditLine {
-     display: flex;
-     flex-direction: row;
-     justify-content: space-between;
-     align-items: center;
- }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 @media only screen and (max-width: 760px) {
     #UserCard {
         margin-left: 1rem;

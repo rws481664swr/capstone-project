@@ -12,7 +12,7 @@ const UserCard = ({ user,viewer = user, showEdit, className = ''}) =>
             </span>}
         </div>
         <div>Username: {user.username}</div>
-        <div>Email: {user.email}{viewer !== user &&
+        <div id={'BasicUserCard_CopyDiv'}><span>Email: {user.email}</span>{viewer !== user &&
             <span onClick={()=>navigator.clipboard.writeText(user.email)}  className={'BasicProfile_Copy'}><FontAwesomeIcon icon={faCopy}/></span>
         }</div>
     </div>

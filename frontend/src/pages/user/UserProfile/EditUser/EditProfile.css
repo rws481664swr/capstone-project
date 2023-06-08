@@ -1,27 +1,57 @@
 
-.EditProfilePage{
+#EditProfileModal.sr-modal_content {
+    z-index: 3;
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 10px;
+    border: 1px solid #888;
+    height: 75%;
+    width: 50%; /* Could be more or less, depending on screen size */
+    border-radius: 4px;
+}
+#EditProfileModal form {
+    width: 70%;
+}
+
+@media screen and (max-width: 800px) {
+    #EditProfileModal.sr-modal_content {
+        width: 80%;
+    }
+
+    #EditProfileModal form {
+        width: 80%;
+    }
+
+
+}
+
+.EditProfilePage {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: auto ;
+    width: auto;
     margin-top: 2rem;
 }
 
 
-.Button.EditProfileButton{
+.Button.EditProfileButton {
     padding: .2rem .7rem;
     font-size: 1.2rem;
 }
-.Button.Edit-Cancel.EditProfileButton{
-margin-right:1rem;
+
+.Button.Edit-Cancel.EditProfileButton {
+    margin-right: 1rem;
 }
-.Button.Edit-Save.EditProfileButton{
-margin-right: 1rem;
+
+.Button.Edit-Save.EditProfileButton {
+    margin-right: 1rem;
 }
-.Button.Edit-Cancel.EditProfileButton:hover{
-background: #ff0a0a;
+
+.Button.Edit-Cancel.EditProfileButton:hover {
+    background: #ff0a0a;
 }
-.Button.Edit-Save.EditProfileButton:hover{
-    background:green;
+
+.Button.Edit-Save.EditProfileButton:hover {
+    background: green;
 }
