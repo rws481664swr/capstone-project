@@ -9,10 +9,10 @@ import {useCallback} from "react";
 
 
 const Edit = ({  post, setEditMode, setPost,editMode}) => {
+    console.log(post)
     const [form, onChange, resetForm] = useForm({
         title: post.title, content: post.content
     })
-    const store = useSelector(e=>e)
 
     const dispatch = useDispatch()
     const {put} = useAxios()
@@ -26,8 +26,8 @@ const Edit = ({  post, setEditMode, setPost,editMode}) => {
             setPost({...post, ...form})
             setEditMode(false)
             resetForm()
-        } catch (e) {
-            console.error(e)
+        } catch (err) {
+            console.error(err)
         }
     }
 
