@@ -6,36 +6,38 @@ import {useGlobalContext} from "../../state/contexts/GlobalContext";
 import {useNavigate} from "react-router-dom";
 import useFlash from "../../hooks/form/useFlash";
 import Button from "../../components/General/Button/GenericButton/Button";
-import {debug} from "../../debug";
-import {useEffect} from "react";
 
 /**
  * Login component for user authentication.
  */
-const Login=()=>{
-    const [toRender, flash, , {danger}]= useFlash()
-        const navigate = useNavigate()
-    const{setToken}=useGlobalContext()
+const Login = () => {
+    const [toRender, flash, , {danger}] = useFlash()
+    const navigate = useNavigate()
+    const {setToken} = useGlobalContext()
     const [form, onChange] = useForm({
         username: "",
         password: ''
     })
 
-    const submit = async (e)=>{
+    const submit = async (e) => {
         e.preventDefault()
-        try{
-            const {data: {token}} = await axios.post(`${BASE_URL}/auth/login`, form)
+        try {
+
+            const promise = axios.post(`${BASE_URL}/auth/login`, form)
+            const {data: {token}} = await promise
             setToken(token)
             navigate('/')
-        }catch (e) {
+        } catch (e) {
             console.error(e)
-            danger(e.message)
-            danger(`Something went wrong logging in: ${
+            if (e.message) danger(e.message)
+            else if (e.response && e.response.data) danger(`Something went wrong logging in: ${
                 e.response ? e.response.data.message : e.message
             }`)
+
+
         }
     }
-    return <form onSubmit={()=>alert('onsubmit')} className={'login Login_form'}>
+    return <form onSubmit={() => alert('onsubmit')} className={'login Login_form'}>
         <div>{toRender}</div>
         <h4>Log In</h4>
         <div className={'login'}>

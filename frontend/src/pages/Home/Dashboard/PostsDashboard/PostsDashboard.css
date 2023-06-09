@@ -6,19 +6,19 @@
 
 #PostCard {
     max-width: 700px;
+    flex-grow: 2;
+}
+
+#PostCard .PostList {
+    width: 80%;
 }
 
 @media only screen and (max-width: 700px) {
     #PostCard {
-        margin-left: 8px;
-
-
-        margin-right: 8px;
-
-
     }
-    #PostCard ul{
-        max-width: 80%;
+
+    #PostCard ul {
+        max-width: 100%;
 
     }
 }

@@ -41,7 +41,11 @@ div.PostDisplay {
     display: flex;
     justify-content: space-between;
 }
-
+@media only screen and (max-width: 550px) {
+    .PostDisplayHeading {
+        display: block;
+    }
+}
 
 .PostDisplay-Title {
     font-size: 1.6rem;

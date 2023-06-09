@@ -21,7 +21,7 @@ const NavRoutes = ({isAdmin ,loggedIn}) =>
         <Route path={'/login'} element={<Login/>}/>
         <Route path="/profile/edit" element={<EditProfile/>}/>
         <Route path="/profile" element={<DisplayProfile/>}/>
-        <Route path={'/user/:username'} element={<BasicProfile/>}/>
+        <Route path={'/users/:username'} element={<BasicProfile/>}/>
         <Route path={'/admin/*'} element={<Admin/>}/>
         <Route path={'/join'} element={<Join/>}/>
         <Route path={'/join/:id'} element={  <Join/>}/>

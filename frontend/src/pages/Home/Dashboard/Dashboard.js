@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 
 const Dashboard = () => {
     const {username} = useGlobalContext()
-    const {courses} = useProfile(username,{courses:[]})
+    const {courses=[]} = useProfile(username,[],{courses:[]})
 
 
     // const courses = user ? user.courses : []

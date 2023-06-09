@@ -15,8 +15,9 @@ const useJoinCourse = () => {
                     `courses/${_id}/users/${username}`, {})
                 console.log(`Joined course ${_id}`, response)
             } catch (e) {
-                flash('Could Not Join Course:ol '+e.message)
-                return console.error(e.message)
+                console.error(e.response.data.message)
+                flash('Could Not Join Course:  '+e.response.data.message)
+                return console.error(e.response.data.message)
             }
             const url = `/courses/${_id}`
 

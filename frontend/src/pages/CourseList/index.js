@@ -37,15 +37,13 @@ const CourseList = ({scroll = false, displayFAB=true}) => {
     return <>
         <div id={'CourseList'} className={`courseListContainer ${scroll && 'course-scroll'}`}>
             {toRender&& <div>{toRender}</div>}
-            <div className="row">
-                <div className={'col'}></div>
-                <ul  className={'col-6 scrollable'}>
+            <div className="CourseList_Container ">
+                <ul  className={'  scrollable'}>
                     {courses && courses.map(course =>
                         <CourseListItem drop={     drop(course._id)} onClick={navigate
 
                         } key={course._id} course={course}/>)}
                 </ul>
-                <div className={'col'}></div>
             </div>
         </div>
         {displayFAB&&<FAB id={'join-fab'} className={'CourseList_add'} onClick={() => navigate('/join')}>
