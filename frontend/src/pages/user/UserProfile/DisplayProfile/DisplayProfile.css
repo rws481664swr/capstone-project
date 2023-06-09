@@ -7,14 +7,27 @@
     margin: 0 2rem 1rem 0;
     padding: 0.5rem;
     background-color: #fff;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
     font-size: 1rem;
     font-weight: 300;
+    width:80%;
+    height: 100%;
 }
 
 
+.DisplayProfile{
+    display: flex;
+    justify-content: center;
+    flex-grow: 2;
+}
 
+.DisplayProfile #UserCard{
+    padding:2rem;
+}
 
+.UserCard_LineItem{
+    padding-bottom: .3rem;
+}
 
 
 

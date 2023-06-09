@@ -8,23 +8,19 @@ import '../../../../components/MyPosts/MyPosts.css'
 
 const DisplayProfile = () => {
     const {username} = useGlobalContext()
-    const user = useProfile(username)
+
     const [editProfileModalVisible, editProfileModal] = useModal()
-    // const [post, setDisplayPost] = useState(null)
+
+    const user = useProfile(username,[editProfileModalVisible])
 
     if (!user) return <div>Loading...</div>
     return (
         <div id="UserProfile">
-            <h1>Profile: {user.username}</h1>
-
             <EditProfileModal hide={editProfileModal.hide} showing={editProfileModalVisible}/>
-            <div className="">
-                <h3 id={"Profile_MyProfile"}>My Profile</h3>
+            <div className="DisplayProfile">
 
                 <UserCard user={user} showEdit={editProfileModal.show}/>
             </div>
-
-            {/*</Provider>*/}
         </div>
     )
 }
@@ -35,7 +31,7 @@ const EditProfileModal = ({showing, hide}) =>
         className={''}
         visible={showing}
         hide={hide}>
-        <EditProfile onCancel={hide}/>
+        <EditProfile onCancel={hide} />
     </Modal>
 
 
