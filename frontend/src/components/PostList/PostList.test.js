@@ -102,5 +102,7 @@ it('should render PostDisplay after click', async () => {
     expect(asFragment()).toMatchSnapshot()
     fireEvent.click(getByTestId('PinButton'))
     expect(asFragment()).toMatchSnapshot()
-    expect(getByText(post.title)).toBeInTheDocument()
+
+
+    expect(getByText(post.content)).toBeInTheDocument()
 })

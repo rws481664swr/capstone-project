@@ -17,7 +17,7 @@ const [error,errorFlash] = useFlash('text-danger')
     const [form, onChange] = useForm({
         courseName: '',
         courseNumber: 0,
-        startDate: Date.now(),
+        startDate: null,
         endDate: null,
         subject: '',
 

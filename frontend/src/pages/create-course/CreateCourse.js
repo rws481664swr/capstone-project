@@ -4,18 +4,21 @@ import Button from "../../components/General/Button/GenericButton/Button";
 import useCreateCourse from "./useCreateCourse";
 import {useGlobalContext} from "../../state/contexts/GlobalContext";
 
+
 const CreateCourse = () => {
-    const{role} =useGlobalContext()
-    const[{form, onChange}, {toRender, setCss,error}, submit] = useCreateCourse()
+    const {role} = useGlobalContext()
+    const [{form, onChange}, {toRender, setCss, error}, submit] = useCreateCourse()
     const isAdmin = role === "ADMIN"
-    const isTeacher= role === "TEACHER"
-    if(!(isAdmin||isTeacher)) return (
-        <div id={'unauthorized-courses-new'} className={'unauthorized sr-container'}><h1>Unauthorized</h1>
+    const isTeacher = role === "TEACHER"
+    if (!(isAdmin || isTeacher)) return (
+        <div id={'unauthorized-courses-new'}
+             className={'unauthorized sr-container'}>
+            <h1>Unauthorized</h1>
         </div>
     )
     return (
         <div className={'sr-container'}>
-            <h1>Create Course</h1>
+            <h1>Create A New Course</h1>
             <form onSubmit={submit}>
 
                 {error && <div className={'CourseFormFlash'}>{error}</div>}

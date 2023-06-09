@@ -1,20 +1,23 @@
-.PostList.sr-container {
-    margin: 0;
-    padding: 0;
-    border: none; /*1px solid #ccc;*/
-    border-radius: 5px;
-    box-shadow: 0 0 1px rgba(0, 0, 0, .1);
+/*.PostList.sr-container {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    border: none; !*1px solid #ccc;*!*/
+/*    border-radius: 5px;*/
+/*    box-shadow: 0 0 1px rgba(0, 0, 0, .1);*/
+/*}*/
+
+/*.PostList_Header {*/
+
+/*}*/
+
+/*#PostList_ul {*/
+/*    margin-top: 5rem;*/
+/*    padding: 1rem;*/
+/*}*/
+
+.PostList {
+padding:0;
 }
-
-.PostList_Header {
-
-}
-
-#PostList_ul {
-    margin-top: 5rem;
-    padding: 1rem;
-}
-
 #PostListElement {
     margin: 0;
     padding: 0 !important;

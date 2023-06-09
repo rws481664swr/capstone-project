@@ -3,39 +3,40 @@ import {useEffect, useState} from "react";
 import {SET_STATE} from "../../state/actions/actions";
 import useAxios from "../../hooks/ajax/useAxios";
 import PostDisplay from "../Posts/PostDisplay/PostDisplay";
-import Button from "../General/Button/GenericButton/Button";
 import useToggle from "../../hooks/state/useToggle";
-
+import './PostList.css'
 /*
     * PostList is a component that displays a list of posts
  */
-const PostList = ({showCollapse,className = '', Post, url,showPostContent=false}) => {
+const PostList = ({ Post, url, showPostContent = false}) => {
     const [postDisplay, setPost] = useState(null)
     const [collapsed, toggleCollapsed] = useToggle(false)
-
     const posts = usePostList(url)
-    console.log(posts)
-    const padding = {padding: '0'}
+console.log('rendering PostList')
     return <>
-        <div style={{overflowY: 'scroll'}} className={`PostList ${className}`}>
-            {posts && <PostDisplay post={postDisplay} setPost={setPost}/>}
-            <div className={` collapsible-list ${collapsed ? 'collapsed' : ''}`}>
-                {showCollapse && <button className={'collapse-button'}
-                         onClick={toggleCollapsed}>{collapsed ? 'Show Posts' : 'Hide Posts'}</button>}
+        {posts && <PostDisplay post={postDisplay} setPost={setPost}/>}
 
-                <ul style={padding} className={' scrollable'} id={'PostList_ul'} data-testid={'PostList'}>
-                    {posts.map(p =>
-                        <Post
-                            onClick={() => setPost(p)}
-                            key={p._id}
-                            post={p}
-                            showContent={showPostContent}
-                        />
-                    )}
-                </ul>
-            </div>
-        </div>
+        <ul className={'PostList'} id={''} data-testid={'PostList'}>
+            {posts.map(p =>
+                <Post
+                    onClick={() => setPost(p)}
+                    key={p._id}
+                    post={p}
+                    showContent={showPostContent}
+                />
+            )}
+        </ul>
     </>
+
+        /*<div style={{overflowY: 'scroll'}} className={`PostList ${className}`}>*/
+        /*<div className={` collapsible-list ${collapsed ? 'collapsed' : ''}`}>*/
+        /*    {showCollapse && <button className={'collapse-button'}*/
+        /*             onClick={toggleCollapsed}>{collapsed ? 'Show Posts' : 'Hide Posts'}</button>}*/
+
+
+        /*</div>*/
+        /*</div>*/
+
 }
 const usePostList = (url) => {
     const {get} = useAxios()
