@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import useAxios from "../../hooks/ajax/useAxios";
 
-const useProfile = (username,defaultState=null) => {
+const useProfile = (username,deps=[],defaultState=null) => {
     const {get} = useAxios()
 
     const [user, setUser] = useState(defaultState)
@@ -14,7 +14,7 @@ const useProfile = (username,defaultState=null) => {
                 console.error(e)
             }
         })()
-    }, [get,username])
+    }, [get,username,...deps])
     return user
 }
 
