@@ -5,7 +5,7 @@ import {BadRequestError, UnauthorizedError} from "../util/Errors.js";
 
 
 export const login = async (username, fromUser) => {
-    const result = await Credentials.findOne({username})
+    const result = await Credentials.findOne({username}).exec()
     if (result === null) throw {message: "User not found"}
     const {password: fromDb} = result
     return await compare(fromUser, fromDb)

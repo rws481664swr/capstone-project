@@ -72,7 +72,9 @@ const CreatePost = ({course, hide}) => {
         <Modal visible={true} hide={hide}>
             <div>
                 <form className={'CreatePost '} onSubmit={submit}>
+
                     <div className={'CreatePost'}> {msg}</div>
+                    <div className="CreatePostContainer">
                     <LabeledInput
                         name={'title'}
                         onChange={(e) => {
@@ -90,18 +92,9 @@ const CreatePost = ({course, hide}) => {
                         label={'Post Content'}
                         id={'input-content'}
                         className={'CreatePost'}/>
-                    {/*<label className={'CreatePost '} htmlFor="post-title">Post Title</label>*/}
-                    {/*<input id="post-title" className={'CreatePost '}*/}
-                    {/*       onChange={onChange} value={form.title}*/}
-                    {/*       name={'title'}*/}
-                    {/*       type="text"/>*/}
 
-                    {/*<label className={'CreatePost '} htmlFor="post-content">Post Content</label>*/}
-                    {/*<textarea id={"post-content"} className={'CreatePost '}*/}
-                    {/*          name="content" cols="30" rows="10" value={form.content}*/}
-                    {/*          onChange={onChange}></textarea>*/}
-
-                    <Button className={'CreatePost '} type="submit">Post</Button>
+                    <Button className={'CreatePost CreatePostButton'} type="submit">Post</Button>
+                    </div>
                 </form>
             </div>
         </Modal>

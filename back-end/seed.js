@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import {connect, Credentials} from "./db/db.js";
+import {connect, Credentials, Users} from "./db/db.js";
 import {Comments as Comment, Courses as Course, Posts as Post, Users as User,} from "./db/schemas/models.js";
 import {faker} from "@faker-js/faker";
 import {ADMIN, STUDENT, TEACHER} from "./util/roles.js";
@@ -11,11 +11,14 @@ import {createPost as _createPost,} from "./db/posts.js";
 const connection = await connect();
 
 
-await Promise.all([Credentials.deleteMany({}).exec(),
+await Promise.all([
+    Credentials.deleteMany({}).exec(),
     Comment.deleteMany({}).exec(),
     Course.deleteMany({}).exec(),
     Post.deleteMany({}).exec(),
-    User.deleteMany({}).exec()])
+    User.deleteMany({}).exec()
+])
+
 
 const createComment = async (post, user) => {
     const comment = new Comment({
@@ -162,7 +165,12 @@ const addTeacher = (s, c) => teachCourse(s.username, c._id);
  addTeacher(teacher_1, course_3),
  addTeacher(teacher_2, course_3)
  ])
-
+ const t3=await  createTeacher('t3')
+const t4=await  createTeacher('t4')
+await addTeacher(t3, course_1)
+await addTeacher(t4, course_1)
+await addTeacher(await createTeacher('t5'), course_1)
+await addTeacher(await createTeacher('t6'), course_1)
   ;[
       user,
     student_2,
@@ -194,7 +202,16 @@ let[ post_1 ,
     createPost(course_3._id, student_2)])
 
 
-
+await createPost(course_1._id, student_1)
+await createPost(course_1._id, student_1)
+await createPost(course_3._id, student_1)
+await createPost(course_3._id, student_1)
+await createPost(course_3._id, student_1)
+await createPost(course_1._id, student_1)
+await createPost(course_1._id, student_1)
+await createPost(course_3._id, student_1)
+await createPost(course_3._id, student_1)
+await createPost(course_3._id, student_1)
 
 
 const posts = [post_1, post_2, post_3, post_4, post_5, post_6, post_7];

@@ -160,17 +160,12 @@ describe('courses middleware security', () => {
                 }
             })
 
-            it('should not allow teacher to enroll in course', async () => {
-                try {
+            it('should allow teacher to enroll in course', async () => {
                     let c3 = await createCourse(newCourse())
 
                     await requests.post.teacher(prefix(`${c3._id}/users/${u2.username}`), {})
-                    should.fail('fail')
-                } catch (e) {
-                    e.message.should.not.equal('fail')
-                    e.response.status.should.equal(401)
-
-                }
+                    c3 = await getCourse(c3._id)
+                    c3.teachers.length.should.equal(1)
 
             })
 
@@ -184,25 +179,16 @@ describe('courses middleware security', () => {
 
 
             })
-            it('teacher cannot add teacher to course', async () => {
-                const c3 = await createCourse(newCourse())
-                try {
-
-                    await requests.post.teacher(prefix(`${c3._id}/users/${u2._id}`))
-
-                    should.fail('fail')
-                } catch (e) {
-                    e.message.should.not.equal('fail')
-                    e.response.status.should.equal(401)
-                }
-
+            it('teacher can add teacher to course', async () => {
+                let c3 = await createCourse(newCourse())
+                    await requests.post.teacher(prefix(`${c3._id}/users/${u2.username}`))
+                    c3 = await getCourse(c3._id)
+                    c3.teachers.length.should.equal(1)
             })
             it('student cannot add teacher to course', async () => {
                 const c3 = await createCourse(newCourse())
                 try {
-
                     await requests.post.student(prefix(`${c3._id}/users/${u2.username}`))
-
                     should.fail('fail')
                 } catch (e) {
                     e.message.should.not.equal('fail')

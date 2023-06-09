@@ -2,11 +2,23 @@
     width:70%;
     margin :auto;
 }
-button.Button.CreatePost{
-    width:70%;
+.CreatePostContainer{
+    width:100%;
     margin:auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
+/*button.Button.CreatePost{*/
+/*    width:70%;*/
+/*    margin:auto;*/
+/*}*/
 form.CreatePost{
     /*display: flex;*/
     /*justify-content: center;*/
+}
+
+.CreatePostButton{
+
 }

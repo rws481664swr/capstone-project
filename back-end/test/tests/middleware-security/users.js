@@ -41,9 +41,9 @@ describe('users middleware security', () => {
     })
     it('admin can get users query', async () => {
         let {data, status} = await requests.get.admin(prefix('?username=asc'))
-        status.should.equal(200)
+        status.should.equal(200);
         ({data, status} = await requests.get.admin(prefix('?username=desc')))
-        status.should.equal(200)
+        status.should.equal(200);
     })
 
     it('user can get themself', async () => {

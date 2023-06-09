@@ -87,18 +87,14 @@ coursesRouter.delete('/:_id', ensureLoggedIn, ensureTeacher, async ({params: {_i
 //enroll in course
 coursesRouter.post('/:_id/users/:username', ensureLoggedIn, async ({params: {_id, username}}, res, next) => {
     try {
-        let [coursePromise, userPromise] = [
-            getCourse(_id),
-            getUser(username)
-        ]
-        const {locals: {user: {role}}} = res
-        if (role !== STUDENT && role !== ADMIN)
-            throw new ForbiddenError('only students can enroll in courses')
+        const {locals:{user:{username:correctUsername,role}}} = res
+        if (correctUsername !== username &&  role !== ADMIN)  throw new ForbiddenError('Cannot enroll others')
+const userPromise = getUser(username)
+        const coursePromise = getCourse(_id)
 
         const user = await userPromise
-        if (user.role === TEACHER && role !== ADMIN)
-            throw new ForbiddenError('Only admin can add teachers to courses.')
         const course = await coursePromise
+
         if (course.hasMember(user._id))
             throw new BadRequestError('User is already a member of course')
         switch (user.role) {
