@@ -37,6 +37,7 @@ const EditProfile = ({navigation = true,onCancel}) => {
             setFormState(payload)
             clear()
             navigate(`/profile`)
+            onCancel()
         } catch (e) {
             flash(`Something went wrong updating ${user.username}: ${
                 e.response ? e.response.data.message : e.message

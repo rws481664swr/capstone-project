@@ -1,13 +1,14 @@
 #UserCard {
-    margin-left: 1rem;
     max-width: 500px;
+    margin-top: 50px;
 }
 
-#Profile_EditLine {
+.Profile_EditLine {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    /*padding-left: 1rem;*/
 }
 
 @media only screen and (max-width: 760px) {
@@ -16,4 +17,9 @@
         max-width: 100%;
     }
 
+}
+.UserCard_Separator{
+    padding:0;
+    margin:0;
+    margin-bottom: 2px;
 }
