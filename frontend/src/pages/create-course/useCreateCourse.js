@@ -58,7 +58,7 @@ const [error,errorFlash] = useFlash('text-danger')
             console.error(e.message)
         }
 
-    }, [form, post])
+    }, [form, post, flash, navigate,errorFlash])
     return [{form, onChange}, {toRender, setCss,error}, submit]
 
 }

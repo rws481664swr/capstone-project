@@ -6,14 +6,10 @@ import FAB from "../../components/General/Button/FAB/FAB";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {useEffect, useState} from "react";
-import useFlash from "../../hooks/form/useFlash";
 
 const CourseList = ({scroll = false, displayFAB=true}) => {
 
     const navigate = useNavigate()
-    const [
-        toRender, flash, , {danger,success}
-    ]= useFlash()
     const gottenCourses = useGet('courses', {init: []})
     const [courses, setCourses] = useState(() => gottenCourses)
     useEffect(() => {
@@ -36,7 +32,6 @@ const CourseList = ({scroll = false, displayFAB=true}) => {
     }
     return <>
         <div id={'CourseList'} className={`courseListContainer ${scroll && 'course-scroll'}`}>
-            {toRender&& <div>{toRender}</div>}
             <div className="CourseList_Container ">
                 <ul  className={'  scrollable'}>
                     {courses && courses.map(course =>

@@ -11,7 +11,7 @@ const useJoinCourse = () => {
             try {
                 if (!username) throw new Error('No username')
                 if (!_id) throw new Error('No course id')
-                const response = await post(
+               await post(
                     `courses/${_id}/users/${username}`, {})
             } catch (e) {
                 console.error(e.response.data.message)

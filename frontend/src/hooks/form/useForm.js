@@ -10,7 +10,7 @@ const useForm = (form) => {
 
     const clear = useCallback(
         () => setState(form),
-        [setState])
+        [setState]) // eslint-disable-line react-hooks/exhaustive-deps
     return [state, onChange, clear, setState]
 }
 

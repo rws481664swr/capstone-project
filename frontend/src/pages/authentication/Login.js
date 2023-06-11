@@ -11,7 +11,7 @@ import Button from "../../components/General/Button/GenericButton/Button";
  * Login component for user authentication.
  */
 const Login = () => {
-    const [toRender, flash, , {danger}] = useFlash()
+    const [toRender,            , , {danger}] = useFlash()
     const navigate = useNavigate()
     const {setToken} = useGlobalContext()
     const [form, onChange] = useForm({
@@ -27,11 +27,11 @@ const Login = () => {
             const {data: {token}} = await promise
             setToken(token)
             navigate('/')
-        } catch (e) {
-            console.error(e)
-            if (e.message) danger(e.message)
-            else if (e.response && e.response.data) danger(`Something went wrong logging in: ${
-                e.response ? e.response.data.message : e.message
+        } catch (e20) {
+            console.error(e20)
+            if (e20.message) danger(e20.message)
+            else if (e20.response && e20.response.data) danger(`Something went wrong logging in: ${
+                e20.response ? e20.response.data.message : e20.message
             }`)
 
 

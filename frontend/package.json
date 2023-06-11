@@ -50,6 +50,7 @@
   },
   "devDependencies": {
     "chalk": "4.1.2",
-    "redux-devtools-extension": "^2.13.9"
+    "redux-devtools-extension": "^2.13.9",
+    "@babel/plugin-proposal-private-property-in-object": "^7.16.7"
   }
 }

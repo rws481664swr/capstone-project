@@ -1,11 +1,10 @@
 import useForm from "../../../hooks/form/useForm";
 import LabeledInput, {LabeledTextBox} from "../../General/LabeledInput/LabeledInput";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import useAxios from "../../../hooks/ajax/useAxios";
 import './EditPost.css'
 import Button from "../../General/Button/GenericButton/Button";
 import {UPDATE} from "../../../state/actions/actions";
-import {useCallback} from "react";
 
 
 const Edit = ({  post, setEditMode, setPost,editMode}) => {

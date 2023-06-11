@@ -6,7 +6,7 @@ import Modal, {useModal} from "../../../components/General/Modal/Modal";
 import {COURSES_ACTIONS} from '../../../state/actions/actions'
 import AdminCourseListItem from "./AdminCourseListItem";
 
-const {INIT, ADD, REMOVE, UPDATE} = COURSES_ACTIONS
+const {INIT, REMOVE} = COURSES_ACTIONS
 /**
  * AdminCourses component for administration of courses. It displays a list of all courses.
  */
@@ -26,7 +26,7 @@ const AdminCourses = () => {
                 console.error(e)
             }
         })()
-    }, [])
+    }, [get])
     const deleteCourse = async (_id) => {
         try {
             console.log('tryiing to dispatch')
@@ -42,8 +42,7 @@ const AdminCourses = () => {
     const [
         showing, {
             show,
-            hide,
-            toggle
+            hide
         }
 
     ] = useModal()

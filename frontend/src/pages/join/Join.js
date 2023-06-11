@@ -2,7 +2,7 @@ import './Join.css'
 import LabeledInput from "../../components/General/LabeledInput/LabeledInput";
 import Button from "../../components/General/Button/GenericButton/Button";
 import useFlash from "../../hooks/form/useFlash";
-import {useCallback, useState} from "react";
+import {useState} from "react";
 import useJoinCourse from "./useJoinCourse";
 import {useParams} from "react-router-dom";
 
@@ -18,8 +18,8 @@ const Join = () => {
 
     const [toRender, , , {danger}] = useFlash()
 
-    const submit =  async (e) => {
-        e.preventDefault()
+    const submit =  async (e5) => {
+        e5.preventDefault()
         await joinCourse(id, danger)
 
     }

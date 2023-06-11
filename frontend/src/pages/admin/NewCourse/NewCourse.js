@@ -5,26 +5,25 @@ import LabeledInput from "../../../components/General/LabeledInput/LabeledInput"
 import useAxios from "../../../hooks/ajax/useAxios";
 
 
-
 /**
  * NewCourse component for creating a new course.
  */
 const NewCourse = () => {
     const [form, onChange, clear] = useForm({
         courseName: '',
-        courseNumber:undefined ,
+        courseNumber: undefined,
         courseDescription: '',
         startDate: Date.now(),
         endDate: Date.now(),
         teacherId: '',
         subject: '',
     })
-    const {post}= useAxios()
-    const submit = useCallback(async (e) => {
-        e.preventDefault()
+    const {post} = useAxios()
+    const submit = useCallback(async (e15) => {
+        e15.preventDefault()
         console.log('submitting')
         console.log(form)
-        try{
+        try {
             const course = await post('courses', form)
             console.log(`Created Course ${course.courseName}`,course)
         clear()
@@ -33,7 +32,7 @@ const NewCourse = () => {
 
         }
 
-    }, [form, clear])
+    }, [form, clear, post])
 
     return (
         <div>
@@ -89,7 +88,7 @@ const NewCourse = () => {
                               label={'Subject'}
                               id={'input-subject'}
                 />
-                <button  id={'submit-course'} type={'submit'}>Submit</button>
+                <button id={'submit-course'} type={'submit'}>Submit</button>
             </form>
         </div>
     )

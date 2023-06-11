@@ -8,7 +8,6 @@ import CreatePost from "../../../components/CreatePost";
 import './Course.css'
 import CourseDashboard from "../CourseDashboard/CourseDashboard";
 import {useMemo} from "react";
-import { useSearchParams } from "react-router-dom";
 import PostListItem from "../../../components/PostList/PostListItem";
 
 

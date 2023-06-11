@@ -20,7 +20,7 @@ const useGet = (resource, {id = '', init = null, query = null}, onError = () => 
                 console.error(e)
             }
         })()
-    }, [resource, id, query])
+    }, [resource, id, query, get, onError])
     return state
 }
 export default useGet

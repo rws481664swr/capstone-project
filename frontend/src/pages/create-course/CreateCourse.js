@@ -7,7 +7,7 @@ import {useGlobalContext} from "../../state/contexts/GlobalContext";
 
 const CreateCourse = () => {
     const {role} = useGlobalContext()
-    const [{form, onChange}, {toRender, setCss, error}, submit] = useCreateCourse()
+    const [{form, onChange}, {toRender, error}, submit] = useCreateCourse()
     const isAdmin = role === "ADMIN"
     const isTeacher = role === "TEACHER"
     if (!(isAdmin || isTeacher)) return (

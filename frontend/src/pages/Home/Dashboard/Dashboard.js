@@ -3,7 +3,6 @@ import {useGlobalContext} from "../../../state/contexts/GlobalContext";
 import PostsDashboard from "./PostsDashboard/PostsDashboard";
 import CoursesDashBoard from "./CoursesDashBoard/CoursesDashBoard";
 import useProfile from "../../user/useProfile";
-import {useNavigate} from "react-router-dom";
 
 const Dashboard = () => {
     const {username} = useGlobalContext()

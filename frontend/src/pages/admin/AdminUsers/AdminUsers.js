@@ -16,7 +16,7 @@ const AdminUsers = () => {
     const {get} = useAxios()
     const [users, dispatchUsers] = useReducer(usersReducer, [])
     const [showing,
-        {show, hide, toggle}
+        {show, hide}
     ] = useModal()
     useEffect(() => {
         (async () => {
@@ -28,7 +28,7 @@ const AdminUsers = () => {
                 console.error(e)
             }
         })()
-    }, [])
+    }, [get])
 
     const [user, setUser] = useState(null)
     return (

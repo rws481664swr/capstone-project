@@ -1,7 +1,6 @@
 import './Home.css'
 import Dashboard from "./Dashboard/Dashboard";
 import Admin from "../admin/Admin";
-import {Navigate} from "react-router-dom";
 import Login from "../authentication/Login";
 
 const Home = ({loggedIn,isAdmin}) => {

@@ -14,7 +14,7 @@ const useProfile = (username,deps=[],defaultState=null) => {
                 console.error(e)
             }
         })()
-    }, [get,username,...deps])
+    }, [get,username,...deps]) // eslint-disable-line react-hooks/exhaustive-deps
     return user
 }
 
