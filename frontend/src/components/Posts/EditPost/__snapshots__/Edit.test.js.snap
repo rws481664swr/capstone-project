@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Edit 1`] = `
+<DocumentFragment>
+  <form>
+    <div>
+      <div
+        class="LabeledInput-div LabeledInput"
+      >
+        <label
+          class="LabeledInput-input-label "
+          for="edit-title"
+        >
+          Title
+        </label>
+        <div />
+        <input
+          class="LabeledInput-input-text "
+          id="edit-title"
+          name="title"
+          type="text"
+          value="test"
+        />
+      </div>
+      <div
+        class="LabeledInput-div LabeledTextBox"
+      >
+        <label
+          class="LabeledInput-label "
+          for="edit-content"
+        >
+          Content
+        </label>
+        <textarea
+          class="LabeledInput-textarea "
+          id="edit-content"
+          name="content"
+        >
+          test-content
+        </textarea>
+      </div>
+      <button
+        class="undefined Button"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+  )
+</DocumentFragment>
+`;

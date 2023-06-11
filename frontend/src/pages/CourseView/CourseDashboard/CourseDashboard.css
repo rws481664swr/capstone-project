@@ -45,7 +45,7 @@
 
 .Dashboard_Teachers_Container {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
     margin-bottom: 20px;

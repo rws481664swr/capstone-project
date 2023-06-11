@@ -20,6 +20,12 @@ display: flex;
 }
 
 
+#AdminUserEditor{
+    overflow-y: scroll;
+    margin :5% auto;
+    width: 40%;
+    height: 70%;
+}
 
 
 @media screen and (max-width: 768px) {
@@ -36,6 +42,6 @@ display: flex;
     }
     #AdminUserEditor.sr-modal_content{
         width: 90%;
-        height: 90%;
+        /*height: 90%;*/
     }
 }

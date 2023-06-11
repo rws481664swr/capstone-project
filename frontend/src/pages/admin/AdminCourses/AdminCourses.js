@@ -49,8 +49,6 @@ const AdminCourses = () => {
     ] = useModal()
     return (
         <>
-            <h1>Admin Courses</h1>
-            {course && course._id}
             {course && <Modal hide={() => {
                 hide() || setCourse(null)
             }} visible={showing}>

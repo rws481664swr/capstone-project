@@ -42,7 +42,6 @@ const AdminUsers = () => {
 
                 user={user}
             />
-            <h1>Admin Users</h1>
 
             {users.map((user) => (
                 <div onClick={() => {

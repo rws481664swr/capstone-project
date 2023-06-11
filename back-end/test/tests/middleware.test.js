@@ -6,6 +6,7 @@ import {SECRET_KEY} from "../../config.js";
 import staleOrInvalidData from "../../middleware/staleOrInvalidData.js";
 import {UnauthorizedError} from "../../util/Errors.js";
 import {ADMIN, STUDENT} from "../../util/roles.js";
+import {Users} from "../../db/schemas/models.js";
 const should = Should()
 
 describe('middleware', () => {
@@ -126,25 +127,5 @@ describe('middleware', () => {
         })
 
     })
-    describe('staleOrInvalidData', () => {
-        common()
-        it('should call next with an error if user.username does not match res.locals.user.username', async () => {
-            const req = {headers: {}}
-            const res = {locals:{
-                    user:{
-                        _id:u1._id,
-                        username:'u1',
-                        isAdmin:false,
-                        timestamp:new Date()
-                    }
-                }}
-            res.locals.user._id=u2._id //change the id
-            await staleOrInvalidData(req, res, next)
-            _next.called.should.be.true
-            _next.err.should.be.an.instanceof(UnauthorizedError)
-            _next.err.message.should.equal('Stale or invalid data. Please log out/in and try again')
 
-        })
-
-    })
 })

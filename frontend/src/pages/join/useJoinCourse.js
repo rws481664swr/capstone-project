@@ -7,16 +7,15 @@ const useJoinCourse = () => {
     const navigate = useNavigate()
     const {post} = useAxios()
     const joinCourse =
-        async (_id,flash) => {
+        async (_id, flash) => {
             try {
                 if (!username) throw new Error('No username')
                 if (!_id) throw new Error('No course id')
                 const response = await post(
                     `courses/${_id}/users/${username}`, {})
-                console.log(`Joined course ${_id}`, response)
             } catch (e) {
                 console.error(e.response.data.message)
-                flash('Could Not Join Course:  '+e.response.data.message)
+                flash('Could Not Join Course:  ' + e.response.data.message)
                 return console.error(e.response.data.message)
             }
             const url = `/courses/${_id}`

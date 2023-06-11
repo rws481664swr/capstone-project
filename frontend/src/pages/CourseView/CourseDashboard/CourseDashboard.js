@@ -2,11 +2,12 @@ import './CourseDashboard.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {formatDate} from "../../../util/date-helpers";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import FAB from "../../../components/General/Button/FAB/FAB";
 
 
 const CourseDashboard = ({modalIsVisible: visible, showModal: show, course}) => {
+    const navigate = useNavigate()
     if (!course) return null
     const {teachers} = course
     return (
@@ -34,8 +35,8 @@ const CourseDashboard = ({modalIsVisible: visible, showModal: show, course}) => 
                 <div className={'course-div Dashboard_Teachers_Container'}>
 
                     {teachers.map(({username}) =>
-                        <span key={username} className={'Dashboard_TeacherLink'}> <Link
-                            to={`/user/${username}`}
+                        <span onClick={()=>navigate(`/users/${username}`)} key={username} className={'Dashboard_TeacherLink'}> <Link
+                            to={`/users/${username}`}
                             key={username}>
                              {username}
                      </Link></span>)}

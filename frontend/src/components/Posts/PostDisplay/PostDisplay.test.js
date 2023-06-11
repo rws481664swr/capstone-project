@@ -39,24 +39,57 @@ const axiosMock =
         }
         throw new Error()
     }
-it('should render PostDisplay', function () {
-axios.get.mockImplementation(axiosMock)
-    const val = {post:null }
-    const {asFragment} = render(
-        <MockContext>
-            <Provider store={postsStore}>
-            <PostDisplay post={val.post} setPost={(v)=>val.post=v} />
-            </Provider>
-        </MockContext>)
-    expect(asFragment()).toMatchSnapshot()
-});it('should render PostDisplay with post', function () {
-axios.get.mockImplementation(axiosMock)
-    const val = {post}
-    const {asFragment} = render(
-        <MockContext>
-            <Provider store={postsStore}>
-            <PostDisplay post={val.post} setPost={(v)=>val.post=v} />
-            </Provider>
-        </MockContext>)
-    expect(asFragment()).toMatchSnapshot()
-});
+describe('PostDisplay', function () {
+
+    it('should render PostDisplay', function () {
+        axios.get.mockImplementation(axiosMock)
+        const val = {post:null }
+        render(
+            <MockContext>
+                <Provider store={postsStore}>
+                    <PostDisplay post={val.post} setPost={(v)=>val.post=v} />
+                </Provider>
+            </MockContext>)
+    });
+    it('should render PostDisplay snapshot', function () {
+        axios.get.mockImplementation(axiosMock)
+        const val = {post:null }
+        const {asFragment} = render(
+            <MockContext>
+                <Provider store={postsStore}>
+                    <PostDisplay post={val.post} setPost={(v)=>val.post=v} />
+                </Provider>
+            </MockContext>)
+        expect(asFragment()).toMatchSnapshot()
+    });
+    it('should render PostDisplay with post', function () {
+        axios.get.mockImplementation(axiosMock)
+        const val = {post}
+        const {asFragment} = render(
+            <MockContext>
+                <Provider store={postsStore}>
+                    <PostDisplay post={val.post} setPost={(v)=>val.post=v} />
+                </Provider>
+            </MockContext>)
+        expect(asFragment()).toMatchSnapshot()
+
+})
+    it('should render PostDisplay Comments with post', async function () {
+        axios.get.mockImplementation(axiosMock)
+        const val = {post}
+        const {asFragment , getByText} = render(
+            <MockContext>
+                <Provider store={postsStore}>
+                    <PostDisplay post={val.post} setPost={(v)=>val.post=v} />
+                </Provider>
+            </MockContext>)
+        expect(asFragment()).toMatchSnapshot()
+        const showComments = getByText('Show Comments')
+        await act(()=>fireEvent.click(showComments))
+        expect(getByText("Hide Comments")).toBeInTheDocument()
+        expect(     getByText(comment.content)).toBeInTheDocument()
+
+
+    });
+
+})

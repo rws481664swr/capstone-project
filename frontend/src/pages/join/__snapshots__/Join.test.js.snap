@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Join snapshot with params 1`] = `
+<DocumentFragment>
+  <div>
+    <h1>
+      Join Course
+    </h1>
+    <form
+      class="sr-container"
+    >
+      <div
+        class="LabeledInput-div "
+      >
+        <label
+          class="LabeledInput-input-label "
+          for="Join_course_id"
+        >
+          Course ID
+        </label>
+        <div />
+        <input
+          class="LabeledInput-input-text "
+          id="Join_course_id"
+          name="course_id"
+          type="text"
+          value="123"
+        />
+      </div>
+      <button
+        class="undefined Button"
+        type="submit"
+      >
+        Join
+      </button>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`should render Join snapshot without params 1`] = `
+<DocumentFragment>
+  <div>
+    <h1>
+      Join Course
+    </h1>
+    <form
+      class="sr-container"
+    >
+      <div
+        class="LabeledInput-div "
+      >
+        <label
+          class="LabeledInput-input-label "
+          for="Join_course_id"
+        >
+          Course ID
+        </label>
+        <div />
+        <input
+          class="LabeledInput-input-text "
+          id="Join_course_id"
+          name="course_id"
+          type="text"
+          value=""
+        />
+      </div>
+      <button
+        class="undefined Button"
+        type="submit"
+      >
+        Join
+      </button>
+    </form>
+  </div>
+</DocumentFragment>
+`;

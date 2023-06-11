@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import {connect, Credentials, Users} from "./db/db.js";
-import {Comments as Comment, Courses as Course, Posts as Post, Users as User,} from "./db/schemas/models.js";
+import {connect} from "./db/db.js";
+import {Comments as Comment, Courses as Course, Posts as Post, Users as User,Credentials} from "./db/schemas/models.js";
 import {faker} from "@faker-js/faker";
 import {ADMIN, STUDENT, TEACHER} from "./util/roles.js";
 import {writeFileSync} from "fs";

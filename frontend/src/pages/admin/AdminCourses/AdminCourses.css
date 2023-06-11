@@ -17,6 +17,12 @@
     background-color: #fff;
 }
 
+@media only screen and (max-width: 500px){
+    .AdminCourse_Card{
+        flex-grow: 2;
+    }
+}
+
 .AdminCourse_Card:hover {
     background-color: #eee;
     cursor: pointer;

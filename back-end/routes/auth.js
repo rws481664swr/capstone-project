@@ -12,6 +12,10 @@ export const authRouter = express.Router()
 
 
 
+/**
+ * Middleware that ensures the user is logged out before executing the wrapped route handler.
+ * It throws a BadRequestError if the user is already logged in. Otherwise, it proceeds to the next middleware.
+ */
 function ensureLoggedOut(type='log in') {
     return (req, res, next)=> {
         try {
@@ -24,6 +28,7 @@ function ensureLoggedOut(type='log in') {
         }
     }
 }
+
 
 authRouter.get('/token',ensureLoggedIn,async (req,res,next)=>{
     try {

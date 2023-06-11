@@ -19,6 +19,26 @@ jest.mock('react-redux', () => ({
     })
 }))
 it('should render Edit', async () => {
+
+    const post = {
+        _id: '123',
+        title: 'test',
+        content: 'test-content'
+    }
+
+
+
+    useDispatch.mockImplementation(() => (mockDispatch))
+
+    // configureStore({reducer})
+    const {asFragment, getByText} =
+        render(<MockContext>
+            <Edit post={post} setEditMode={jest.fn()} setPost={jest.fn()} editMode={true}/>)
+        </MockContext>)
+    getByText('test-content')
+ expect(asFragment()).toMatchSnapshot()
+})
+it('should edit a post', async () => {
     const editing = {isEditing: true}
 
     const setEditMode = jest.fn((mode) => {

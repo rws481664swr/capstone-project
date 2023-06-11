@@ -22,6 +22,7 @@ exports[`should render CourseListItem 1`] = `
         <div>
           <button
             class=" DeleteButton IconButton"
+            data-testid="DeleteButton"
           >
             <svg
               aria-hidden="true"

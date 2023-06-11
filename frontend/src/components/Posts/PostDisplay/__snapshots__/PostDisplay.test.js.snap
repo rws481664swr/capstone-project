@@ -1,0 +1,179 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PostDisplay should render PostDisplay Comments with post 1`] = `
+<DocumentFragment>
+  <div
+    class="sr-modal"
+    style="z-index: 1;"
+  >
+    <div
+      class="PostDisplay sr-modal_content"
+      style="z-index: 1;"
+    >
+      <div
+        class="split-between"
+      />
+      <div
+        class="PostDisplayHeading"
+        data-testid="PostDisplay-Heading"
+      >
+        <h4
+          class="PostDisplay-Title"
+        >
+          Nulla saepe et nemo molestiae ducimus provident.
+        </h4>
+        <div
+          class="PostDisplay-Buttons"
+        >
+          <button
+            class="PinButton  PinButton IconButton  "
+            data-testid="PinButton"
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-thumbtack "
+              data-icon="thumbtack"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 384 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M32 32C32 14.3 46.3 0 64 0H320c17.7 0 32 14.3 32 32s-14.3 32-32 32H290.5l11.4 148.2c36.7 19.9 65.7 53.2 79.5 94.7l1 3c3.3 9.8 1.6 20.5-4.4 28.8s-15.7 13.3-26 13.3H32c-10.3 0-19.9-4.9-26-13.3s-7.7-19.1-4.4-28.8l1-3c13.8-41.5 42.8-74.8 79.5-94.7L93.5 64H64C46.3 64 32 49.7 32 32zM160 384h64v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V384z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <span
+        class="PostedByOn"
+      >
+        <span>
+           posted by 
+        </span>
+        <span>
+          <a
+            href="/users/user"
+          >
+            user
+          </a>
+        </span>
+        <span
+          class=" PostDisplay-TimeStamp"
+        >
+          <span
+            class=""
+          >
+              at  12:52 PM on 5/16
+          </span>
+        </span>
+      </span>
+      <hr />
+      <p
+        class="PostDisplay-Content"
+      >
+         Expedita velit ea nesciunt odio. Illum dolorem dignissimos eos earum dolor eius iusto corporis. Neque inventore numquam vel.
+      </p>
+      <div>
+        <span
+          class="PostDisplay-ShowComments"
+        >
+          Show Comments
+        </span>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`PostDisplay should render PostDisplay snapshot 1`] = `<DocumentFragment />`;
+
+exports[`PostDisplay should render PostDisplay with post 1`] = `
+<DocumentFragment>
+  <div
+    class="sr-modal"
+    style="z-index: 1;"
+  >
+    <div
+      class="PostDisplay sr-modal_content"
+      style="z-index: 1;"
+    >
+      <div
+        class="split-between"
+      />
+      <div
+        class="PostDisplayHeading"
+        data-testid="PostDisplay-Heading"
+      >
+        <h4
+          class="PostDisplay-Title"
+        >
+          Nulla saepe et nemo molestiae ducimus provident.
+        </h4>
+        <div
+          class="PostDisplay-Buttons"
+        >
+          <button
+            class="PinButton  PinButton IconButton  "
+            data-testid="PinButton"
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-thumbtack "
+              data-icon="thumbtack"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 384 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M32 32C32 14.3 46.3 0 64 0H320c17.7 0 32 14.3 32 32s-14.3 32-32 32H290.5l11.4 148.2c36.7 19.9 65.7 53.2 79.5 94.7l1 3c3.3 9.8 1.6 20.5-4.4 28.8s-15.7 13.3-26 13.3H32c-10.3 0-19.9-4.9-26-13.3s-7.7-19.1-4.4-28.8l1-3c13.8-41.5 42.8-74.8 79.5-94.7L93.5 64H64C46.3 64 32 49.7 32 32zM160 384h64v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V384z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <span
+        class="PostedByOn"
+      >
+        <span>
+           posted by 
+        </span>
+        <span>
+          <a
+            href="/users/user"
+          >
+            user
+          </a>
+        </span>
+        <span
+          class=" PostDisplay-TimeStamp"
+        >
+          <span
+            class=""
+          >
+              at  12:52 PM on 5/16
+          </span>
+        </span>
+      </span>
+      <hr />
+      <p
+        class="PostDisplay-Content"
+      >
+         Expedita velit ea nesciunt odio. Illum dolorem dignissimos eos earum dolor eius iusto corporis. Neque inventore numquam vel.
+      </p>
+      <div>
+        <span
+          class="PostDisplay-ShowComments"
+        >
+          Show Comments
+        </span>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

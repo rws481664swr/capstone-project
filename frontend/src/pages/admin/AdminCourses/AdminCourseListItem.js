@@ -1,7 +1,5 @@
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faX} from "@fortawesome/free-solid-svg-icons";
-import React from "react";
 import {DeleteButton} from "../../../components/General/Button/IconButtons/IconButtons";
+import './AdminCourses.css'
 
 const AdminCourseListItem = ({deleteCourse,onClick,course: {_id, courseName, courseNumber}}) => {
 

@@ -17,7 +17,7 @@ jest.mock('react-router-dom', () => ({
         () => mockNavigate)
     , useParams: jest.fn()
 }))
-const mockPost = jest.fn()
+// const mockPost = jest.fn()
 jest.mock('axios', () => ({
     ...jest.requireActual('axios'),
     post: jest.fn()
@@ -73,11 +73,13 @@ it('should join course via POST', async () => {
         }
     )
     axios.post.mockImplementation((url) => {
+        console.log(url)
         expect(url).toContain('courses/123/users/test')
         return Promise.resolve({data: {}})
     })
+    // mockPost.mockResolvedValueOnce({data: {message:'error'}})
 
-    mockPost.mockImplementation(() => Promise.resolve({data: {}}))
+    // mockImplementation(() => Promise.resolve({data: {}}))
 
     const {getByLabelText, getByText} =
         await act(() => render(<TestJoin value={defaultValue}/>))
@@ -95,7 +97,7 @@ it('should join course via POST form', async () => {
     const navigateWasCalled = jest.fn()
 
     useNavigate.mockImplementation(() => (arg) => {
-            navigateWasCalled(arg)
+        navigateWasCalled(arg)
             return () => {
             }
         }
@@ -104,7 +106,7 @@ it('should join course via POST form', async () => {
         return Promise.resolve({data: {}})
     })
 
-    mockPost.mockImplementation(() => Promise.resolve({data: {}}))
+    // mockPost.mockImplementation(() => Promise.resolve({data: {}}))
 
     const {getByLabelText, getByText} =
         await act(() => render(<TestJoin value={defaultValue}/>))

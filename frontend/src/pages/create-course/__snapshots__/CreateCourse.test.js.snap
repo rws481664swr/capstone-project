@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateCourse should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sr-container"
+  >
+    <h1>
+      Create A New Course
+    </h1>
+    <form>
+      <div
+        class="LabeledInput-div "
+      >
+        <label
+          class="LabeledInput-input-label "
+          for="input-courseName"
+        >
+          Course Name
+        </label>
+        <div />
+        <input
+          class="LabeledInput-input-text "
+          data-testid="input-create-courseName"
+          id="input-courseName"
+          name="courseName"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="LabeledInput-div "
+      >
+        <label
+          class="LabeledInput-input-label "
+          for="input-courseNumber"
+        >
+          Course Number
+        </label>
+        <div />
+        <input
+          class="LabeledInput-input-text "
+          data-testid="input-create-courseNumber"
+          id="input-courseNumber"
+          name="courseNumber"
+          type="number"
+          value="0"
+        />
+      </div>
+      <div
+        class="LabeledInput-div "
+      >
+        <label
+          class="LabeledInput-input-label "
+          for="input-subject"
+        >
+          Subject
+        </label>
+        <div />
+        <input
+          class="LabeledInput-input-text "
+          data-testid="input-create-subject"
+          id="input-subject"
+          name="subject"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="LabeledInput-div "
+      >
+        <label
+          class="LabeledInput-input-label "
+          for="input-startDate"
+        >
+          Start Date
+        </label>
+        <div />
+        <input
+          class="LabeledInput-input-text "
+          data-testid="input-create-startDate"
+          id="input-startDate"
+          name="startDate"
+          type="date"
+          value=""
+        />
+      </div>
+      <div
+        class="LabeledInput-div "
+      >
+        <label
+          class="LabeledInput-input-label "
+          for="input-endDate"
+        >
+          End Date
+        </label>
+        <div />
+        <input
+          class="LabeledInput-input-text "
+          data-testid="input-create-endDate"
+          id="input-endDate"
+          name="endDate"
+          type="date"
+          value=""
+        />
+      </div>
+      <button
+        class="undefined Button"
+        id="submit-course"
+        type="submit"
+      >
+        Create Course
+      </button>
+    </form>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Comments Snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <span
+      class="PostDisplay-ShowComments"
+    >
+      Show Comments
+    </span>
+  </div>
+</DocumentFragment>
+`;

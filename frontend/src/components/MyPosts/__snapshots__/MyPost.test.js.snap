@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MyPost should render 1`] = `
+<DocumentFragment>
+  <div
+    class="MyPost"
+  >
+    <div
+      class="MyPostTitle"
+    >
+      My Post
+    </div>
+    <div
+      class="MyPostContent"
+    >
+      Posted 
+      <span
+        class="MyPostTimestamp"
+      >
+          at  2:25 PM on 10/30
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;

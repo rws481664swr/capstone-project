@@ -6,7 +6,6 @@ import {connect} from "./db/db.js";
 import {isTest, PORT, printReport, testIsMainModule} from "./config.js";
 import cors from "cors";
 import morgan from "morgan";
-import staleOrInvalidData from "./middleware/staleOrInvalidData.js";
 
 const isMainModule = testIsMainModule(import.meta.url);
 
@@ -18,7 +17,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(authenticateJWT);
-app.use(staleOrInvalidData)
 app.use(express.static('static'));
 
 //only use if not in test environment
@@ -44,15 +42,17 @@ app.use(errorHandler);
  * @returns the server started by express.
  */
 export async function startServer(PORT_NUM = PORT) {
-    conn = await connect(true);
-    return app.listen(
+    conn = connect(isTest);
+    const server = app.listen(
         PORT_NUM,
-        () => !isTest && console.log(`Listening on Port ${PORT_NUM}`)
-    );
+        () => {
+            !isTest && console.log(`Listening on Port ${PORT_NUM}`)
+        });
+    conn = await conn
+    return server
 }
 
 /* c8 ignore next 2*/
 if (isMainModule) {
     await startServer();
-    // can't programatically stop server so no reason to save return value
 }
