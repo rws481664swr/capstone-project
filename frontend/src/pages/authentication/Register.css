@@ -2,14 +2,7 @@ input.register,form.register ,label.register {
     display: block;
 }
 
-.sr-container{
-    margin: 5% 10%;
-    padding: 5%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0,0,0,.2);
-    background-color: #fff;
-}
+
 
 label.register {
     margin-bottom: 5px;
@@ -30,14 +23,52 @@ div.register {
 
 }
 
+@media screen and (min-width: 700px){
+    form.register{
+        width:50%;
+    }
+    #RegisterFormContainer{
+        display: flex;
+        justify-content: center;
+    }
+}
+@media screen and (min-width: 1000px) {
+    form.register{
+        width:30%;    }
+}
+
+/*@media screen and (min-width: 700px){*/
+/*    form.register{*/
+/*        display:flex;*/
+/*        justify-content: center;*/
+/*    }*/
+/*    #Register_FormItems{*/
+/*flex-grow: 1;*/
+/*width:100%;*/
+/*        margin-right:0;*/
+/*    }*/
+/*    .LabeledInput-div{*/
+/*        margin-right:0;*/
+/*    }*/
+/*form.register{*/
+/*    width: 70%;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*}*/
+/*    div.LabeledInput-div {*/
+/*        width: 70%;*/
+/*    }*/
+/*    input.register {*/
+/*        width: 70%;*/
+/*        padding: 5px;*/
+
+/*    }*/
+/*}*/
 @media screen and (max-width: 500px){
     label.register {
         margin-bottom: 5px;
     }
-    .btn.btn-primary.register{
-        margin-top:3%;
-        width: 100%;
-    }
+
     input.register {
         width: 100%;
         padding: 5px;

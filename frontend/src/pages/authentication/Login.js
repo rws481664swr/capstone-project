@@ -11,7 +11,7 @@ import Button from "../../components/General/Button/GenericButton/Button";
  * Login component for user authentication.
  */
 const Login = () => {
-    const [toRender,            , , {danger}] = useFlash()
+    const [toRender, , , {danger}] = useFlash()
     const navigate = useNavigate()
     const {setToken} = useGlobalContext()
     const [form, onChange] = useForm({
@@ -37,33 +37,40 @@ const Login = () => {
 
         }
     }
-    return <form onSubmit={() => alert('onsubmit')} className={'login Login_form'}>
-        <div>{toRender}</div>
-        <h4>Log In</h4>
-        <div className={'login'}>
-            <label className={'login'} htmlFor={'username'}>Username</label>
-            <input name={'username'}
-                   value={form.username}
-                   onChange={onChange}
-                   className={'login'}
-                   id={'username'}
-                   type={'text'}/>
-        </div>
-        <div className={'login'}>
-            <label className={'login'} htmlFor={'password'}>Password</label>
-            <input name={'password'}
-                   value={form.password}
-                   onChange={onChange}
-                   className={'login'}
-                   id={'password'}
-                   type={'password'}/>
-            <Button
-                onClick={submit}
-                className="Login_button  register"
-                type="submit">Log In
-            </Button>
-        </div>
-    </form>
+    return (
+        <div id={'Login'} className="login">
+            <form onSubmit={() => alert('onsubmit')} className={'login Login_form'}>
+
+                <div className="login-items">
+                    <div>{toRender}</div>
+
+                    <h4>Log In</h4>
+                    <div className={'login'}>
+                        <label className={'login'} htmlFor={'username'}>Username</label>
+                        <input name={'username'}
+                               value={form.username}
+                               onChange={onChange}
+                               className={'login'}
+                               id={'username'}
+                               type={'text'}/>
+                    </div>
+                    <div className={'login'}>
+                        <label className={'login'} htmlFor={'password'}>Password</label>
+                        <input name={'password'}
+                               value={form.password}
+                               onChange={onChange}
+                               className={'login'}
+                               id={'password'}
+                               type={'password'}/>
+                        <Button
+                            onClick={submit}
+                            className="Login_button  register"
+                            type="submit">Log In
+                        </Button>
+                    </div>
+                </div>
+            </form>
+        </div>)
 }
 
 export default Login

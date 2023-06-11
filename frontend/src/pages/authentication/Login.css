@@ -1,8 +1,42 @@
 input.login,form.login ,label.login {
     display: block;
 }
+#Login{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f5f5f5;
 
+
+}
+form.login.Login_form{
+
+}
+form.login{
+    display: flex;
+width: 50%;
+    justify-content: center;
+    align-items: center;
+
+}
+.login-items{
+flex-grow: 2;
+
+}
+.login-items div{
+    width: 100%;
+}
+.login-items input{
+    width: 100%;
+}
 .Login_form{
+
+
+    width: 70%;
     margin: 5% 10%;
     padding: 5%;
     border: 1px solid #ccc;
@@ -35,6 +69,41 @@ div.login {
 
 }
 @media screen and (max-width: 500px){
+
+
+    form.login {
+        /*margin-left: 10%;*/
+        /*margin-top: 5%;*/
+    }
+    input.login {
+        /*width: 50%;*/
+        /*padding: 5px;*/
+    }
+    div.login {
+        margin-top: 10px;
+    }
+
+
+
+
+
+
+
+    form.login.Login_form{
+        width: 70%;
+        margin:0;
+    }
+    div.login-items{
+        width: 100%;
+        padding:10%
+    }
+    .login-items input.login{
+        width: 100%;
+
+    }
+    .login input{
+        width: 40%
+    }
     label.login {
         margin-bottom: 5px;
     }

@@ -8,7 +8,6 @@ import {UPDATE} from "../../../state/actions/actions";
 
 
 const Edit = ({  post, setEditMode, setPost,editMode}) => {
-    console.log(post)
     const [form, onChange, resetForm] = useForm({
         title: post.title, content: post.content
     })
