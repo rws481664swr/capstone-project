@@ -28,7 +28,7 @@ const AdminUsers = () => {
                 console.error(e)
             }
         })()
-    }, [get])
+    }, [])
 
     const [user, setUser] = useState(null)
     return (

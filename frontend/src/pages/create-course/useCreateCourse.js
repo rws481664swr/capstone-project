@@ -24,7 +24,7 @@ const [error,errorFlash] = useFlash('text-danger')
     })
     const navigate = useNavigate()
     const {post} = useAxios()
-    const submit = useCallback(async (e) => {
+    const submit =async (e) => {
         e.preventDefault()
         flash({})
         const flashes = {}
@@ -50,15 +50,13 @@ const [error,errorFlash] = useFlash('text-danger')
         try {
 
             const course = await post('courses', form)
-            console.log(`Created Course ${course.courseName}`, course)
-
             navigate(`/courses/${course._id}`)
         } catch (e) {
             errorFlash(e.message)
             console.error(e.message)
         }
 
-    }, [form, post, flash, navigate,errorFlash])
+    }
     return [{form, onChange}, {toRender, setCss,error}, submit]
 
 }

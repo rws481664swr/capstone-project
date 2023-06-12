@@ -1,8 +1,16 @@
 import {ADD, PIN, REMOVE, SET_STATE, UNPIN, UPDATE} from "../actions/actions";
 
 
+/**
+ * reducer for posts
+ * @param posts the state
+ * @param type the action type
+ * @param payload the payload if it exists
+ * @param id the id relevent to the action type if exists
+ * @return the new state
+ */
 function postsReducer(posts = [], {type, payload, id}) {
-    // console.log('reducer ran action', type, id? 'with id': 'without id', 'with payload'/*, payload*/)
+    console.debug('reducer ran action', type, id? 'with id': 'without id', 'with payload'/*, payload*/)
 
      switch (type) {
         case ADD:

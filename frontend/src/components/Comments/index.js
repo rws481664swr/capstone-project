@@ -20,7 +20,6 @@ const useCommentsReducer = (post) => {
     useEffect(() => {
         (async () => {
             if (!post) return
-            console.log('POSTID', post._id)
             const payload = await axios.get(`comments/${post._id}`)
             dispatch({type: "SET_STATE", payload})
         })()

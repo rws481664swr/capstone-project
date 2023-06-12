@@ -22,7 +22,6 @@ const PostDisplay = ({post = null, setPost}) => {
         setEditMode(false)
     }
 
-    console.log(`rendering post display`)
 
     if (!post) return null
     const {

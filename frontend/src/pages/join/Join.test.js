@@ -73,14 +73,9 @@ it('should join course via POST', async () => {
         }
     )
     axios.post.mockImplementation((url) => {
-        console.log(url)
         expect(url).toContain('courses/123/users/test')
         return Promise.resolve({data: {}})
     })
-    // mockPost.mockResolvedValueOnce({data: {message:'error'}})
-
-    // mockImplementation(() => Promise.resolve({data: {}}))
-
     const {getByLabelText, getByText} =
         await act(() => render(<TestJoin value={defaultValue}/>))
     const joinBox = getByLabelText(Join.LabelText)

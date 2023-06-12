@@ -13,7 +13,7 @@ const useDisplayPost = ([post, setPost], setEditMode) => {
                     await axios.put(`posts/${post._id}/pin`)
                     const payload = {...post, pinned: !post.pinned}
                     dispatch({type: payload.pinned ? "PIN" : "UNPIN", payload: payload})
-                    setPost(payload)
+                    setPost(payload,`setPost called in memo`)
                 } catch (e) {
                     console.error(e.response.data.message)
                 }
@@ -23,12 +23,12 @@ const useDisplayPost = ([post, setPost], setEditMode) => {
                 try {
                     const payload = await axios.delete(`posts/${post._id}`)
                     dispatch({type: REMOVE, id: post._id})
-                    setPost(null)
+                    setPost(null,`setPost called in memo`)
                 } catch (e) {
                     console.error(e.response.data.message)
                 }
             }
-        }), [post, setPost, dispatch, axios, setEditMode])
+        }), [post ,setPost, dispatch, axios, setEditMode])
 }
 
 export default useDisplayPost

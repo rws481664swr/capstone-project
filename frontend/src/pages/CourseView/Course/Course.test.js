@@ -46,9 +46,7 @@ const axiosGetImplementation =
         else if (url.includes('auth')) {
             return Promise.resolve({data: {token: MOCK_TOKEN.current}})
         }
-        else {
-            console.log("FFAIL", url)
-        }
+
     }
 jest.mock('axios')
 

@@ -7,7 +7,6 @@ import {useGlobalContext} from "../../state/contexts/GlobalContext";
 
 const BasicProfile = () => {
     const {username} = useParams()
-    console.log('username', username)
     const user = useProfile(username)
     const {username: viewer} = useGlobalContext()
     if (!user) return null

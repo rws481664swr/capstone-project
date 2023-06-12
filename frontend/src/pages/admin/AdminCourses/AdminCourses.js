@@ -20,21 +20,17 @@ const AdminCourses = () => {
             try {
                 const payload = await get('courses')
                 dispatchCourses({type: INIT, payload})
-                console.log(payload)
 
             } catch (e) {
                 console.error(e)
             }
         })()
-    }, [get])
+    }, [])
     const deleteCourse = async (_id) => {
         try {
-            console.log('tryiing to dispatch')
             await _delete(`courses/${_id}`)
-            console.log('http call not failed')
             dispatchCourses({type: REMOVE, payload: _id})
         } catch (e) {
-            console.log('err')
             console.error(e)
         }
     }
@@ -65,7 +61,6 @@ const AdminCourses = () => {
                     deleteCourse={(e) => {
                         e.preventDefault()
                         e.stopPropagation()
-                        console.log('courseid ' ,course._id)
                         deleteCourse(course._id)
                     }}
                     key={course._id} onClick={

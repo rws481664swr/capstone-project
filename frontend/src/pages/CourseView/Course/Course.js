@@ -17,7 +17,6 @@ const Course = () => {
         ()=>({populate: true}),[])
     const course = useGet('courses', {id, query})
     const [visible, {show, hide}] = useModal()
-
     return course &&
         <div className="sr-container Course_Container">
 

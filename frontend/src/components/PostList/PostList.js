@@ -10,16 +10,15 @@ import './PostList.css'
  */
 const PostList = ({ Post, url, showPostContent = false}) => {
     const [postDisplay, setPost] = useState(null)
-    const [collapsed, toggleCollapsed] = useToggle(false)
+
     const posts = usePostList(url)
-console.log('rendering PostList')
     return <>
-        {posts && <PostDisplay post={postDisplay} setPost={setPost}/>}
+        {postDisplay && <PostDisplay post={postDisplay} setPost={setPost}/>}
 
         <ul className={'PostList'} id={''} data-testid={'PostList'}>
             {posts.map(p =>
                 <Post
-                    onClick={() => setPost(p)}
+                    onClick={() => setPost(p)                    }
                     key={p._id}
                     post={p}
                     showContent={showPostContent}
@@ -52,7 +51,7 @@ const usePostList = (url) => {
                 console.error(e)
             }
         })()
-    }, [dispatch, get])
+    }, [dispatch])
     return useSelector(e => e)
 }
 

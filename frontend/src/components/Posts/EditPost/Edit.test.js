@@ -53,11 +53,8 @@ it('should edit a post', async () => {
         content: 'test-content'
     }
     axios.put.mockImplementation(async (url, body) => {
-        console.log(url)
-        console.log(body)
         expect(body).toEqual({title: 'test', content: 'changed'})
         expect(url).toContain('123')
-        console.log("AXIOSPUT")
         return {
             data: body
         }

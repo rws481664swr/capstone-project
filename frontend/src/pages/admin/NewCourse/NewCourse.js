@@ -19,20 +19,17 @@ const NewCourse = () => {
         subject: '',
     })
     const {post} = useAxios()
-    const submit = useCallback(async (e15) => {
-        e15.preventDefault()
-        console.log('submitting')
-        console.log(form)
+    const submit = useCallback(async (e) => {
+        e.preventDefault()
         try {
-            const course = await post('courses', form)
-            console.log(`Created Course ${course.courseName}`,course)
+            await post('courses', form)
         clear()
         }catch (e) {
             console.error(e.message)
 
         }
 
-    }, [form, clear, post])
+    }, [form, clear])
 
     return (
         <div>

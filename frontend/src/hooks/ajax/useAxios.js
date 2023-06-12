@@ -76,7 +76,6 @@ const useAxios = () => {
            }
 
            async function delete_(resource, id = '') {
-             console.log('DELETE ',resource,id)
                try {
                    const {data} = await axios.delete(`${BASE_URL}/${resource}/${id}`, config())
                    return data;

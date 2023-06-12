@@ -7,7 +7,6 @@ const useLocalStorageState = (prop, init) => {
         if (item!=="undefined") {
             return JSON.parse(window.localStorage.getItem(prop))
         }
-        console.log('setItem as ',init)
         return init
     })
     useEffect(()=> {
