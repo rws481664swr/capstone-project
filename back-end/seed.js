@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 import {connect} from "./db/db.js";
-import {Comments as Comment, Courses as Course, Posts as Post, Users as User,Credentials} from "./db/schemas/models.js";
+import {Comments as Comment,
+    Courses as Course,
+    Posts as Post,
+    Users as User,
+    Credentials
+} from "./db/schemas/models.js";
 import {faker} from "@faker-js/faker";
 import {ADMIN, STUDENT, TEACHER} from "./util/roles.js";
 import {writeFileSync} from "fs";
@@ -118,30 +123,7 @@ let courses = await Promise.all([
         courseNumber: faker.datatype.number(),
     }
 ].map(c => createCourse(c)))
-writeFileSync('courses.json', JSON.stringify(
-    [
-        {
-            subject: "subject1",
-            startDate: new Date(2020, 3, 20),
-            endDate: new Date(2022, 3, 25),
-            courseName: "c1",
-            courseNumber: faker.datatype.number(),
-        },
-        {
-            subject: "subject2",
-            startDate: new Date(2020, 3, 20),
-            endDate: new Date(2022, 3, 25),
-            courseName: "c2",
-            courseNumber: faker.datatype.number(),
-        },
-        {
-            subject: "subject3",
-            startDate: new Date(2020, 3, 20),
-            endDate: new Date(2022, 3, 25),
-            courseName: "c3",
-            courseNumber: faker.datatype.number(),
-        }
-    ], null, 2))
+
 
 const [
     course_1,
@@ -214,16 +196,9 @@ await createPost(course_3._id, student_1)
 await createPost(course_3._id, student_1)
 
 
-const posts = [post_1, post_2, post_3, post_4, post_5, post_6, post_7];
-let [
-    comment_1,
-    comment_2,
-    comment_3,
-    comment_4,
-    comment_5,
-    comment_6,
-    comment_7,
-    comment_8]=  await Promise.all([
+
+
+  await Promise.all([
     createComment(post_1, student_1),
     createComment(post_2, teacher_1),
     createComment(post_2, student_1),
@@ -233,6 +208,17 @@ let [
     createComment(post_6, teacher_1),
     createComment(post_6, teacher_2)
 ])
+
+
+await connection.disconnect();
+process.exit(0)
+/******************************************************************************************************/
+/******************************************************************************************************/
+/***************** END OF DB CALLS ********************************************************************/
+/******************************************************************************************************/
+/******************************************************************************************************/
+
+
 const mapReduce = (arr) =>
     arr.map((e) => ({[e._id]: e})).reduce((e, r) => ({...e, ...r}));
 const _teachers = mapReduce([teacher_1, teacher_2]);
@@ -306,5 +292,4 @@ const out = {
     comment_8,
 
 }
-writeFileSync("./data.json", JSON.stringify(writeout, null, 4));
-await connection.disconnect();
+
