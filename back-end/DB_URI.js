@@ -1,7 +1,6 @@
 import {LOCAL_DEV_DB, TEST_DB} from "./config.js";
 
 export default function getDB_URI({flag, arg, NODE_ENV, MONGO_USER, MONGO_PASSWORD, EDU_DB_DOMAIN}) {
-return `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${EDU_DB_DOMAIN}/?retryWrites=true&w=majority`
     if (flag === '--db') {
         switch (arg) {
             case 'local':

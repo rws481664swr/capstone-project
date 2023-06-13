@@ -4,7 +4,7 @@ import {act, render} from "@testing-library/react";
 import axios from 'axios'
 import getData from "../../mock_data/data";
 import {default as GlobalContext} from '../../state/contexts/GlobalContext'
-import {extractKeysAsList, MOCK_TOKEN} from "../../../mock-backend";
+import {extractKeysAsList, MOCK_TOKEN} from "../../test-utils/mock-backend";
 import {BASE_URL} from "../../config";
 import chalk from "chalk";
 const mockCoursesList = extractKeysAsList(getData().courses)

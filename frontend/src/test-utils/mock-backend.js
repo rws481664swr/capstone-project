@@ -1,4 +1,4 @@
-import {BASE_URL} from "./src/config";
+import {BASE_URL} from "../config";
 
 export const extractKeysAsList= (obj)=>
     Object.keys(obj).map(key=>obj[key])

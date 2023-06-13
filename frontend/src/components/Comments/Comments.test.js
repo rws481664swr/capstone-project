@@ -1,7 +1,7 @@
 import {act, fireEvent, render} from '@testing-library/react';
 import Comments from "./index";
 import getData from '../../mock_data/data'
-import {MOCK_TOKEN} from "../../../mock-backend";
+import {MOCK_TOKEN} from "../../test-utils/mock-backend";
 import axios from "axios";
 import MockContext from "../../test-utils/MockContext";
 

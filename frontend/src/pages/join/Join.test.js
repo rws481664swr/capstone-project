@@ -3,7 +3,7 @@ import Join from "./Join";
 import GlobalContext from "../../state/contexts/GlobalContext";
 import axios from 'axios'
 import {MemoryRouter, useNavigate, useParams} from "react-router-dom";
-import {MOCK_TOKEN} from "../../../mock-backend";
+import {MOCK_TOKEN} from "../../test-utils/mock-backend";
 
 const defaultValue = {
     username: 'test',

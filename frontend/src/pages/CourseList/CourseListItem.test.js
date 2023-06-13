@@ -2,7 +2,7 @@ import {render} from "@testing-library/react";
 import CourseListItem from "./CourseListItem";
 import {MemoryRouter} from "react-router-dom";
 import GlobalContext from "../../state/contexts/GlobalContext";
-import {MOCK_TOKEN} from "../../../mock-backend";
+import {MOCK_TOKEN} from "../../test-utils/mock-backend";
 
 it('should render CourseListItem', () => {
     const {getByText} = render(

@@ -1,5 +1,5 @@
 import GlobalContext from "../state/contexts/GlobalContext";
-import {MOCK_TOKEN} from "../../mock-backend";
+import {MOCK_TOKEN} from "./mock-backend";
 import {MemoryRouter} from "react-router-dom";
 
 const MockContext = ({children, isAdmin = false, ...mockValue}) => {

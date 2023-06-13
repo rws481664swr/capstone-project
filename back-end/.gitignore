@@ -3,3 +3,4 @@ node_modules
 backend.iml
 /test/tests/sandbox.test.js
 /ignored/
+.DS_Store

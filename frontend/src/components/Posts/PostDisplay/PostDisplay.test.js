@@ -6,7 +6,7 @@ import postsStore from "../../../state/redux/postsStore";
 import {act} from "react-dom/test-utils";
 import axios from "axios";
 import getData from "../../../mock_data/data";
-import {MOCK_TOKEN} from "../../../../mock-backend";
+import {MOCK_TOKEN} from "../../../test-utils/mock-backend";
 
 let post, comment
 beforeEach(() => {

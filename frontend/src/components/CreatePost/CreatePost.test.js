@@ -4,7 +4,7 @@ import {Provider} from "react-redux";
 import getData from "../../mock_data/data";
 import GlobalContext from "../../state/contexts/GlobalContext";
 import postsStore from "../../state/redux/postsStore";
-import {MOCK_TOKEN} from "../../../mock-backend";
+import {MOCK_TOKEN} from "../../test-utils/mock-backend";
 import axios from "axios";
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect'

@@ -3,7 +3,7 @@ import Course from "./Course";
 import axios from "axios";
 import GlobalContext from "../../../state/contexts/GlobalContext";
 import {MemoryRouter} from "react-router-dom";
-import {extractKeysAsList as mockExtractKeysAsList, MOCK_TOKEN, spliceUrl} from "../../../../mock-backend";
+import {extractKeysAsList as mockExtractKeysAsList, MOCK_TOKEN, spliceUrl} from "../../../test-utils/mock-backend";
 import mockGetData from "../../../mock_data/data";
 import getData from "../../../mock_data/data";
 import postsStore from "../../../state/redux/postsStore";

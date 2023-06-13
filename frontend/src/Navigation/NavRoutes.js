@@ -1,15 +1,15 @@
 import {Route, Routes} from "react-router-dom";
-import Admin from "./pages/admin/Admin";
-import Home from "./pages/Home/Home";
-import CourseList from "./pages/CourseList";
-import CreateCourse from "./pages/create-course/CreateCourse";
-import Course from "./pages/CourseView/Course/Course";
-import Register from "./pages/authentication/Register";
-import Login from "./pages/authentication/Login";
-import EditProfile from "./pages/user/UserProfile/EditUser/EditingUser";
-import DisplayProfile from "./pages/user/UserProfile/DisplayProfile";
-import BasicProfile from "./pages/user/BasicProfile";
-import Join from "./pages/join/Join";
+import Admin from "../pages/admin/Admin";
+import Home from "../pages/Home/Home";
+import CourseList from "../pages/CourseList";
+import CreateCourse from "../pages/create-course/CreateCourse";
+import Course from "../pages/CourseView/Course/Course";
+import Register from "../pages/authentication/Register";
+import Login from "../pages/authentication/Login";
+import EditProfile from "../pages/user/UserProfile/EditUser/EditingUser";
+import DisplayProfile from "../pages/user/UserProfile/DisplayProfile";
+import BasicProfile from "../pages/user/BasicProfile";
+import Join from "../pages/join/Join";
 
 const NavRoutes = ({isAdmin ,loggedIn}) =>
     <Routes>

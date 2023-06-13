@@ -26,3 +26,4 @@ yarn-error.log*
 node_modules
 src/components/Fetch.js
 src/components/Fetch.test.js
+.env
