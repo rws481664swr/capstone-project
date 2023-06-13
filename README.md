@@ -20,6 +20,7 @@
     - The front end is deployed on Netlify and can be accessed at https://edu-comm.netlify.app/
 
 ## Demo
+
   - For testing and demonstration, the following users have been created:
     - Student
       - username: user
@@ -31,6 +32,7 @@
       - username: admin
       - password: password
   
+###### A note about testing users: The users are enrolled in courses already and teachers are set up to teach them as example data. There are routes in the API that handle this, and joining a course is possible given the course id, but it is mainly intended to be done with the API in conjunction with a learning management system. 
 
 ## Deployment Instructions
  - To deploy locally, clone the repository and run npm install in both the frontend and backend project folders.
