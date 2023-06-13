@@ -27,14 +27,10 @@ const Login = () => {
             const {data: {token}} = await promise
             setToken(token)
             navigate('/')
-        } catch (e20) {
-            console.error(e20)
-            if (e20.message) danger(e20.message)
-            else if (e20.response && e20.response.data) danger(`Something went wrong logging in: ${
-                e20.response ? e20.response.data.message : e20.message
-            }`)
-
-
+        } catch (e) {
+            console.error(e)
+            if (e.response && e.response.data) return danger(e.response.data.message)
+            danger(e.message || `Something went wrong logging in`)
         }
     }
     return (
