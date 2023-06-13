@@ -12,12 +12,35 @@
   - - Teachers can: 
   - create courses, mark posts as pinned, as well as do everything students can do.
   - Administrators have control over most functions in the app with the idea that the api might be used by a CMS or LMS to extend or complete functionality.
-- The app designed mostly around the idea of courses. Once in the Course View, the user has access to all posts and teacher info. With a click the user has access to post info, comments, and for the post owner, the ability to edit their post.
+
+ The app designed mostly around the idea of courses. Once in the Course View, the user has access to all posts and teacher info. With a click the user has access to post info, comments, and for the post owner, the ability to edit their post. The idea is to keep the ability to communicate, whether through posts or comments, very close together and easy to access. 
+ Courses are more visually divided to intentionally break up users into little "communities" surrounding coureses.
 
 ## Implementation
-- The project is built using ReactJS, NodeJS, ExpressJS, and MongoDB.
-    - The back end is deployed on Heroku at https://edu-comm.herokuapp.com/, but most endpoints are secured using jwt tokens. 
+
+- The implementation is Course-Orientedd 
+	-  In a course there are 
+	-  users:students and teachers 
+	-  users can make posts
+	-  all users in a course can see posts
+	-  both students and teachers can comment on posts
+	-  Teachers can mark posts as pinned.
+-  In addition to courses and posts, there are profiles where users can share there contact info for direct communication and collabaoration
+-  Each user has their courses and a profile and can navigate between them
+- The project is built using ReactJS, NodeJS, ExpressJS, and MongoDB. 
+	- Some essential libraries used in this project include `redux` and `react-router` on the front end and  `express` and `mongoose` on the back end.
+    - The back end is deployed on Heroku at https://edu-comm.herokuapp.com/, but most endpoints are secured using jwt tokens. The database is on MongoDb Atlas.
     - The front end is deployed on Netlify and can be accessed at https://edu-comm.netlify.app/
+
+## API
+I created my own API for storing
+
+* users (with 3 unique roles and varied permissions)
+* courses
+* posts
+* comments
+* user credentials 
+The API uses jwt tokens to verify who the user is and what they can request. As said above, it is build on Node/Mongo/Express. I tested it with mocha, chai and c8 for coverage. My tests are in a test directory and can be run bby `npm install ; npm test`	
 
 ## Demo
 
