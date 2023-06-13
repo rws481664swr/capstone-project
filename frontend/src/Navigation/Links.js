@@ -49,7 +49,7 @@ export const Links = ({close: hideSidePanel}) => {
                     logout()
                     hideSidePanel()
 
-                }} to={'/login'}>
+                }} to={'/'}>
                     Log Out
                 </NavLink>
             }</>)
