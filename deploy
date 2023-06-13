@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cd frontend
+npm run build && mv build ../back-end/
+cd ../back-end
+git add .;
+git commit -m "deploy"
+git push heroku main
+ heroku logs --tail --app edu-comm
+
